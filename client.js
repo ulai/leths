@@ -12,25 +12,19 @@ function connect(device, init) {
     log.info(`connected to ${host}:${port}`)
     if(init) init()
   })
-  this.client.on('data', ondata).on('error', onerror).on('end', onend)
+  this.client.on('data', ondata.bind(this)).on('error', onerror.bind(this)).on('end', onend.bind(this))
 }
 
 function ondata(data) {
-  log.info(`ondata ${data}`)
-  return
-  clearTimeout(this.timeout)
+  log.info(`ondata: ${data}`)
 }
 
 function onerror(err) {
   log.warn(`bus: connection failed: ${JSON.stringify(err)}`)
-  //clearTimeout(this.timeout)
-  //this._reconnect(1e3)
 }
 
 function onend() {
   log.warn(`bus: connection ended: ${JSON.stringify(this.addr)}`)
-  clearTimeout(this.timeout)
-  this._reconnect(1e3)
 }
 
 function getHostAndPort(addr) {
@@ -56,11 +50,11 @@ function getCommand(cmd) {
 
 class Client {
   constructor(device, init) {
-    connect(device, init);
+    connect.bind(this)(device, init);
   }
   send(cmd) {
-    send(cmd);
+    send.bind(this)(cmd);
   }
 }
 
-module.exports =  Client;
+module.exports = Client;

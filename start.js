@@ -5,7 +5,6 @@ const _ = require('lodash'),
 
 var clients = [];
 
-
 _.forOwn(config.omegas, (devices, type) => {
   ({
     'text': initText,
@@ -24,9 +23,9 @@ function initText(devices) {
 }
 
 function initLight(devices) {
-  _.each(devices, (device) => {
+  _.each(devices.cells, (device) => {
     var client = new Client(device, () => {
-      client.send({cmd:'init', 'light': true);
+      client.send({cmd:'echo'});
     });
     clients.push(client);
   });
@@ -43,6 +42,6 @@ function initNeuron(devices) {
 
 setTimeout(() => {
   _.each(clients, (c, i) => {
-    //c.send({cmd:'init', i:i});
+    c.send({cmd:'echo'});
   });
 }, 1e3);
