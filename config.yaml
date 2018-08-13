@@ -1,0 +1,40 @@
+default:
+  interface: enp2s0
+  port: 12345
+omegas:
+  text:
+    - { addr: 'fe80::b908:c314:cfbd:7a4a 11200', text: [cols: 22, offset: 123, orentiation: 1] }
+    - { addr: 'fe80::b908:c314:cfbd:7a4a 11201' }
+    - { addr: 'fe80::b908:c314:cfbd:7a4a 11202' }
+    - { addr: 'fe80::b908:c314:cfbd:7a4a 11203' }
+    - { addr: 'fe80::b908:c314:cfbd:7a4a 11204' }
+    - { addr: 'fe80::b908:c314:cfbd:7a4a 11205' }
+  light:
+    size: {x: 4, y: 4} # (N, M)
+    cells: # starting at x=0, y=0 -> x=N, y=0 -> x=1, y=1 ...
+      # row 0 -> y=0
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11210' }
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11211' }
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11212' }
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11213' }
+      # row 1 -> y=1
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11220' }
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11221' }
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11222' }
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11223' }
+      # row 2
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11230' }
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11231' }
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11232' }
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11233' }
+      # row 3
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11240' }
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11241' }
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11242' }
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11243' }
+  neuron:
+    - { addr: 'fe80::b908:c314:cfbd:7a4a 11300', x: 1, y : 3}
+    - { addr: 'fe80::b908:c314:cfbd:7a4a 11301', x: 1, y : 3}
+    - { addr: 'fe80::b908:c314:cfbd:7a4a 11302', x: 2, y : 2}
+    - { addr: 'fe80::b908:c314:cfbd:7a4a 11303', x: 3, y : 1}
+    - { addr: 'fe80::b908:c314:cfbd:7a4a 11304', x: 2, y : 1}
