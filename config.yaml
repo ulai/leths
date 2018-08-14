@@ -33,8 +33,11 @@ omegas:
       - { addr: 'fe80::b908:c314:cfbd:7a4a 11242' }
       - { addr: 'fe80::b908:c314:cfbd:7a4a 11243' }
   neuron:
-    - { addr: 'fe80::b908:c314:cfbd:7a4a 11300', x: 1, y : 3}
-    - { addr: 'fe80::b908:c314:cfbd:7a4a 11301', x: 1, y : 3}
-    - { addr: 'fe80::b908:c314:cfbd:7a4a 11302', x: 2, y : 2}
-    - { addr: 'fe80::b908:c314:cfbd:7a4a 11303', x: 3, y : 1}
-    - { addr: 'fe80::b908:c314:cfbd:7a4a 11304', x: 2, y : 1}
+    movingAverageCount: 20
+    threshold: 250
+    neurons:
+      - { addr: 'fe80::42a3:6bff:fec1:88e6 12345', x: 1, y : 3}
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11301', x: 1, y : 3}
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11302', x: 2, y : 2}
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11303', x: 3, y : 1}
+      - { addr: 'fe80::b908:c314:cfbd:7a4a 11304', x: 2, y : 1}

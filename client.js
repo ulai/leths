@@ -4,11 +4,15 @@ const _ = require('lodash'),
       log = require('./logger').getLogger()
 
 function connect(device, init) {
+  this.reconnectParams = {device, init}
   var [host, port] = getHostAndPort(device.addr)
   host = `${host}%${config.default.interface}`
   port = port || config.default.port
   this.client = net.connect({ host: host, port: port}, (err) => {
-    if(err) return;
+    if(err) {
+      log.warn(`error connect: ${this.addr} ${JSON.stringify(err)}`)
+      reconect.bind(this)();
+    }
     log.info(`connected to ${host}:${port}`)
     if(init) init()
   })
@@ -16,17 +20,18 @@ function connect(device, init) {
 }
 
 function ondata(data) {
+  data = JSON.parse(data.toString());
   clearTimeout(this.timeout)
-  log.info(`ondata: ${data}`)
+  log.info(`ondata: ${JSON.stringify(data)}`)
   this.receiveCb(data);
 }
 
 function onerror(err) {
-  log.warn(`bus: connection failed: ${JSON.stringify(err)}`)
+  log.warn(`onerror: ${this.addr} ${JSON.stringify(err)}`)
 }
 
 function onend() {
-  log.warn(`bus: connection ended: ${JSON.stringify(this.addr)}`)
+  log.warn(`onend: ${this.addr}`)
 }
 
 function getHostAndPort(addr) {
