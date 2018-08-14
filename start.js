@@ -16,7 +16,7 @@ _.forOwn(config.omegas, (devices, type) => {
 function initText(devices) {
   _.each(devices, (device) => {
     var client = new Client(device, () => {
-      client.send({cmd:'init', 'text': device.text});
+      client.send({cmd:'init', 'text': device.text}, () => {});
     });
     clients.push(client);
   });
@@ -25,7 +25,7 @@ function initText(devices) {
 function initLight(devices) {
   _.each(devices.cells, (device) => {
     var client = new Client(device, () => {
-      client.send({cmd:'echo'});
+      client.send({cmd:'echo'}, () => {});
     });
     clients.push(client);
   });
@@ -34,7 +34,7 @@ function initLight(devices) {
 function initNeuron(devices) {
   _.each(devices, (device) => {
     var client = new Client(device, () => {
-      client.send({cmd:'init', 'neuron': true});
+      client.send({cmd:'init', 'neuron': true}, () => {});
     });
     clients.push(client);
   });
@@ -42,6 +42,6 @@ function initNeuron(devices) {
 
 setTimeout(() => {
   _.each(clients, (c, i) => {
-    c.send({cmd:'echo'});
+    c.send({cmd:'now'}, () => {});
   });
 }, 1e3);

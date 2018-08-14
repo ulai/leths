@@ -16,7 +16,9 @@ function connect(device, init) {
 }
 
 function ondata(data) {
+  clearTimeout(this.timeout)
   log.info(`ondata: ${data}`)
+  this.receiveCb(data);
 }
 
 function onerror(err) {
@@ -39,8 +41,12 @@ function ipv6LocalFromMac(mac) {
   return `fe80::${m[0]}${m[1]}:${m[2]}ff:fe${m[3]}:${m[4]}${m[5]}`
 }
 
-function send(cmd) {
+function send(cmd, cb) {
   log.info(`t=${(new Date()).getTime()}, cmd=${cmd}`)
+  this.receiveCb = cb;
+  this.timeout = setTimeout(() => {
+    log.error(`timeout`);
+  }, 1e3);
   this.client.write(getCommand(cmd));
 }
 
@@ -52,8 +58,8 @@ class Client {
   constructor(device, init) {
     connect.bind(this)(device, init);
   }
-  send(cmd) {
-    send.bind(this)(cmd);
+  send(cmd, cb) {
+    send.bind(this)(cmd, cb);
   }
 }
 
