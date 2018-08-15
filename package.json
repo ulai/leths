@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "server part of lethd daemon",
   "main": "start.js",
-  "scripts": {  
+  "scripts": {
     "test": "mocha test.js",
     "start": "node start.js"
   },
