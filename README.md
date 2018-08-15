@@ -2,7 +2,8 @@
 
 ```
 npm install
-node start.js
+npm run test
+npm run | tail leths.log
 ```
 
 Logging goes to leths.log

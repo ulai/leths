@@ -1,3 +1,5 @@
+"use strict"
+
 const _ = require('lodash'),
       config = require('./config').getConfig(),
       log = require('./logger').getLogger(),

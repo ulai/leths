@@ -1,11 +1,12 @@
 const _ = require('lodash'),
       net = require('net'),
       config = require('./config').getConfig(),
-      log = require('./logger').getLogger()
+      log = require('./logger').getLogger(),
+      utils = require('./utils');
 
 function connect(device, init) {
   this.reconnectParams = {device, init}
-  var [host, port] = getHostAndPort(device.addr)
+  var [host, port] = utils.getHostAndPort(device.addr)
   host = `${host}%${config.default.interface}`
   port = port || config.default.port
   this.client = net.connect({ host: host, port: port}, (err) => {
@@ -20,10 +21,23 @@ function connect(device, init) {
 }
 
 function ondata(data) {
-  data = JSON.parse(data.toString());
-  clearTimeout(this.timeout)
-  log.info(`ondata: ${JSON.stringify(data)}`)
-  this.receiveCb(data);
+  this.buffer = this.buffer || '' + data.toString()
+  if(!this.buffer.endsWith('\n')) return
+  _.each(this.buffer.split('\n').filter(String), (b) => {
+    try {
+      data = JSON.parse(b);
+    } catch(e) {
+      log.error(`ondata: json parse error '${e}' : ${JSON.stringify(data)}`)
+      return
+    } finally {
+      this.buffer = ''
+    }
+    log.info(`ondata: ${JSON.stringify(data)}`)
+    if(data) {
+      this.receiveCb(data)
+      clearTimeout(this.timeout)
+    }
+  })
 }
 
 function onerror(err) {
@@ -32,18 +46,6 @@ function onerror(err) {
 
 function onend() {
   log.warn(`onend: ${this.addr}`)
-}
-
-function getHostAndPort(addr) {
-  if(addr.match(/ /)) return addr.split(' ')
-  if(addr.length == 17) return [ipv6LocalFromMac(addr)]
-  return [addr]
-}
-
-function ipv6LocalFromMac(mac) {
-  m = mac.split(':')
-  m[0] = (parseInt(m[0], 16) ^ 0x02).toString(16)
-  return `fe80::${m[0]}${m[1]}:${m[2]}ff:fe${m[3]}:${m[4]}${m[5]}`
 }
 
 function send(cmd, cb) {

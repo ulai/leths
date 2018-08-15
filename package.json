@@ -2,19 +2,22 @@
   "name": "leths",
   "version": "1.0.0",
   "description": "server part of lethd daemon",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "main": "start.js",
+  "scripts": {  
+    "test": "mocha test.js",
+    "start": "node start.js"
   },
   "repository": {
     "type": "git",
-    "url": "git@trantsport.com:leths"
+    "url": "https://github.com/ulai/leths.git"
   },
   "author": "Ueli Wahlen <ueli@hotmail.com>",
   "license": "GPLv3",
   "dependencies": {
+    "chai": "^4.1.2",
     "express": "^4.16.3",
     "js-yaml": "^3.12.0",
+    "mocha": "^5.2.0",
     "node-yaml": "^3.1.1",
     "winston": "^3.0.0"
   }
