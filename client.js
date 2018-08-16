@@ -9,11 +9,9 @@ function connect(device, init) {
   var [host, port] = utils.getHostAndPort(device.addr)
   host = `${host}%${config.default.interface}`
   port = port || config.default.port
-  this.client = net.connect({ host: host, port: port}, (err) => {
-    if(err) {
-      log.warn(`error connect: ${this.addr} ${JSON.stringify(err)}`)
-      reconect.bind(this)();
-    }
+  log.info(`connection to ${host}:${port}`)
+  this.client = net.connect({ host: host, port: port}, () => {
+    this.online = true
     log.info(`connected to ${host}:${port}`)
     if(init) init()
   })
@@ -33,18 +31,20 @@ function ondata(data) {
       this.buffer = ''
     }
     log.info(`ondata: ${JSON.stringify(data)}`)
-    if(data) {
-      this.receiveCb(data)
+    if(data) {      
+      if(this.receiveCb) this.receiveCb(data)
       clearTimeout(this.timeout)
     }
   })
 }
 
 function onerror(err) {
+  this.online = false
   log.warn(`onerror: ${this.addr} ${JSON.stringify(err)}`)
 }
 
 function onend() {
+  this.online = false
   log.warn(`onend: ${this.addr}`)
 }
 

@@ -1,6 +1,6 @@
 const winston = require('winston');
 
-/** @module config */
+/** @module logger */
 
 module.exports = {
   getLogger() {
