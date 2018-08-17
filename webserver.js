@@ -4,6 +4,7 @@ const config = require('./config.js'),
       app = express(),
       server = require('http').createServer(app),
       io = require('socket.io').listen(server),
+      spawn = require('child_process').spawn,
       _ = require('lodash')
 
 /** @module WebServer */
@@ -39,16 +40,27 @@ class WebServer {
       })
     }, 1e3)
 
-    io.sockets.on('connection', (socket) => {
+    _.each(['ledchain1', 'ledchain2'], ledchain => {
+      spawn('tail', ['-f', `/tmp/${ledchain}`]).stdout.on('data', data => {
+        io.sockets.emit(ledchain, data)
+      })
+    })
+
+    io.sockets.on('connection', socket => {
       log.info(`websocket connected`);
-    	socket.on('setText', (text) => {
+    	socket.on('setText', text => {
         log.info(`setText: ${text}`)
-        //start in 100ms
-        var start = (new Date).getTime() + 100;
-        _.each(clients.text, (c) => c.send({
-          cmd: 'setText', text, start
-        }));
+        _.each(clients.text, c => c.send({feature: 'text', text: text || ''}));
     	})
+      socket.on('startScroll', () => {
+        log.info(`startScroll`)
+        var start = (new Date).getTime() + 50;
+        _.each(clients.text, c => c.send({feature: 'text', cmd: 'startscroll', start: start}));
+    	})
+      socket.on('stopScroll', () => {
+        log.info(`stopScroll`)
+        _.each(clients.text, c => c.send({feature: 'text', cmd: 'stopscroll'}));
+      })
     })
   }
 }

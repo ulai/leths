@@ -2,20 +2,21 @@ const _ = require('lodash'),
       net = require('net'),
       config = require('./config').getConfig(),
       log = require('./logger').getLogger(),
-      utils = require('./utils');
+      utils = require('./utils'),
+      reconnect = require('reconnect-net')
 
 function connect(device, init) {
-  this.reconnectParams = {device, init}
   var [host, port] = utils.getHostAndPort(device.addr)
   host = `${host}%${config.default.interface}`
   port = port || config.default.port
-  log.info(`connection to ${host}:${port}`)
-  this.client = net.connect({ host: host, port: port}, () => {
+  log.info(`connecting to ${host}:${port}`)
+  reconnect(client => {
+    this.client = client
+    client.on('data', ondata.bind(this))
     this.online = true
     log.info(`connected to ${host}:${port}`)
     if(init) init()
-  })
-  this.client.on('data', ondata.bind(this)).on('error', onerror.bind(this)).on('end', onend.bind(this))
+  }).connect({host, port}).on('error', onerror.bind(this)).on('end', onend.bind(this))
 }
 
 function ondata(data) {
@@ -31,7 +32,7 @@ function ondata(data) {
       this.buffer = ''
     }
     log.info(`ondata: ${JSON.stringify(data)}`)
-    if(data) {      
+    if(data) {
       if(this.receiveCb) this.receiveCb(data)
       clearTimeout(this.timeout)
     }

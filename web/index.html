@@ -2,17 +2,24 @@
 <html ng-app="app" ng-cloak>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css" />    
-    <script src="angular.min.js"></script>
-    <script src="socket.io.slim.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="vendor/angular.min.js"></script>
+    <script src="vendor/socket.io.slim.js"></script>
+    <script src="vendor/lodash.min.js"></script>
     <script src="app.js"></script>
 </head>
 <body ng-controller="ctrl">
-  <div>
-    <p>Modules online: {{stats.online}}</p>
-  </div>
-  <div>
-    <p>Text: <input type="text" ng-model="text"><button ng-click="setText(text)">set</button>
-  </div>
+  <p>Modules online: {{stats.online}}</p>
+  <p>Text: <input type="text" ng-model="text">
+    <button ng-click="setText(text)">set</button>
+    <button ng-click="startScroll()">start</button>
+    <button ng-click="stopScroll()">stop</button>
+  </p>
+  <ul style="list-style:none; border:0; float:left" ng-repeat="ledchain in ledchains">
+    <li ng-repeat="led in ledchain track by $index" style="height:10px; width:10px; float:left; background-color:{{led}}"></li>
+  </ul>
+  <ul style="list-style:none; border:0; float:left; width:150px; clear:both">
+    <li ng-repeat="module in modules track by $index" style="height:20px; width:28px; float:left; background-color:{{module}}"></li>
+  </ul>
 </body>
 </html>
