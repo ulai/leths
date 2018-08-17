@@ -12,13 +12,13 @@ _.each(config.omegas, (devices, type) => {
   ({
     'text':   (devices) => _.each(devices, (device) => {
                 var client = new Client(device, () => {
-                  client.send({cmd:'init', 'text': device.text}, () => {})
+                  client.send({feature:'text', cmd:'init', 'text': device.text}, () => {})
                 })
                 clients.text.push(client)
               }),
     'light':  (devices) => _.each(devices.cells, (device) => {
                 var client = new Client(device, () => {
-                  client.send({cmd:'init', light:1}, () => {})
+                  client.send({feature:'light', cmd:'init'}, () => {})
                 })
                 clients.light.push(client)
               }),
@@ -26,14 +26,16 @@ _.each(config.omegas, (devices, type) => {
                 var c = config.omegas.neuron
                 _.each(devices.neurons, (device) => {
                   var client = new Client(device, () => {
-                    client.send({cmd:'init', 'neuron': {
+                    client.send({feature:'neuron', cmd:'init',
                       movingAverageCount:c.movingAverageCount,
                       threshold:c.threshold,
-                    }}, () => {})
+                      numAxonLeds:device.numAxonLeds,
+                      numBodyLeds:c.numBodyLeds,
+                    }, () => {})
                   })
                   clients.neuron.push(client)
                 })
-              }  
+              }
   }[type])(devices);
 })
 
