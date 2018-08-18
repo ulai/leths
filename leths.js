@@ -5,7 +5,7 @@ const _ = require('lodash'),
       log = require('./logger').getLogger('leths'),
       Client = require('./client'),
       WebServer = require('./webserver'),
-      mqtt = require('./mqtt')
+      mqtt = new (require('./mqtt'))
 
 var clients = { text: [], light: [], neuron: []}
 
@@ -49,9 +49,10 @@ _.each(config.omegas, (devices, type) => {
                         numBodyLeds:c.numBodyLeds,
                     }})
                     client.send({cmd:'status'}, status => device.status = status)
-                    client.on('sensor', data => {
-                      let k = `${i}`
-                      mqtt.publish('neurons', { i : true })
+                    client.on('sensor', () => {
+                      let o = {}
+                      o[i] = true
+                      mqtt.publish('neurons', o)
                     })
                   })
                   clients.neuron.push(client)

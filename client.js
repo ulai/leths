@@ -33,6 +33,9 @@ function ondata(data) {
     }
     this.log.info('ondata %j', data)
     if(data) {
+      if('sensor' in data) {
+        this.emit('sensor')
+      }
       if(this.receiveCb) this.receiveCb(data)
       clearTimeout(this.timeout)
     }
@@ -54,10 +57,10 @@ function send(cmd, cb) {
   if(cb) {
     this.receiveCb = cb;
     this.timeout = setTimeout(() => {
-      this.log.error(timeout, cmd);
+      this.log.error(timeout, cmd)
     }, 1e3)
   }
-  this.client.write(getCommand(cmd));
+  this.client.write(getCommand(cmd))
 }
 
 function getCommand(cmd) {
@@ -70,11 +73,11 @@ class Client extends EventEmitter {
     this.log = require('./logger').getLogger(`client.${device.addr}`)
     this.online = false
     this.device = device
-    connect.bind(this)(device, init);
+    connect.bind(this)(device, init)
   }
   send(cmd, cb) {
-    send.bind(this)(cmd, cb);
+    send.bind(this)(cmd, cb)
   }
 }
 
-module.exports = Client;
+module.exports = Client

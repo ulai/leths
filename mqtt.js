@@ -9,7 +9,9 @@ class Mqtt {
     })
   }
   publish(topic, msg) {
-    log.info(`publish topic:${topic}`, msg)
-    this.client.publish(topic, msg)
+    log.info(`publish %s %j`, topic, msg)
+    this.client.publish(topic, JSON.stringify(msg))
   }
 }
+
+module.exports = Mqtt
