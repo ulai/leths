@@ -6,9 +6,11 @@ angular
   var socket = io.connect()
 
   socket.on('stats', (stats) => $scope.$apply(() => $scope.stats = stats))
+
   $scope.setText = (text) => socket.emit('setText', text)
   $scope.startScroll = () => socket.emit('startScroll')
   $scope.stopScroll = () => socket.emit('stopScroll')
+  $scope.fire = i => socket.emit('fire', i)
 
   const N = 100
   $scope.ledchains = {}

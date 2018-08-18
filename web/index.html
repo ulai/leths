@@ -4,18 +4,23 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css" />
     <script src="vendor/angular.min.js"></script>
+    <script src="vendor/angular-resource.min.js"></script>
+    <script src="vendorangular-ui-router.min.js"></script>
     <script src="vendor/socket.io.slim.js"></script>
     <script src="vendor/lodash.min.js"></script>
     <script src="app.js"></script>
 </head>
 <body ng-controller="ctrl">
-  <p>Modules online: {{stats.online}}</p>
+  <p>Modules online: {{stats.online}} / {{stats.total}}</p>
   <p>Text: <input type="text" ng-model="text">
     <button ng-click="setText(text)">set</button>
     <button ng-click="startScroll()">start</button>
     <button ng-click="stopScroll()">stop</button>
   </p>
-  <ul style="list-style:none; border:0; float:left" ng-repeat="ledchain in ledchains">
+  <ul style="list-style:none; border:0; float:left; clear:both">
+    <li ng-repeat="neuron in stats.clients.neuron track by $index" style=""><button ng-click="fire($index)">Neuron_{{$index}}</button</li>
+  </ul>
+  <ul style="list-style:none; border:0; float:left; clear:both" ng-repeat="ledchain in ledchains track by $index">
     <li ng-repeat="led in ledchain track by $index" style="height:10px; width:10px; float:left; background-color:{{led}}"></li>
   </ul>
   <ul style="list-style:none; border:0; float:left; width:150px; clear:both">

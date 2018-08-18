@@ -1,20 +1,20 @@
 const _ = require('lodash'),
       net = require('net'),
       config = require('./config').getConfig(),
-      log = require('./logger').getLogger(),
       utils = require('./utils'),
-      reconnect = require('reconnect-net')
+      reconnect = require('reconnect-net'),
+      EventEmitter = require('events')
 
 function connect(device, init) {
   var [host, port] = utils.getHostAndPort(device.addr)
   host = `${host}%${config.default.interface}`
   port = port || config.default.port
-  log.info(`connecting to ${host}:${port}`)
+  this.log.debug('connecting to %s:%s', host, port)
   reconnect(client => {
     this.client = client
     client.on('data', ondata.bind(this))
     this.online = true
-    log.info(`connected to ${host}:${port}`)
+    this.log.info('connected to %s:%s', host, port)
     if(init) init()
   }).connect({host, port}).on('error', onerror.bind(this)).on('end', onend.bind(this))
 }
@@ -26,12 +26,12 @@ function ondata(data) {
     try {
       data = JSON.parse(b);
     } catch(e) {
-      log.error(`ondata: json parse error '${e}' : ${JSON.stringify(data)}`)
+      log.error('json parse error %j for %s', e, b)
       return
     } finally {
       this.buffer = ''
     }
-    log.info(`ondata: ${JSON.stringify(data)}`)
+    this.log.info('ondata %j', data)
     if(data) {
       if(this.receiveCb) this.receiveCb(data)
       clearTimeout(this.timeout)
@@ -41,20 +41,22 @@ function ondata(data) {
 
 function onerror(err) {
   this.online = false
-  log.warn(`onerror: ${this.addr} ${JSON.stringify(err)}`)
+  this.log.warn('onerror %j', err)
 }
 
 function onend() {
   this.online = false
-  log.warn(`onend: ${this.addr}`)
+  this.log.warn('onend')
 }
 
 function send(cmd, cb) {
-  log.info(`t=${(new Date()).getTime()}, cmd=${cmd}`)
-  this.receiveCb = cb;
-  this.timeout = setTimeout(() => {
-    log.error(`timeout`);
-  }, 1e3);
+  this.log.info('send %j', cmd)
+  if(cb) {
+    this.receiveCb = cb;
+    this.timeout = setTimeout(() => {
+      this.log.error(timeout, cmd);
+    }, 1e3)
+  }
   this.client.write(getCommand(cmd));
 }
 
@@ -62,8 +64,12 @@ function getCommand(cmd) {
   return JSON.stringify(cmd) + "\n";
 }
 
-class Client {
+class Client extends EventEmitter {
   constructor(device, init) {
+    super()
+    this.log = require('./logger').getLogger(`client.${device.addr}`)
+    this.online = false
+    this.device = device
     connect.bind(this)(device, init);
   }
   send(cmd, cb) {
