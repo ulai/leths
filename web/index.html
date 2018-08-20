@@ -53,8 +53,12 @@
     offsety: <input type="text" ng-model="offsety">
     <button ng-click="set('offsety',offsety)">set</button>
   </p>
+  <p>Modules</p>
+  <ul style="clear:both">
+    <li ng-repeat="t in stats.clients.text track by $index" style="">{{$index}} {{t}}</li>
+  </ul>
   <ul style="list-style:none; border:0; float:left; clear:both">
-    <li ng-repeat="neuron in stats.clients.neuron track by $index" style=""><button ng-click="fire($index)">Neuron_{{$index}}</button</li>
+    <li ng-repeat="neuron in stats.clients.neuron track by $index" style=""><button ng-click="fire($index)">Neuron_{{$index}}</button></li>
   </ul>
   <ul style="list-style:none; border:0; float:left; clear:both" ng-repeat="ledchain in ledchains track by $index">
     <li ng-repeat="led in ledchain track by $index" style="height:10px; width:10px; float:left; background-color:{{led}}"></li>
