@@ -12,10 +12,46 @@
 </head>
 <body ng-controller="ctrl">
   <p>Modules online: {{stats.online}} / {{stats.total}}</p>
-  <p>Text: <input type="text" ng-model="text">
-    <button ng-click="setText(text)">set</button>
-    <button ng-click="startScroll()">start</button>
+  <p>
+    Text: <input type="text" ng-model="text">
+    <button ng-click="set('text',text)">set</button>
+  </p>
+  <p>
+    stepx: <input type="text" ng-model="stepx">
+    stepy: <input type="text" ng-model="stepy">
+    steps: <input type="text" ng-model="steps">
+    interval: <input type="text" ng-model="interval">
+    roundoffsets: <input type="checkbox" ng-model="roundoffsets">
+    start: <input type="text" ng-model="start">
+    <button ng-click="startScroll(stepx, stepy, steps, interval, roundoffsets, start)">start</button>
+  </p>
+  <p>
     <button ng-click="stopScroll()">stop</button>
+  </p>
+  <p>
+    to: <input type="text" ng-model="to">
+    t: <input type="text" ng-model="t">
+    <button ng-click="fade(to, t)">fade</button>
+  </p>
+  <p>
+    Color: <input type="text" ng-model="color">
+    <button ng-click="set('color',color)">set</button>
+  </p>
+  <p>
+    Backgroundcolor: <input type="text" ng-model="backgroundcolor">
+    <button ng-click="set('backgroundcolor',backgroundcolor)">set</button>
+  </p>
+  <p>
+    spacing: <input type="text" ng-model="spacing">
+    <button ng-click="set('spacing',spacing)">set</button>
+  </p>
+  <p>
+    offsetx: <input type="text" ng-model="offsetx">
+  <button ng-click="set('offsetx',offsetx)">set</button>
+  </p>
+  <p>
+    offsety: <input type="text" ng-model="offsety">
+    <button ng-click="set('offsety',offsety)">set</button>
   </p>
   <ul style="list-style:none; border:0; float:left; clear:both">
     <li ng-repeat="neuron in stats.clients.neuron track by $index" style=""><button ng-click="fire($index)">Neuron_{{$index}}</button</li>

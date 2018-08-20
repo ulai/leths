@@ -7,9 +7,10 @@ angular
 
   socket.on('stats', (stats) => $scope.$apply(() => $scope.stats = stats))
 
-  $scope.setText = (text) => socket.emit('setText', text)
-  $scope.startScroll = () => socket.emit('startScroll')
+  $scope.set = (k,v) => socket.emit('set', {k, v})
+  $scope.startScroll = (stepx, stepy, steps, interval, roundoffsets, start) => socket.emit('startScroll', {stepx, stepy, steps, interval, roundoffsets, start})
   $scope.stopScroll = () => socket.emit('stopScroll')
+  $scope.fade = (to, t) => socket.emit('fade', {to, t})
   $scope.fire = i => socket.emit('fire', i)
 
   const N = 100

@@ -46,18 +46,33 @@ class WebServer {
 
     io.sockets.on('connection', socket => {
       log.info(`websocket connected`);
-    	socket.on('setText', text => {
-        log.info('setText %s', text)
-        _.each(clients.text, c => c.send({feature: 'text', text: text || ''}));
+    	socket.on('set', x => {
+        log.info('set %j', x)
+        let o = {feature: 'text'}
+        o[x.k] = x.v
+        _.each(clients.text, c => c.send(o));
     	})
-      socket.on('startScroll', () => {
-        log.info('startScroll')
-        var start = (new Date).getTime() + 50;
-        _.each(clients.text, c => c.send({feature: 'text', cmd: 'startscroll', start: start}));
+      socket.on('startScroll', x => {
+        log.info('startScroll %j', x)
+        let o = { feature: 'text', cmd: 'startscroll', start: (new Date).getTime() + 50 }
+        if(x.stepx !== null) o.stepx = x.stepx
+        if(x.stepy !== null) o.stepy = x.stepy
+        if(x.steps !== null) o.steps = x.steps
+        if(x.interval !== null) o.interval = x.interval
+        if(x.roundoffsets !== null) o.roundoffsets = x.roundoffsets
+        if(x.start !== undefined) o.start = x.start
+        _.each(clients.text, c => c.send(o));
     	})
       socket.on('stopScroll', () => {
         log.info('stopScroll')
         _.each(clients.text, c => c.send({feature: 'text', cmd: 'stopscroll'}));
+      })
+      socket.on('fade', x => {
+        log.info('fade %j', x)
+        let o = {feature: 'text', cmd: 'fade'}
+        if(x.to) o.to = x.to
+        if(x.t) o.t = x.t
+        _.each(clients.text, c => c.send(o));
       })
       socket.on('fire', i => {
         log.info('fire %d', i)
