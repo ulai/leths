@@ -57,7 +57,7 @@ function send(cmd, cb) {
   if(cb) {
     this.receiveCb = cb;
     this.timeout = setTimeout(() => {
-      this.log.error(timeout, cmd)
+      this.log.error('timeout %j', cmd)
     }, 1e3)
   }
   this.client.write(getCommand(cmd))

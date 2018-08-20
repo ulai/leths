@@ -19,7 +19,7 @@ process.on('uncaughtException', (err) => {
 log.info(
   'initialsing: %d text, %d light, %d neuron',
   config.omegas.text.length,
-  config.omegas.light.cells.length,
+  config.omegas.light.lights.length,
   config.omegas.neuron.neurons.length)
 
 _.each(config.omegas, (devices, type) => {
@@ -31,13 +31,22 @@ _.each(config.omegas, (devices, type) => {
                 })
                 clients.text.push(client)
               }),
-    'light':  (devices) => _.each(devices.cells, (device) => {
-                var client = new Client(device, () => {
-                  client.send({cmd:'init', light: 1})
-                  client.send({cmd:'status'}, status => device.status = status)
+    'light':  (devices) => {
+                let pos = {x: 0, y: 0}
+                _.each(devices.lights, (device) => {
+                  var client = new Client(device, () => {
+                    client.send({cmd:'init', light: 1})
+                    client.send({cmd:'status'}, status => device.status = status)
+                  })
+                  client.pos = _.clone(pos)
+                  pos.x++
+                  if(pos.x === devices.size.x) {
+                    pos.y++
+                    pos.x = 0
+                  }
+                  clients.light.push(client)
                 })
-                clients.light.push(client)
-              }),
+              },
     'neuron': (devices) => {
                 var c = config.omegas.neuron
                 _.forOwn(devices.neurons, (device, i) => {
@@ -50,6 +59,9 @@ _.each(config.omegas, (devices, type) => {
                     }})
                     client.send({cmd:'status'}, status => device.status = status)
                     client.on('sensor', () => {
+                      _.each(_.filter(clients.light,
+                        l => Math.abs(l.pos.x - device.x) < 2 && Math.abs(l.pos.y - device.y) < 2), c =>
+                        c.send({cmd: 'fade', to: .5, time: 100}))
                       let o = {}
                       o[i] = true
                       mqtt.publish('neurons', o)

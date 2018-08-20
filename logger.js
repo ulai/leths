@@ -1,14 +1,14 @@
-const winston = require('winston')
+const winston = require('winston'),
+      _ = require('lodash')
 
 /** @module logger */
 
-module.exports = {
-  getLogger(label) {
-    return getLogger(label)
-    if(!this.logger) this.logger = getLogger()
-    return this.logger;
-  },
-};
+var transports = {
+   file: new winston.transports.File({ filename: 'leths.log', level: 'info' }),
+   console: new winston.transports.Console({ format: winston.format.simple(), level: 'debug', silent: true})
+}
+
+let loggers = {}
 
 function getLogger(label) {
   return  winston.createLogger({
@@ -17,13 +17,25 @@ function getLogger(label) {
       winston.format.timestamp(),
       winston.format.label({ label: label }),
       winston.format.splat(),
-      winston.format.printf(info => `${info.timestamp} [${info.label}] ${info.level}: ${info.message}`)
+      winston.format.printf(info => `${info.timestamp} [${info.label}] ${info.level}: ${info.message}`),
+      winston.format.colorize({ all: true })
    ),
    transports: [
-     new winston.transports.File({
-       filename: 'leths.log',
-       level: 'info'
-     }),
-   ]
- });
+    transports.console,
+    transports.file
+  ]
+ })
+}
+
+module.exports = {
+  getLogger(label) {
+    if(!loggers[label]) loggers[label] = getLogger(label)
+    return loggers[label]
+  },
+  setLevel(level) {
+    transports.file.level = level
+  },
+  toConsole() {
+    transports.console.silent = false
+  }
 }

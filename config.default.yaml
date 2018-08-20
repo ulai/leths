@@ -15,7 +15,7 @@ omegas:
     - { addr: 'fe80::b908:c314:cfbd:7a4a 11205', text: [{cols: 22, offset: 123, orentiation: 1}] }
   light:
     size: {x: 4, y: 4} # (N, M)
-    cells: # starting at x=0, y=0 -> x=N, y=0 -> x=1, y=1 ...
+    lights: # starting at x=0, y=0 -> x=N, y=0 -> x=1, y=1 ...
       # row 0 -> y=0
       - { addr: 'fe80::b908:c314:cfbd:7a4a 11210' }
       - { addr: 'fe80::b908:c314:cfbd:7a4a 11211' }
@@ -39,7 +39,8 @@ omegas:
   neuron:
     movingAverageCount: 20 # Number of frame to for moving average
     threshold: 250 # ad threshold to fire neuron
-    neurons:    
+    numBodyLeds: 70
+    neurons:
       - { addr: 'fe80::42a3:6bff:fec1:88e6 12345', x: 1, y : 3}
       - { addr: 'fe80::b908:c314:cfbd:7a4a 11301', x: 1, y : 3}
       - { addr: 'fe80::b908:c314:cfbd:7a4a 11302', x: 2, y : 2}
