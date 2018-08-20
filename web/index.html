@@ -17,40 +17,40 @@
     <button ng-click="set('text',text)">set</button>
   </p>
   <p>
-    stepx: <input type="text" ng-model="stepx">
-    stepy: <input type="text" ng-model="stepy">
-    steps: <input type="text" ng-model="steps">
-    interval: <input type="text" ng-model="interval">
+    stepx: <input type="number" ng-model="stepx">
+    stepy: <input type="number" ng-model="stepy">
+    steps: <input type="number" ng-model="steps">
+    interval: <input type="number" ng-model="interval">
     roundoffsets: <input type="checkbox" ng-model="roundoffsets">
-    start: <input type="text" ng-model="start">
+    start: <input type="number" ng-model="start">
     <button ng-click="startScroll(stepx, stepy, steps, interval, roundoffsets, start)">start</button>
   </p>
   <p>
     <button ng-click="stopScroll()">stop</button>
   </p>
   <p>
-    to: <input type="text" ng-model="to">
-    t: <input type="text" ng-model="t">
+    to: <input type="number" ng-model="to">
+    t: <input type="number" ng-model="t">
     <button ng-click="fade(to, t)">fade</button>
   </p>
   <p>
-    Color: <input type="text" ng-model="color">
+    Color: <input type="color" ng-model="color">
     <button ng-click="set('color',color)">set</button>
   </p>
   <p>
-    Backgroundcolor: <input type="text" ng-model="backgroundcolor">
+    Backgroundcolor: <input type="color" ng-model="backgroundcolor">
     <button ng-click="set('backgroundcolor',backgroundcolor)">set</button>
   </p>
   <p>
-    spacing: <input type="text" ng-model="spacing">
+    spacing: <input type="number" ng-model="spacing">
     <button ng-click="set('spacing',spacing)">set</button>
   </p>
   <p>
-    offsetx: <input type="text" ng-model="offsetx">
+    offsetx: <input type="number" ng-model="offsetx">
   <button ng-click="set('offsetx',offsetx)">set</button>
   </p>
   <p>
-    offsety: <input type="text" ng-model="offsety">
+    offsety: <input type="number" ng-model="offsety">
     <button ng-click="set('offsety',offsety)">set</button>
   </p>
   <p>Modules</p>
