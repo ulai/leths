@@ -54,7 +54,7 @@ class WebServer {
     	})
       socket.on('startScroll', x => {
         log.info('startScroll %j', x)
-        let o = { feature: 'text', cmd: 'startscroll', start: (new Date).getTime() + 50 }
+        let o = { feature: 'text', cmd: 'startscroll', start: (new Date).getTime() + 200 }
         if(x.stepx !== null) o.stepx = x.stepx
         if(x.stepy !== null) o.stepy = x.stepy
         if(x.steps !== null) o.steps = x.steps
