@@ -1,15 +1,12 @@
+process.env.NODE_ENV === 'test'
+
 const chai = require('chai'),
       expect = chai.expect,
       sinon = require('sinon'),
-      mySpawn = require('mock-spawn')(),
-      log = require('./logger')
+      log = require('./logger'),
+      spawn = require('mock-spawn')()
 
-      sinon.stub(log, 'getLogger').callsFake((level) => {
-        return { info : () => {}, warn: () => {} }
-      })
-
-      require('child_process').spawn = mySpawn;
-
+require('child_process').spawn = spawn
 const utils = require('./utils'),
       config = require('./config')
 
@@ -30,12 +27,11 @@ describe('utility functions', () => {
   })
   describe('discover', () => {
     before(() => {
-      sinon.stub(config, 'getIps').callsFake(() => {
-        return ['fe80::b908:c314:cfbd:7a4a', 'fe80::20d:b9ff:fe4d:5d10', 'fe80::e695:6eff:fe41:84e8']
-      })
+      sinon.stub(config, 'getIps').callsFake(() => ['fe80::b908:c314:cfbd:7a4a', 'fe80::20d:b9ff:fe4d:5d10', 'fe80::e695:6eff:fe41:84e8'])
+      sinon.stub(config, 'getConfig').callsFake(() => { return { default: {interface: 'eth0'}}})
     }),
     it('finds omegas', (done) => {
-      mySpawn.sequence.add(function (cb) {
+      spawn.sequence.add(function (cb) {
         this.stdout.write('64 bytes from fe80::b908:c314:cfbd:7a4a: icmp_seq=1 ttl=64 time=0.011 ms')
         this.stdout.write('64 bytes from fe80::20d:b9ff:fe4d:5d10: icmp_seq=1 ttl=64 time=0.305 ms (DUP!)')
         this.stdout.write('64 bytes from fe80::e695:6eff:fe41:84e8: icmp_seq=1 ttl=64 time=0.589 ms (DUP!)')
@@ -43,7 +39,7 @@ describe('utility functions', () => {
         this.stdout.write('64 bytes from fe80::20d:b9ff:fe4d:5d10: icmp_seq=2 ttl=64 time=0.235 ms (DUP!)')
         cb()
       })
-      utils.discover('eth0', 10, (ips) => {
+      utils.discover(10, ips => {
         expect(ips.found).to.deep.equal(['fe80::b908:c314:cfbd:7a4a', 'fe80::20d:b9ff:fe4d:5d10', 'fe80::e695:6eff:fe41:84e8'])
         expect(ips.times).to.deep.equal({'fe80::b908:c314:cfbd:7a4a' : 0.022, 'fe80::20d:b9ff:fe4d:5d10' : 0.27, 'fe80::e695:6eff:fe41:84e8' : 0.589 })
         expect(ips.complete).to.equal(true)
@@ -51,22 +47,21 @@ describe('utility functions', () => {
       })
     })
     it('missing some omegas', (done) => {
-      mySpawn.sequence.add(function (cb) {
+      spawn.sequence.add(function (cb) {
         this.stdout.write('64 bytes from fe80::b908:c314:cfbd:7a4a: icmp_seq=1 ttl=64 time=0.024 ms')
         this.stdout.write('64 bytes from fe80::20d:b9ff:fe4d:5d10: icmp_seq=1 ttl=64 time=0.305 ms (DUP!)')
         cb()
       })
-      utils.discover('eth0', 10, (ips) => {
+      utils.discover(10, ips => {
         expect(ips.found).to.deep.equal(['fe80::b908:c314:cfbd:7a4a', 'fe80::20d:b9ff:fe4d:5d10'])
         expect(ips.defined).to.deep.equal(['fe80::b908:c314:cfbd:7a4a', 'fe80::20d:b9ff:fe4d:5d10', 'fe80::e695:6eff:fe41:84e8'])
         expect(ips.complete).to.equal(false)
         done()
       })
     })
-  })
-  describe('flash', () => {
-    it('flashes the omegas', () => {
-
+    after(() => {
+      config.getIps.reset()
+      config.getConfig.reset()
     })
   })
 })

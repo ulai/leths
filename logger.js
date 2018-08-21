@@ -29,6 +29,10 @@ function getLogger(label) {
 
 module.exports = {
   getLogger(label) {
+    if(process.env.NODE_ENV === 'test') {
+      return { debug() {}, info() {}, warn() {}, error() {} }
+    }
+    label = ''
     if(!loggers[label]) loggers[label] = getLogger(label)
     return loggers[label]
   },

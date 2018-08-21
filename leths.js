@@ -16,8 +16,10 @@ process.on('uncaughtException', (err) => {
   log.error(`uncaughtException: ${err.stack}`)
 })
 
+//process.on('warning', e => console.warn(e.stack));
+
 log.info(
-  'initialsing: %d text, %d light, %d neuron',
+  'initialising: %d text, %d light, %d neuron',
   config.omegas.text.length,
   config.omegas.light.lights.length,
   config.omegas.neuron.neurons.length)
