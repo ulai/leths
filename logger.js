@@ -32,6 +32,7 @@ module.exports = {
     if(process.env.NODE_ENV === 'test') {
       return { debug() {}, info() {}, warn() {}, error() {} }
     }
+    //TODO Fix logger label
     label = ''
     if(!loggers[label]) loggers[label] = getLogger(label)
     return loggers[label]
