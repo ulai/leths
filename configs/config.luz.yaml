@@ -7,14 +7,14 @@ default:
 
 omegas:
   text:
-#    - { addr: 'fe80::42a3:6bff:fec1:838a 11200', text: [ { cols: 47, offset: 0, orientation: 0 }, { cols: 24, offset: 47, orientation: 6 } ] }
-#    - { addr: 'fe80::42a3:6bff:fec1:8253 11200', text: [ { cols: 72, offset: 71, orientation: 0 } ] }
-#    - { addr: 'fe80::42a3:6bff:fec1:828a 11200', text: [ { cols: 72, offset: 143, orientation: 0 } ] }
-#    - { addr: 'fe80::42a3:6bff:fec1:8381 11200', text: [ { cols: 72, offset: 215, orientation: 0 } ] }
-#    - { addr: 'fe80::42a3:6bff:fec1:8375 11200', text: [ { cols: 72, offset: 287, orientation: 0 } ] }
-#    - { addr: 'fe80::42a3:6bff:fec1:8298 11200', text: [ { cols: 72, offset: 359, orientation: 0 } ] }
-#    - { addr: 'fe80::42a3:6bff:fec1:825c 11200', text: [ { cols: 72, offset: 431, orientation: 0 } ] }
-#    - { addr: 'fe80::42a3:6bff:fec1:82b2 11200', text: [ { cols: 72, offset: 503, orientation: 0 } ] }
+    - { addr: 'fe80::42a3:6bff:fec1:838a 11200', text: [ { cols: 47, offset: 0, orientation: 0 }, { cols: 24, offset: 47, orientation: 6 } ] }
+    - { addr: 'fe80::42a3:6bff:fec1:8253 11200', text: [ { cols: 72, offset: 71, orientation: 0 } ] }
+    - { addr: 'fe80::42a3:6bff:fec1:828a 11200', text: [ { cols: 72, offset: 143, orientation: 0 } ] }
+    - { addr: 'fe80::42a3:6bff:fec1:8381 11200', text: [ { cols: 72, offset: 215, orientation: 0 } ] }
+    - { addr: 'fe80::42a3:6bff:fec1:8375 11200', text: [ { cols: 72, offset: 287, orientation: 0 } ] }
+    - { addr: 'fe80::42a3:6bff:fec1:8298 11200', text: [ { cols: 72, offset: 359, orientation: 0 } ] }
+    - { addr: 'fe80::42a3:6bff:fec1:825c 11200', text: [ { cols: 72, offset: 431, orientation: 0 } ] }
+    - { addr: 'fe80::42a3:6bff:fec1:82b2 11200', text: [ { cols: 72, offset: 503, orientation: 0 } ] }
 
     - { addr: 'fe80::42a3:6bff:fec1:80e3 11200', text: [ { cols: 47, offset: 0, orientation: 0 }, { cols: 24, offset: 47, orientation: 6 } ] }
     - { addr: 'fe80::42a3:6bff:fec1:82a4 11200', text: [ { cols: 72, offset: 71, orientation: 0 } ] }
@@ -25,8 +25,13 @@ omegas:
     - { addr: 'fe80::42a3:6bff:fec1:838d 11200', text: [ { cols: 72, offset: 431, orientation: 0 } ] }
     - { addr: 'fe80::42a3:6bff:fec1:82b1 11200', text: [ { cols: 72, offset: 503, orientation: 0 } ] }
 
-    - { addr: 'fe80::42a3:6bff:fec1:8567 11200', text: [ { cols: 72, offset: 575, orientation: 0 } ] }
-    - { addr: 'fe80::42a3:6bff:fec1:82a6 11200', text: [ { cols: 72, offset: 647, orientation: 0 } ] }
+    - { addr: 'fe80::42a3:6bff:fec1:8567 11200', text: [ { cols: 72, offset: 0, orientation: 0 } ] }
+    - { addr: 'fe80::42a3:6bff:fec1:82a6 11200', text: [ { cols: 72, offset: 72, orientation: 0 } ] }
+
+
+# text: The quick brown fox jumps over the lazy dog +++ 0123456789+"*$%&/()=,;.:-_!?^~` +++ THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG +++
+# text: Benno Eddi Rolf - Wolf +++ Sue Claire Trine - Biene +++
+# text: Des Menschen Seele  Gleicht dem Wasser:  Vom Himmel kommt es,  Zum Himmel steigt es,  Und wieder nieder  Zur Erde muß es.  Ewig wechselnd.  -  Strömt von der hohen,  Steilen Felsenwand  Der reine Strahl,  Dann stäubt er lieblich  In Wolkenwellen  Zum glatten Fels,  Und, leicht empfangen,  Wallt er verschleiernd,  Leisrauschend  Zur Tiefe nieder.  -  Ragen Klippen  Dem Sturz entgegen,  Schäumt er unmutig  Stufenweise  Zum Abgrund.  -  Im flachen Bette  Schleicht er das Wiesental hin,  Und in dem glatten See  Weiden ihr Antlitz  Alle Gestirne. - Wind ist der Welle  Lieblicher Buhler;  Wind rauscht von Grund aus  Schäumende Wogen.  -  Seele des Menschen  Wie gleichst du dem Wasser!  Schicksal des Menschen,  Wie gleichst du dem Wind!
 
 
   light:
@@ -44,6 +49,32 @@ omegas:
       - { addr: 'fe80::42a3:6bff:fec1:82a0 11200' }
       - { addr: 'fe80::42a3:6bff:fec1:8103 11200' }
       - { addr: 'fe80::42a3:6bff:fec1:80c8 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:8003 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:8000 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:800f 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:8084 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:8295 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:805d 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:8018 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:8063 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:803c 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:8407 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:7ff1 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:82c7 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:8036 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:8289 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:84a4 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:7ffa 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:8006 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:808b 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:8066 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:827f 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:8069 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:8054 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:832d 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:8042 11200' }
+
+
   neuron:
     movingAverageCount: 20 # Number of frame to for moving average
     threshold: 250 # ad threshold to fire neuron
