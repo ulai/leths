@@ -1,0 +1,73 @@
+# Configuration for leths server
+# The server connects to omegas an initializes them with different
+# features. The connection is via ipv6 local link addresses.
+default:
+  interface: en7 # the interface for ipv6 local
+  port: 11200 # the default port the lethd api listens on
+
+omegas:
+  text:
+#    - { addr: 'fe80::42a3:6bff:fec1:838a 11200', text: [ { cols: 47, offset: 0, orientation: 0 }, { cols: 24, offset: 47, orientation: 6 } ] }
+#    - { addr: 'fe80::42a3:6bff:fec1:8253 11200', text: [ { cols: 72, offset: 71, orientation: 0 } ] }
+#    - { addr: 'fe80::42a3:6bff:fec1:828a 11200', text: [ { cols: 72, offset: 143, orientation: 0 } ] }
+#    - { addr: 'fe80::42a3:6bff:fec1:8381 11200', text: [ { cols: 72, offset: 215, orientation: 0 } ] }
+#    - { addr: 'fe80::42a3:6bff:fec1:8375 11200', text: [ { cols: 72, offset: 287, orientation: 0 } ] }
+#    - { addr: 'fe80::42a3:6bff:fec1:8298 11200', text: [ { cols: 72, offset: 359, orientation: 0 } ] }
+#    - { addr: 'fe80::42a3:6bff:fec1:825c 11200', text: [ { cols: 72, offset: 431, orientation: 0 } ] }
+#    - { addr: 'fe80::42a3:6bff:fec1:82b2 11200', text: [ { cols: 72, offset: 503, orientation: 0 } ] }
+
+    - { addr: 'fe80::42a3:6bff:fec1:80e3 11200', text: [ { cols: 47, offset: 0, orientation: 0 }, { cols: 24, offset: 47, orientation: 6 } ] }
+    - { addr: 'fe80::42a3:6bff:fec1:82a4 11200', text: [ { cols: 72, offset: 71, orientation: 0 } ] }
+    - { addr: 'fe80::42a3:6bff:fec1:839f 11200', text: [ { cols: 72, offset: 143, orientation: 0 } ] }
+    - { addr: 'fe80::42a3:6bff:fec1:828e 11200', text: [ { cols: 72, offset: 215, orientation: 0 } ] }
+    - { addr: 'fe80::42a3:6bff:fec1:82a3 11200', text: [ { cols: 72, offset: 287, orientation: 0 } ] }
+    - { addr: 'fe80::42a3:6bff:fec1:8262 11200', text: [ { cols: 72, offset: 359, orientation: 0 } ] }
+    - { addr: 'fe80::42a3:6bff:fec1:838d 11200', text: [ { cols: 72, offset: 431, orientation: 0 } ] }
+    - { addr: 'fe80::42a3:6bff:fec1:82b1 11200', text: [ { cols: 72, offset: 503, orientation: 0 } ] }
+
+    - { addr: 'fe80::42a3:6bff:fec1:8567 11200', text: [ { cols: 72, offset: 575, orientation: 0 } ] }
+    - { addr: 'fe80::42a3:6bff:fec1:82a6 11200', text: [ { cols: 72, offset: 647, orientation: 0 } ] }
+
+
+  light:
+    size: {x: 1, y: 1} # (N, M)
+    lights: # starting at x=0, y=0 -> x=N, y=0 -> x=1, y=1 ...
+      # row 0 -> y=0
+      - { addr: 'fe80::42a3:6bff:fec1:8385 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:8390 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:82ad 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:8292 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:82a8 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:80F5 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:837e 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:8290 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:82a0 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:8103 11200' }
+      - { addr: 'fe80::42a3:6bff:fec1:80c8 11200' }
+  neuron:
+    movingAverageCount: 20 # Number of frame to for moving average
+    threshold: 250 # ad threshold to fire neuron
+    neurons:
+      # first batch delivered 2018-08-20
+      - { addr: 'fe80::42a3:6bff:fec1:8383 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:8395 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:82af 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:82ac 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:8297 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:82a7 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:837b 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:8296 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:82aa 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:82b5 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:82a1 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:8288 11200', x: 1, y : 1}
+
+      # second batch
+      - { addr: 'fe80::42a3:6bff:fec1:82b7 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:828d 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:8378 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:828b 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:82a9 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:82a2 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:829e 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:80ec 11200', x: 1, y : 1}
