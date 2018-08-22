@@ -53,6 +53,10 @@ function onend() {
 }
 
 function send(cmd, cb) {
+  if(!this.online) {
+    this.log.warn('send %j fails, no connection', cmd)
+    return
+  }
   this.log.info('send %j', cmd)
   if(cb) {
     this.receiveCb = cb;
@@ -60,7 +64,9 @@ function send(cmd, cb) {
       this.log.error('timeout %j', cmd)
     }, 1e3)
   }
-  this.client.write(getCommand(cmd))
+  setTimeout(() => {
+    this.client.write(getCommand(cmd))
+  })
 }
 
 function getCommand(cmd) {
