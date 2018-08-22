@@ -68,15 +68,19 @@ function getCommand(cmd) {
 }
 
 class Client extends EventEmitter {
-  constructor(device, init) {
+  constructor(device, ws, init) {
     super()
     this.log = require('./logger').getLogger(`client.${device.addr}`)
     this.online = false
     this.device = device
+    this.ws = ws
     connect.bind(this)(device, init)
   }
   send(cmd, cb) {
     send.bind(this)(cmd, cb)
+    if(cmd.cmd === 'fade') {
+      this.ws.light(cmd.to, this.pos)
+    }
   }
 }
 

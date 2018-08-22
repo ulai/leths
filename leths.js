@@ -18,6 +18,8 @@ process.on('uncaughtException', (err) => {
 
 //process.on('warning', e => console.warn(e.stack));
 
+const ws = new WebServer(clients, 3333)
+
 log.info(
   'initialising: %d text, %d light, %d neuron',
   config.omegas.text.length,
@@ -27,7 +29,7 @@ log.info(
 _.each(config.omegas, (devices, type) => {
   ({
     'text':   (devices) => _.each(devices, (device) => {
-                var client = new Client(device, () => {
+                var client = new Client(device, ws, () => {
                   client.send({cmd:'init', 'text': device.text})
                   client.send({cmd:'status'}, status => device.status = status)
                 })
@@ -36,7 +38,7 @@ _.each(config.omegas, (devices, type) => {
     'light':  (devices) => {
                 let pos = {x: 0, y: 0}
                 _.each(devices.lights, (device) => {
-                  var client = new Client(device, () => {
+                  var client = new Client(device, ws, () => {
                     client.send({cmd:'init', light: 1})
                     client.send({cmd:'status'}, status => device.status = status)
                   })
@@ -52,7 +54,7 @@ _.each(config.omegas, (devices, type) => {
     'neuron': (devices) => {
                 var c = config.omegas.neuron
                 _.forOwn(devices.neurons, (device, i) => {
-                  var client = new Client(device, () => {
+                  var client = new Client(device, ws, () => {
                     client.send({cmd:'init', 'neuron' : {
                         movingAverageCount:c.movingAverageCount,
                         threshold:c.threshold,
@@ -62,11 +64,17 @@ _.each(config.omegas, (devices, type) => {
                     client.send({cmd:'status'}, status => device.status = status)
                     client.on('sensor', () => {
                       _.each(_.filter(clients.light,
-                        l => Math.abs(l.pos.x - device.x) < 2 && Math.abs(l.pos.y - device.y) < 2), c =>
-                        c.send({cmd: 'fade', to: .5, time: 100}))
+                        l => Math.abs(l.pos.x - device.x) < 2 && Math.abs(l.pos.y - device.y) < 2), c => {
+                          c.send({cmd: 'fade', to: .5, time: 100})
+                          addTimeout(`lightFadeBack.${c.pos.x}.${c.pos.y}`, () => c.send({cmd: 'fade', to: 1, time: 1e3}), 10e3)
+                        })
                       let o = {}
                       o[i] = true
                       mqtt.publish('neurons', o)
+                      addTimeout(`mqttReset.${i}`, () => {
+                        o[i] = false
+                        mqtt.publish('neurons', o)
+                      }, 10e3)
                     })
                   })
                   clients.neuron.push(client)
@@ -75,4 +83,12 @@ _.each(config.omegas, (devices, type) => {
   }[type])(devices);
 })
 
-const webServer = new WebServer(clients, 3333)
+var timeouts = {}
+
+function addTimeout(id, cb, t) {
+  if(id in timeouts) clearTimeout(timeouts[id])
+  timeouts[id] = setTimeout(() => {
+    cb()
+    delete(timeouts[id])
+  }, t)
+}

@@ -5,7 +5,7 @@ angular
 .controller('ctrl', ['$scope', '$interval', '$timeout', ($scope, $interval, $timeout) => {
   var socket = io.connect()
 
-  socket.on('stats', (stats) => $scope.$apply(() => $scope.stats = stats))
+  socket.on('stats', stats => $scope.$apply(() => $scope.stats = stats))
 
   $scope.set = (k,v) => socket.emit('set', {k, v})
   $scope.startScroll = (stepx, stepy, steps, interval, roundoffsets, start) => socket.emit('startScroll', {stepx, stepy, steps, interval, roundoffsets, start})
@@ -21,7 +21,6 @@ angular
     socket.on(ledchain, (leds) => $scope.$apply(() => {
       buffer = new Uint8Array([...buffer, ...(new Uint8Array(leds))])
       if(buffer.lenght < N * 3) return
-      console.log(_.findIndex(new Uint8Array(buffer), x => x === 255))
       $scope.ledchains[ledchain] = _.map(_.chunk(new Uint8Array(buffer), 3), x => {
         return `rgb(${x[0]},${x[1]},${x[2]})`
       })
@@ -29,7 +28,6 @@ angular
     }))
   })
 
-  //$scope.modules = _.times(35, () => `rgb(0,0,0)`)
   function noise() {
     $interval(() => {
       $scope.modules = _.map($scope.modules, x => {
@@ -38,7 +36,6 @@ angular
       })
     }, 10)
   }
-
   function chess() {
     $scope.modules = _.times(35, x => {
       let c = x % 2 ? 255 : 0
@@ -46,4 +43,6 @@ angular
     })
   }
   chess()
+  socket.on('light', l =>
+    $scope.$apply(() => $scope.modules[l.pos.x + l.pos.y * 5] = `rgb(${l.v*255},${l.v*255},${l.v*255})`))
 }])
