@@ -68,12 +68,9 @@ _.each(config.omegas, (devices, type) => {
                           c.send({cmd: 'fade', to: .5, time: 100})
                           addTimeout(`lightFadeBack.${c.pos.x}.${c.pos.y}`, () => c.send({cmd: 'fade', to: 1, time: 1e3}), 10e3)
                         })
-                      let o = {}
-                      o[i] = true
-                      mqtt.publish('neurons', o)
+                      mqtt.publish('neurons', {[i]: true})
                       addTimeout(`mqttReset.${i}`, () => {
-                        o[i] = false
-                        mqtt.publish('neurons', o)
+                        mqtt.publish('neurons', {[i]: false})
                       }, 10e3)
                     })
                   })

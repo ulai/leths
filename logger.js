@@ -1,5 +1,6 @@
 const winston = require('winston'),
-      _ = require('lodash')
+      _ = require('lodash'),
+      { LEVEL, SPLAT } = require('triple-beam')
 
 /** @module logger */
 
@@ -8,34 +9,49 @@ var transports = {
    console: new winston.transports.Console({ format: winston.format.simple(), level: 'debug', silent: true})
 }
 
-let loggers = {}
+const logger = winston.createLogger({
+  format: winston.format.combine(
+    winston.format.colorize({ all: true }),
+    winston.format.timestamp(),
+    winston.format.splat(),
+    winston.format.printf(info => `${info.timestamp} [${info.label}] ${info.level}: ${info.message}`),
+ ),
+ transports: [
+  transports.console,
+  transports.file
+ ]
+})
 
-function getLogger(label) {
-  return  winston.createLogger({
-    format: winston.format.combine(
-      winston.format.colorize({ all: true }),
-      winston.format.timestamp(),
-      winston.format.label({ label: label }),
-      winston.format.splat(),
-      winston.format.printf(info => `${info.timestamp} [${info.label}] ${info.level}: ${info.message}`),
-      winston.format.colorize({ all: true })
-   ),
-   transports: [
-    transports.console,
-    transports.file
-  ]
- })
+class Logger {
+  constructor(label) {
+    Object.keys(logger.levels).forEach(level => {
+      this[level] = (...args) => {
+          // Optimize the hot-path which is the single object.
+          if (args.length === 1) {
+            const [msg] = args
+            const info = msg && msg.message && msg || { message: msg }
+            info.level = level
+            info.label = label
+            logger.write(info)
+            return this
+          }
+          const [msg] = args
+          logger.write(Object.assign({}, {
+            [LEVEL]: level,
+            [SPLAT]: args.splice(1),
+            level,
+            label,
+            message: msg
+          }))
+          return this
+      }
+    })
+  }
 }
 
 module.exports = {
   getLogger(label) {
-    if(process.env.NODE_ENV === 'test') {
-      return { debug() {}, info() {}, warn() {}, error() {} }
-    }
-    //TODO Fix logger label
-    label = ''
-    if(!loggers[label]) loggers[label] = getLogger(label)
-    return loggers[label]
+    return new Logger(label)
   },
   setLevel(level) {
     transports.file.level = level
