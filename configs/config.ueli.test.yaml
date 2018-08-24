@@ -1,0 +1,21 @@
+# Configuration for leths server
+# The server connects to omegas an initializes them with different
+# features. The connection is via ipv6 local link addresses.
+default:
+  interface: enp2s0 # the interface for ipv6 local
+  port: 11200 # the default port the lethd api listens on
+
+omegas:
+  text:
+    - { addr: 'fe80::b908:c314:cfbd:7a4a', text: [{cols: 22, offset: 123, orentiation: 1}] }
+  light:
+    size: {x: 4, y: 4} # (N, M)
+    lights: # starting at x=0, y=0 -> x=N-1, y=0 -> x=1, y=1 ...
+      # row 0 -> y=0
+      - { addr: 'fe80::42a3:6bff:fec0:db43' }
+  neuron:
+    movingAverageCount: 20 # Number of frame to for moving average
+    threshold: 250 # ad threshold to fire neuron
+    numBodyLeds: 70
+    neurons:
+      - { addr: 'fe80::42a3:6bff:fec1:8296', x: 1, y : 3, numAxonLeds: 70}

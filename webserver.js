@@ -80,6 +80,11 @@ class WebServer {
       })
     })
   }
+
+  light(v, pos) {
+    log.info('%d %j', v, pos)
+    io.sockets.emit('light', {v, pos})
+  }
 }
 
 module.exports = WebServer

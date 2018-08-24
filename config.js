@@ -21,7 +21,7 @@ module.exports = {
     return _.map(_.flatten(_.at(this.getConfig(), ['omegas.text', 'omegas.light.lights', 'omegas.neuron.neurons'])), 'addr')
   },
   getIps() {
-    return _.map(_.map(this.getAddresses(), utils.getHostAndPort), _.first)
+    return _.map(this.getAddresses(), utils.getHostAndPort)
   },
   check() {
     let ips = this.getIps()

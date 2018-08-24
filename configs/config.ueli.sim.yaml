@@ -1,0 +1,85 @@
+# Configuration for leths server
+# The server connects to omegas an initializes them with different
+# features. The connection is via ipv6 local link addresses.
+default:
+  interface: wlp3s0 # the interface for ipv6 local
+  port: 12345 # the default port the lethd api listens on
+
+omegas:
+  text:
+    - { addr: '::1 11200', text: [{cols: 22, offset: 123, orentiation: 1}] }
+    - { addr: '::1 11201', text: [{cols: 22, offset: 123, orentiation: 1}] }
+    - { addr: '::1 11202', text: [{cols: 22, offset: 123, orentiation: 1}] }
+    - { addr: '::1 11203', text: [{cols: 22, offset: 123, orentiation: 1}] }
+    - { addr: '::1 11204', text: [{cols: 22, offset: 123, orentiation: 1}] }
+    - { addr: '::1 11205', text: [{cols: 22, offset: 123, orentiation: 1}] }
+  light:
+    size: {x: 5, y: 7} # (N, M)
+    lights: # starting at x=0, y=0 -> x=N-1, y=0 -> x=1, y=1 ...
+      # row 0 -> y=0
+      - { addr: '::1 11210' }
+      - { addr: '::1 11211' }
+      - { addr: '::1 11212' }
+      - { addr: '::1 11213' }
+      - { addr: '::1 11214' }
+      # row 1 -> y=1
+      - { addr: '::1 11220' }
+      - { addr: '::1 11221' }
+      - { addr: '::1 11222' }
+      - { addr: '::1 11223' }
+      - { addr: '::1 11224' }
+      # row 2
+      - { addr: '::1 11230' }
+      - { addr: '::1 11231' }
+      - { addr: '::1 11232' }
+      - { addr: '::1 11233' }
+      - { addr: '::1 11234' }
+      # row 3
+      - { addr: '::1 11240' }
+      - { addr: '::1 11241' }
+      - { addr: '::1 11242' }
+      - { addr: '::1 11243' }
+      - { addr: '::1 11244' }
+      # row 4
+      - { addr: '::1 11250' }
+      - { addr: '::1 11251' }
+      - { addr: '::1 11252' }
+      - { addr: '::1 11253' }
+      - { addr: '::1 11254' }
+      # row 5
+      - { addr: '::1 11260' }
+      - { addr: '::1 11261' }
+      - { addr: '::1 11262' }
+      - { addr: '::1 11263' }
+      - { addr: '::1 11264' }
+      # row 6
+      - { addr: '::1 11270' }
+      - { addr: '::1 11271' }
+      - { addr: '::1 11272' }
+      - { addr: '::1 11273' }
+      - { addr: '::1 11274' }            
+  neuron:
+    movingAverageCount: 20 # Number of frame to for moving average
+    threshold: 250 # ad threshold to fire neuron
+    numBodyLeds: 70
+    neurons:
+      - { addr: '::1 11300', x: 1, y : 3, numAxonLeds: 70}
+      - { addr: '::1 11301', x: 1, y : 3, numAxonLeds: 70}
+      - { addr: '::1 11302', x: 2, y : 2, numAxonLeds: 70}
+      - { addr: '::1 11303', x: 3, y : 1, numAxonLeds: 70}
+      - { addr: '::1 11304', x: 2, y : 1, numAxonLeds: 70}
+      - { addr: '::1 11305', x: 2, y : 1, numAxonLeds: 70}
+      - { addr: '::1 11306', x: 2, y : 1, numAxonLeds: 70}
+      - { addr: '::1 11307', x: 2, y : 1, numAxonLeds: 70}
+      - { addr: '::1 11308', x: 2, y : 1, numAxonLeds: 70}
+      - { addr: '::1 11309', x: 2, y : 1, numAxonLeds: 70}
+      - { addr: '::1 11310', x: 2, y : 1, numAxonLeds: 70}
+      - { addr: '::1 11311', x: 2, y : 1, numAxonLeds: 70}
+      - { addr: '::1 11312', x: 2, y : 1, numAxonLeds: 70}
+      - { addr: '::1 11313', x: 2, y : 1, numAxonLeds: 70}
+      - { addr: '::1 11314', x: 2, y : 1, numAxonLeds: 70}
+      - { addr: '::1 11315', x: 2, y : 1, numAxonLeds: 70}
+      - { addr: '::1 11316', x: 2, y : 1, numAxonLeds: 70}
+      - { addr: '::1 11317', x: 2, y : 1, numAxonLeds: 70}
+      - { addr: '::1 11318', x: 2, y : 1, numAxonLeds: 70}
+      - { addr: '::1 11319', x: 2, y : 1, numAxonLeds: 70}

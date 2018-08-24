@@ -53,6 +53,10 @@ function onend() {
 }
 
 function send(cmd, cb) {
+  if(!this.online) {
+    this.log.warn('send %j fails, no connection', cmd)
+    return
+  }
   this.log.info('send %j', cmd)
   if(cb) {
     this.receiveCb = cb;
@@ -60,7 +64,9 @@ function send(cmd, cb) {
       this.log.error('timeout %j', cmd)
     }, 1e3)
   }
-  this.client.write(getCommand(cmd))
+  setTimeout(() => {
+    this.client.write(getCommand(cmd))
+  })
 }
 
 function getCommand(cmd) {
@@ -68,15 +74,19 @@ function getCommand(cmd) {
 }
 
 class Client extends EventEmitter {
-  constructor(device, init) {
+  constructor(device, ws, init) {
     super()
     this.log = require('./logger').getLogger(`client.${device.addr}`)
     this.online = false
     this.device = device
+    this.ws = ws
     connect.bind(this)(device, init)
   }
   send(cmd, cb) {
     send.bind(this)(cmd, cb)
+    if(cmd.cmd === 'fade') {
+      this.ws.light(cmd.to, this.pos)
+    }
   }
 }
 

@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 const program = require('commander'),
-      config = require('./config'),
       utils = require('./utils'),
       winston = require('winston'),
       log = require('./logger').getLogger('cli')
@@ -8,9 +7,11 @@ const program = require('commander'),
 require('./logger').toConsole()
 
 program
-  .command('discover <iface>')
+  .command('discover <c>')
   .description('Discover Ω(s)')
-  .action(iface =>  utils.discover(iface))
+  .action(c =>  utils.discover(c, x => {
+    log.info('%j', x)
+  }))
 program
   .command('config')
   .description('Check config')
@@ -18,16 +19,11 @@ program
 program
   .command('flash <image>')
   .description('Flash firmware from image')
-  .action(image => {
-    log.info(`flash image ${image}`)
-    utils.flash(image)
-  })
+  .action(image => utils.flash(image))
 program
-  .command('dist <lethd>')
-  .description('Distribute lethd binary')
-  .action(lethd => {
-    console.log(`dist binary ${lethd}`)
-  })
+  .command('copy <lethd>')
+  .description('Copy lethd binary')
+  .action(lethd => utils.copy(lethd))
 
 program.on('command:*', function () {
   program.help()
