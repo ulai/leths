@@ -15,26 +15,32 @@ describe('client', () => {
     before(() => {
       sinon.stub(utils, 'getHostAndPort').callsFake(() => ['localhost', 12345] )
       sinon.stub(config, 'getConfig').callsFake(() => { return { default: {interface: ''}} } )
-      sinon.stub(settings, 'getTimeout').callsFake(() => 100)
-      sinon.stub(settings, 'getStartWatchdog').callsFake(() => 10)
-      sinon.stub(settings, 'getRepeatWatchdog').callsFake(() => 200)
+      sinon.stub(settings, 'getTimeout').callsFake(() => 1)
+      sinon.stub(settings, 'getStartWatchdog').callsFake(() => 1)
+      sinon.stub(settings, 'getRepeatWatchdog').callsFake(() => 1)
     })
     beforeEach(() => {
       server = net.createServer(_socket => {
         socket = _socket
       }).listen(12345)
     }),
-    it('connects', function(done) {
+    it('inits', function(done) {
       const device = {addr: '1', text:[{}]}
       var client = new Client(device, {}, {'text': device.text}, () => {
-        socket.once('data', d => done())
+        socket.once('data', d => {
+          d = d.toString()
+          expect(d).to.equal('{"cmd":"init","text":[{}]}\n')
+          done()
+        })
       })
     })
     it('reconnects', function(done) {
       const device = {addr: '2', text:[{}]}
       var client = new Client(device, {}, {'text': device.text}, () => {
-        //socket.once('end', () => done())
-        done()
+        setTimeout(() => {
+          expect(client.online).to.equal(false)
+          done()
+        }, 10)
       })
     })
     afterEach(() => {

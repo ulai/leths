@@ -18,10 +18,11 @@ describe('features', () => {
       // })
     }),
     it('initializes', done => {
-      spawn(lethd, ['--ledchain1', '/tmp/ledchain1'])
-      .stdout.on('data', data => {
-          expect(data.toString()).to.have.string('lethd initialize()')
-          done()
+      var p = spawn(lethd, ['--ledchain1', '/tmp/ledchain1'])
+        .stdout.on('data', data => {
+            expect(data.toString()).to.have.string('lethd initialize()')
+            console.log(p);
+            done()
       })
     })
     it('writes text')

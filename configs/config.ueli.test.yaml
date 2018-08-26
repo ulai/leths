@@ -7,13 +7,47 @@ default:
 
 omegas:
   text:
-    - { addr: 'fe80::b908:c314:cfbd:7a4a', text: [{cols: 22, offset: 123, orentiation: 1}] }
+    - { addr: 'fe80::42a3:6bff:fec0:db43', text: [{cols: 22, offset: 123, orentiation: 1}] }
   light:
-    size: {x: 4, y: 4} # (N, M)
+    size: {x: 5, y: 7} # (N, M)
     lights: # starting at x=0, y=0 -> x=N-1, y=0 -> x=1, y=1 ...
       # row 0 -> y=0
-      - { addr: 'fe80::42a3:6bff:fec0:db43' }
-  neuron:
+      - { addr: '::1 11210' }
+      - { addr: '::1 11211' }
+      - { addr: '::1 11212' }
+      - { addr: '::1 11213' }
+      - { addr: '::1 11214' }
+      - { addr: '::1 11220' }
+      - { addr: '::1 11221' }
+      - { addr: '::1 11222' }
+      - { addr: '::1 11223' }
+      - { addr: '::1 11224' }
+      - { addr: '::1 11230' }
+      - { addr: '::1 11231' }
+      - { addr: '::1 11232' }
+      - { addr: '::1 11233' }
+      - { addr: '::1 11234' }
+      - { addr: '::1 11240' }
+      - { addr: '::1 11241' }
+      - { addr: '::1 11242' }
+      - { addr: '::1 11243' }
+      - { addr: '::1 11244' }
+      - { addr: '::1 11250' }
+      - { addr: '::1 11251' }
+      - { addr: '::1 11252' }
+      - { addr: '::1 11253' }
+      - { addr: '::1 11254' }
+      - { addr: '::1 11260' }
+      - { addr: '::1 11261' }
+      - { addr: '::1 11262' }
+      - { addr: '::1 11263' }
+      - { addr: '::1 11264' }
+      - { addr: '::1 11270' }
+      - { addr: '::1 11271' }
+      - { addr: '::1 11272' }
+      - { addr: '::1 11273' }
+      - { addr: '::1 11274' }      
+neuron:
     movingAverageCount: 20 # Number of frame to for moving average
     threshold: 250 # ad threshold to fire neuron
     numBodyLeds: 70

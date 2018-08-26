@@ -79,7 +79,7 @@ module.exports = {
     ping.on('exit', code => {
       let found = [...foundIps]
       let defined = config.getIps()
-      times = _.mapValues(times, _.mean)
+      times = _.mapValues(times, _.flow([_.mean, _.partialRight(_.round, 4)]))
       cb({ found, defined, times, complete: _.intersection(found, defined).length === defined.length})
     })
   },

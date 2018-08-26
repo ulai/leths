@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 const program = require('commander'),
-      utils = require('./utils'),
       winston = require('winston'),
+      _ = require('lodash'),
+      utils = require('./utils'),
       log = require('./logger').getLogger('cli'),
       config = require('./config')
 
@@ -10,8 +11,9 @@ require('./logger').toConsole()
 program
   .command('discover <c>')
   .description('Discover Ω(s)')
-  .action(c =>  utils.discover(c, x => {
-    log.info('%j', x)
+  .action(c =>  utils.discover(c, stat => {
+    _.forOwn(stat.times, (v, k) => log.info(`${k} avg:${v}ms`))
+    if(!stat.complete) log.warn('Not all omegas found')
   }))
 program
   .command('config')

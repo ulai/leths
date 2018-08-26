@@ -40,9 +40,24 @@ angular
       $scope.fade = (to, t) => websocket.emit('fade', {to, t})
     }]
   })
-  $stateProvider.state('debug', {
-    url: '/debug',
-    templateUrl: 'tmpl/debug.html',
+  $stateProvider.state('test', {
+    url: '/test',
+    templateUrl: 'tmpl/test.html',
+    controller: ['$scope', 'websocket', function($scope, websocket) {
+      $scope.fire = i => websocket.emit('fire', i)
+      $scope.tetris = b => websocket.emit('light', {tetris: b})
+      $scope.test = b => websocket.emit('light', {test: b})
+      $scope.clear = b => websocket.emit('light', {clear: 1})
+      $scope.modules = _.times(35, x => {
+        return `rgb(255,255,255)`
+      })
+      websocket.on('light', l =>
+        $scope.$apply(() => $scope.modules[l.pos.x + l.pos.y * 5] = `rgb(${l.v*255},${l.v*255},${l.v*255})`))
+    }]
+  })
+  $stateProvider.state('sim', {
+    url: '/sim',
+    templateUrl: 'tmpl/sim.html',
     controller: ['$scope', 'websocket', function($scope, websocket) {
       $scope.fire = i => websocket.emit('fire', i)
       $scope.tetris = b => websocket.emit('light', {tetris: b})
@@ -63,20 +78,7 @@ angular
           buffer = new Uint8Array()
         }))
       })
-      function noise() {
-        $interval(() => {
-          $scope.modules = _.map($scope.modules, x => {
-            let c = _.random(0, 255)
-            return `rgb(${c},${c},${c})`
-          })
-        }, 10)
-      }
-      $scope.modules = _.times(35, x => {
-        let c = 0
-        return `rgb(${c},${c},${c})`
-      })
-      websocket.on('light', l =>
-        $scope.$apply(() => $scope.modules[l.pos.x + l.pos.y * 5] = `rgb(${l.v*255},${l.v*255},${l.v*255})`))
+
     }]
   })
 }])
