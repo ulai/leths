@@ -54,7 +54,7 @@ module.exports = {
     if(addr.match(/ /)) return addr.split(' ')
     if(addr.length == 17) return [ipv6LocalFromMac(addr)]
     if(addr.length == 25) return [addr]
-    throw 'wrong length, cannot handle'
+    throw Error('wrong length, cannot handle')
   },
   /**
     Discover omegas on intferface with ipv6 and check with

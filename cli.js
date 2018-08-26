@@ -2,7 +2,8 @@
 const program = require('commander'),
       utils = require('./utils'),
       winston = require('winston'),
-      log = require('./logger').getLogger('cli')
+      log = require('./logger').getLogger('cli'),
+      config = require('./config')
 
 require('./logger').toConsole()
 

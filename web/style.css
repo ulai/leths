@@ -1,0 +1,9 @@
+.lightsim {
+  background-color: lightblue;
+}
+.lightsim ul {
+  list-style:none; border:0; float:left; width:150px
+}
+.lightsim ul li{
+  height:20px; width:28px; float:left; margin:0;
+}

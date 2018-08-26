@@ -2,8 +2,8 @@
 # The server connects to omegas an initializes them with different
 # features. The connection is via ipv6 local link addresses.
 default:
-  interface: enp2s0 # the interface for ipv6 local
-  port: 12345 # the default port the lethd api listens on
+  interface: enp2s0   # the interface for ipv6 local
+  port: 12345         # the default port the lethd api listens on
 
 omegas:
   text:

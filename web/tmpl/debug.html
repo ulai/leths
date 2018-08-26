@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <button ng-repeat="neuron in stats.clients.neuron track by $index" ng-click="fire($index)">Neuron_{{$index}}</button></li>
+  <div class="row neuronsim">
+      <ul style="list-style:none; border:0; float:left" ng-repeat="ledchain in ledchains track by $index">
+      <li ng-repeat="led in ledchain track by $index" style="height:10px; width:10px; float:left; background-color:{{led}}"></li>
+    </ul>
+  </div>
+  <div class="row lightsim">
+    <ul>
+      <li ng-repeat="module in modules track by $index" style="background-color:{{module}}"></li>
+    </ul>
+  </div>
+  <div class="row">
+    <button ng-click="clear()">Clear</button>
+    <button ng-click="tetris(true)">Start Tetris</button>
+    <button ng-click="tetris(false)">Stop Tetris</button>
+    <button ng-click="test(true)">Start Test</button>
+    <button ng-click="test(false)">Stop Test</button>
+  </div>
+</div>

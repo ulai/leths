@@ -1,0 +1,26 @@
+<p>Modules</p>
+<div ng-repeat="t in ['text', 'light', 'neuron']">
+  {{t}}
+  <table class="u-full-width">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>online</th>
+        <th>addr</th>
+        <th>mac</th>
+        <th>ivp4</th>
+        <th>now</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="c in stats.clients[t] track by $index" style="color:{{c.online ? 'black':'red'}}">
+        <td>{{$index}}</td>
+        <td>{{c.online}}</td>
+        <td>{{c.device.addr}}</td>
+        <td>{{c.device.status.macaddress}}</td>
+        <td>{{c.device.status.ipv4}}</td>
+        <td>{{c.device.status.now}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
