@@ -10,7 +10,7 @@ const _ = require('lodash'),
       timeouts = require('./timeouts'),
       settings = require('./settings')
 
-var clients = { text: [], light: [], neuron: []}
+const clients = { text: [], light: [], neuron: []}
 
 log.info('leths starting')
 
@@ -29,13 +29,13 @@ log.info(
 
 _.each(config.omegas, (devices, type) => {
   ({
-    'text':   (devices) => _.each(devices, (device) => {
+    'text':   devices => _.each(devices, device => {
                 var client = new Client(device, ws, {'text': device.text})
                 clients.text.push(client)
               }),
-    'light':  (devices) => {
+    'light':  devices => {
                 let pos = {x: 0, y: 0}
-                _.each(devices.lights, (device) => {
+                _.each(devices.lights, device => {
                   var client = new Client(device, ws, {light: 1})
                   client.pos = _.clone(pos)
                   pos.x++
@@ -46,7 +46,7 @@ _.each(config.omegas, (devices, type) => {
                   clients.light.push(client)
                 })
               },
-    'neuron': (devices) => {
+    'neuron': devices => {
                 var c = config.omegas.neuron
                 _.forOwn(devices.neurons, (device, i) => {
                   var client = new Client(device, ws, {'neuron' : {

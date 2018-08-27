@@ -76,6 +76,7 @@ return {
   },
 
   resume: function() {
+    if(!this._board.started) this._doStart();
     this._board.paused = false;
   },
 
