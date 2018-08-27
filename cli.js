@@ -11,7 +11,7 @@ require('./logger').toConsole()
 program
   .command('discover <c>')
   .description('Discover Ω(s)')
-  .action(c =>  utils.discover(c, stat => {
+  .action(c =>  utils.discover(c).then(stat => {
     _.forOwn(stat.times, (v, k) => log.info(`${k} avg:${v}ms`))
     if(!stat.complete) log.warn('Not all omegas found')
   }))

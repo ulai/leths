@@ -9,7 +9,7 @@ const chai = require('chai'),
       settings = require('./settings'),
       Client = require('./client')
 
-describe('client', () => {
+describe('client', function() {
   describe('connection', function() {
     var server, socket
     before(() => {
@@ -19,7 +19,7 @@ describe('client', () => {
       sinon.stub(settings, 'getStartWatchdog').callsFake(() => 1)
       sinon.stub(settings, 'getRepeatWatchdog').callsFake(() => 1)
     })
-    beforeEach(() => {
+    beforeEach(function() {
       server = net.createServer(_socket => {
         socket = _socket
       }).listen(12345)
@@ -27,10 +27,14 @@ describe('client', () => {
     it('inits', function(done) {
       const device = {addr: '1', text:[{}]}
       var client = new Client(device, {}, {'text': device.text}, () => {
-        socket.once('data', d => {
-          d = d.toString()
-          expect(d).to.equal('{"cmd":"init","text":[{}]}\n')
-          done()
+        var cmds = []
+        socket.on('data', d => {
+          cmds.push(d.toString())
+          if(cmds.length == 2) {
+            expect(cmds).to.include('{"cmd":"init","text":[{}]}\n')
+            expect(cmds).to.include('{"cmd":"status"}\n')
+            done()
+          }
         })
       })
     })
@@ -43,16 +47,16 @@ describe('client', () => {
         }, 10)
       })
     })
-    afterEach(() => {
+    afterEach(function() {
       server.close()
       socket.removeAllListeners()
     })
-    after(() => {
-      utils.getHostAndPort.reset()
-      config.getConfig.reset()
-      settings.getTimeout.reset()
-      settings.getStartWatchdog.reset()
-      settings.getRepeatWatchdog.reset()
+    after(function() {
+      utils.getHostAndPort.restore()
+      config.getConfig.restore()
+      settings.getTimeout.restore()
+      settings.getStartWatchdog.restore()
+      settings.getRepeatWatchdog.restore()
     })
   })
 })

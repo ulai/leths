@@ -1,5 +1,4 @@
 const _ = require('lodash'),
-      spawn = require('child_process').spawn,
       config = require('./config'),
       log = require('./logger').getLogger('utils'),
       exec = require('await-exec'),
@@ -60,28 +59,23 @@ module.exports = {
     Discover omegas on intferface with ipv6 and check with
     definitions in config
   */
-  discover(c, cb) {
-    const ping = spawn('ping6', [`-c${c}`, `ff02::1%${config.getConfig().default.interface}`])
+  async discover(c) {
+    var {stdout, stderr} = await exec(`ping6 -c${c} ff02::1%${config.getConfig().default.interface}`)
     let foundIps = new Set()
     let times = {}
-    ping.stdout.on('data', data => {
-      data = data.toString()
-      let m =  data.match(`bytes from (.*?) .*? time=(.*?) `)
-      if(m) {
-        let ip = m[1].slice(0, -1)
-        if(!times[ip]) times[ip] = []
-        times[ip].push(parseFloat(m[2]))
-        foundIps.add(ip)
-      }
-    })
-    ping.stderr.on('data', data => { throw new Error(data.toString()) })
-    ping.on('error', error => { throw new Error(error.toString()) })
-    ping.on('exit', code => {
-      let found = [...foundIps]
-      let defined = config.getIps()
-      times = _.mapValues(times, _.flow([_.mean, _.partialRight(_.round, 4)]))
-      cb({ found, defined, times, complete: _.intersection(found, defined).length === defined.length})
-    })
+    var r = /bytes from (.*?) .*? time=(.*?) ms/gm
+    var m = r.exec(stdout)
+    while(m) {
+      let ip = m[1].slice(0, -1)
+      if(!times[ip]) times[ip] = []
+      times[ip].push(parseFloat(m[2]))
+      foundIps.add(ip)
+      m = r.exec(stdout)
+    }
+    let found = [...foundIps]
+    let defined = config.getIps()
+    times = _.mapValues(times, _.flow([_.mean, _.partialRight(_.round, 4)]))
+    return { found, defined, times, complete: _.intersection(found, defined).length === defined.length}
   },
   /**
     Flash image to omages with previously testing if sv status lethd reacts

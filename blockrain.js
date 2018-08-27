@@ -6,7 +6,8 @@ const _ = require("lodash"),
       },
       BlockrainThemes = {'headless': {}}
 
-module.exports = {
+module.exports = { game: () => {
+return {
   options: {
     autoplay: true, // Let a bot play the game
     autoplayRestart: true, // Restart the game automatically once a bot loses
@@ -1213,4 +1214,4 @@ module.exports = {
 
     function getKey(evt) { return 'safekeypress.' + evt.keyCode; }
   },
-}
+}}}

@@ -4,7 +4,7 @@
   "description": "server part of lethd daemon",
   "main": "start.js",
   "scripts": {
-    "test": "mocha utilstests.js",
+    "test": "mocha utilstests.js clienttests.js inttests.js",
     "start": "node leths.js | tail -f leths.log"
   },
   "repository": {

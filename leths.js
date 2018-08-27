@@ -74,7 +74,8 @@ _.each(config.omegas, (devices, type) => {
   }[type])(devices);
 })
 
-blockrain.create({
+const tetris = blockrain.game()
+tetris.create({
   onGameOver: () => log.debug('onGameOver'),
   onPlaced: () => log.debug('onPlaced'),
   onLine: () => log.debug('onLine'),
@@ -89,12 +90,12 @@ blockrain.create({
     })
   }
 })
-blockrain.pause()
+tetris.pause()
 
 var lightTimer, lightPos = 0
 ws.on('light', x => {
   if(x.clear) _.each(clients.light, l => l.send({cmd: 'fade', to: 1, time: 0}))
-  if('tetris' in x) x.tetris ? blockrain.resume() : blockrain.pause()
+  if('tetris' in x) x.tetris ? tetris.resume() : tetris.pause()
   if('test' in x) {
     if(x.test && !lightTimer) {
       lightTimer = setInterval(() => {
