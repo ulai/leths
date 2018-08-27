@@ -85,7 +85,7 @@ return {
     // On autoplay, start the game right away
     this.options.autoplay = enable;
     if( enable && ! this._board.started ) {
-      this._doStart();
+      //this._doStart();
     }
   },
 

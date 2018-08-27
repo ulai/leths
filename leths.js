@@ -90,7 +90,6 @@ tetris.create({
     })
   }
 })
-tetris.pause()
 
 var lightTimer, lightPos = 0
 ws.on('light', x => {
