@@ -28,13 +28,14 @@ function connect(device, initArgs, addInit) {
 function pingTimer() {
   this.send({cmd:'ping'}, pong => {
     clearTimeout(this.noConnectionTimeout)
-    setTimeout(pingTimer.bind(this), settings.getTimeout())
+    this.pingTimeout = setTimeout(pingTimer.bind(this), settings.getRepeatWatchdog())
   })
   this.noConnectionTimeout = setTimeout(() => {
     this.log.warn('ending connection')
+    clearTimeouts.bind(this)
     this.client.destroy()
     this.online = false
-  }, settings.getRepeatWatchdog())
+  }, settings.getTimeout())
 }
 
 function ondata(data) {
@@ -53,23 +54,29 @@ function ondata(data) {
     if(data) {
       if('sensor' in data) {
         this.emit('sensor')
+      } else {
+        if(this.receiveCb) this.receiveCb(data)
+        clearTimeout(this.timeout)        
       }
-      if(this.receiveCb) this.receiveCb(data)
-      clearTimeout(this.timeout)
     }
   })
 }
 
 function onerror(err) {
   this.online = false
-  clearTimeout(this.noConnectionTimeout)
+  clearTimeouts.bind(this)
   this.log.warn('onerror %j', err)
 }
 
 function onend() {
   this.online = false
-  clearTimeout(this.noConnectionTimeout)
+  clearTimeouts.bind(this)
   this.log.warn('onend')
+}
+
+function clearTimeouts() {
+  clearTimeout(this.noConnectionTimeout)
+  clearTimeout(this.pingTimeout)
 }
 
 function send(cmd, cb) {
