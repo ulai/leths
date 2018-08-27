@@ -46,8 +46,8 @@ omegas:
       - { addr: '::1 11271' }
       - { addr: '::1 11272' }
       - { addr: '::1 11273' }
-      - { addr: '::1 11274' }      
-neuron:
+      - { addr: '::1 11274' }
+  neuron:
     movingAverageCount: 20 # Number of frame to for moving average
     threshold: 250 # ad threshold to fire neuron
     numBodyLeds: 70

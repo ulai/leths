@@ -21,25 +21,37 @@ async function ssh(args, addr, iface, cmd, expected) {
 }
 
 async function copy(addr, iface, lethd) {
-  log.info(`start for ${addr}`);
-  await ping(addr, iface, `64 bytes from ${addr}: icmp_seq=1 ttl=64`)
+  log.info(`start for ${addr}`)
+  await ping(addr, iface, `bytes from ${addr}: icmp_seq=1 ttl=64`)
   var args = `-o StrictHostKeyChecking=no`
   await ssh(args, addr, iface, `sv stop lethd`, `ok: down: lethd:`)
   await exec(`scp  ${args} ${lethd} root@[\\${addr}%${iface}\\]:/usr/bin`)
   await ssh(args, addr, iface, `sv start lethd`, `ok: run: lethd:`)
-  log.info(`successful for ${addr}`);
+  log.info(`successful for ${addr}`)
 }
 
 async function flash(addr, iface, image) {
   log.info(`start for ${addr}`);
-  await ping(addr, iface, `64 bytes from ${addr}: icmp_seq=1 ttl=64`)
+  await ping(addr, iface, `bytes from ${addr}: icmp_seq=1 ttl=64`)
   var args = `-o StrictHostKeyChecking=no`
   await ssh(args, addr, iface, `sv status lethd`, `(run|down): lethd:`)
   await exec(`scp  ${args} ${image} root@[\\${addr}%${iface}\\]:/tmp/upgradeimage`)
   await exec(`ssh ${args} root@${addr}%${iface} sysupgrade /tmp/upgradeimage`).catch(err => {
     //Connection to fe80::42a3:6bff:fec1:8296%enp2s0 closed by remote host.
   })
-  log.info(`successful for ${addr}`);
+  log.info(`successful for ${addr}`)
+}
+
+async function uci(addr, iface, settings, cmd) {
+  log.info(`start for ${addr}`);
+  await ping(addr, iface, `bytes from ${addr}(.*?): icmp_seq=1 ttl=64`)
+  var ssh = `ssh -o StrictHostKeyChecking=no root@${addr}%${iface}`
+  await _.map(settings.split(','), setting => {
+    exec(`${ssh} uci set ${setting}`)
+  })
+  await exec(`${ssh} uci commit`)
+  if(cmd) await exec(`${ssh} ${cmd}`)
+  log.info(`successful for ${addr}`)
 }
 
 module.exports = {
@@ -90,6 +102,14 @@ module.exports = {
   */
   copy(lethd) {
     _.each(config.getIps(), ip => copy(ip, config.getConfig().default.interface, lethd).catch(err => {
+      log.warn(`${ip}: something went wrong: ${err}`);
+    }))
+  },
+  /**
+    Distributes uci settings to device, settings are a=b,c=d, ...
+  */
+  uci(settings, cmd) {
+    _.each(config.getIps(), ip => uci(ip, config.getConfig().default.interface, settings, cmd).catch(err => {
       log.warn(`${ip}: something went wrong: ${err}`);
     }))
   }

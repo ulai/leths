@@ -22,11 +22,15 @@ program
 program
   .command('flash <image>')
   .description('Flash firmware from image')
-  .action(image => utils.flash(image))
+  .action(utils.flash)
 program
   .command('copy <lethd>')
   .description('Copy lethd binary')
-  .action(lethd => utils.copy(lethd))
+  .action(utils.copy)
+program
+  .command('uci <settings> <cmd>')
+  .description('Distribute uci settings: (a=b,c=d) cmd: executed afterwards')
+  .action(utils.uci)
 
 program.on('command:*', function () {
   program.help()
