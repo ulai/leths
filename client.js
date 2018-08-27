@@ -19,16 +19,16 @@ function connect(device, initArgs, addInit) {
     client.on('data', ondata.bind(this))
     this.log.info('connected to %s:%s', host, port)
     this.send(_.extend({cmd:'init'}, initArgs))
+    this.send({cmd:'status'}, status => this.device.status = status)
     if(addInit) addInit()
-    setTimeout(statusTimer.bind(this), settings.getStartWatchdog())
+    setTimeout(pingTimer.bind(this), settings.getStartWatchdog())
   }).connect({host, port}).on('error', onerror.bind(this)).on('end', onend.bind(this))
 }
 
-function statusTimer() {
-  this.send({cmd:'status'}, status => {
-    this.device.status = status
+function pingTimer() {
+  this.send({cmd:'ping'}, pong => {
     clearTimeout(this.noConnectionTimeout)
-    setTimeout(statusTimer.bind(this), settings.getTimeout())
+    setTimeout(pingTimer.bind(this), settings.getTimeout())
   })
   this.noConnectionTimeout = setTimeout(() => {
     this.log.warn('ending connection')
