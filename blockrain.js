@@ -31,7 +31,7 @@ return {
     onStart: function(){},
     onRestart: function(){},
     onGameOver: function(score){},
-    drawBlocks: function(b){},
+    drawBlock: function(pos){},
     clear: function(){},
 
     // When a block is placed
@@ -822,7 +822,7 @@ return {
       render: function(forceRender) {
         if( this.renderChanged || forceRender ) {
           this.renderChanged = false;
-          game.options.clear();
+          if(game._board.started) game.options.clear();
           game._filled.draw();
           this.cur.draw();
         }
@@ -835,8 +835,7 @@ return {
        * The falling attribute is needed to apply different styles for falling and placed blocks.
        */
       drawBlock: function(x, y, blockType, blockVariation, blockIndex, blockRotation, falling) {
-        falling = typeof falling === 'boolean' ? falling : false;
-        game.options.drawBlock({x, y});
+        if(game._board.started) game.options.drawBlock({x, y});
       },
 
 
