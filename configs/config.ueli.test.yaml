@@ -7,7 +7,11 @@ default:
 
 omegas:
   text:
-    - { addr: 'fe80::42a3:6bff:fec0:db43', text: [{cols: 22, offset: 123, orentiation: 1}] }
+    defaultText: 'The quick brown fox jumps over the lazy dog +++ 0123456789+"*$%&/()=,;.:-_!?^~` +++ THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG +++'
+    scrollSettings: { stepx: .25, stepy: 0, steps: -1, interval: 20, roundoffsets: true }
+    settings: [{color: 'ffffff'}]
+    texts:
+      - { addr: 'fe80::42a3:6bff:fec0:db43', text: [{cols: 22, offset: 123, orentiation: 1}] }
   light:
     size: {x: 5, y: 7} # (N, M)
     lights: # starting at x=0, y=0 -> x=N-1, y=0 -> x=1, y=1 ...

@@ -7,12 +7,16 @@ default:
 
 omegas:
   text:
-    - { addr: '::1 11200', text: [{cols: 22, offset: 123, orentiation: 1}] }
-    - { addr: '::1 11201', text: [{cols: 22, offset: 123, orentiation: 1}] }
-    - { addr: '::1 11202', text: [{cols: 22, offset: 123, orentiation: 1}] }
-    - { addr: '::1 11203', text: [{cols: 22, offset: 123, orentiation: 1}] }
-    - { addr: '::1 11204', text: [{cols: 22, offset: 123, orentiation: 1}] }
-    - { addr: '::1 11205', text: [{cols: 22, offset: 123, orentiation: 1}] }
+    defaultText: 'The quick brown fox jumps over the lazy dog +++ 0123456789+"*$%&/()=,;.:-_!?^~` +++ THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG +++'
+    scrollSettings: { stepx: .25, stepy: 0, steps: -1, interval: 20, roundoffsets: true }
+    settings: [{color: 'ffffff'}]
+    texts:
+      - { addr: '::1 11200', text: [{cols: 22, offset: 123, orentiation: 1}] }
+      - { addr: '::1 11201', text: [{cols: 22, offset: 123, orentiation: 1}] }
+      - { addr: '::1 11202', text: [{cols: 22, offset: 123, orentiation: 1}] }
+      - { addr: '::1 11203', text: [{cols: 22, offset: 123, orentiation: 1}] }
+      - { addr: '::1 11204', text: [{cols: 22, offset: 123, orentiation: 1}] }
+      - { addr: '::1 11205', text: [{cols: 22, offset: 123, orentiation: 1}] }
   light:
     size: {x: 5, y: 7} # (N, M)
     lights: # starting at x=0, y=0 -> x=N-1, y=0 -> x=1, y=1 ...
@@ -57,7 +61,7 @@ omegas:
       - { addr: '::1 11271' }
       - { addr: '::1 11272' }
       - { addr: '::1 11273' }
-      - { addr: '::1 11274' }            
+      - { addr: '::1 11274' }
   neuron:
     movingAverageCount: 20 # Number of frame to for moving average
     threshold: 250 # ad threshold to fire neuron
