@@ -57,19 +57,19 @@ class WebServer extends EventEmitter {
       socket.on('startScroll', x => {
         log.info('startScroll %j', x)
         let o = { feature: 'text', cmd: 'startscroll', start: (new Date).getTime() + 200 }
-        _.each(['stepx', 'stepy', 'steps', 'interval', 'roundoffsets', 'start'], k => x[k] = o[k] || x[k])
-        _.each(clients.text, c => c.send(o));
+        o = _.merge(o, _.omitBy(x, _.isNull))
+        _.each(clients.text, c => c.send(o))
     	})
       socket.on('stopScroll', () => {
         log.info('stopScroll')
-        _.each(clients.text, c => c.send({feature: 'text', cmd: 'stopscroll'}));
+        _.each(clients.text, c => c.send({feature: 'text', cmd: 'stopscroll'}))
       })
       socket.on('fade', x => {
         log.info('fade %j', x)
         let o = {feature: 'text', cmd: 'fade'}
         if(x.to) o.to = x.to
         if(x.t) o.t = x.t
-        _.each(clients.text, c => c.send(o));
+        _.each(clients.text, c => c.send(o))
       })
       socket.on('fire', i => {
         log.info('fire %d', i)

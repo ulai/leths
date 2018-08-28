@@ -6,7 +6,6 @@ const _ = require('lodash'),
       config = require('./config'),
       settings = require('./settings')
 
-
 function connect(device, initArgs, addInit) {
   var [host, port] = utils.getHostAndPort(device.addr)
   var iface = config.getConfig().default.interface
@@ -19,8 +18,10 @@ function connect(device, initArgs, addInit) {
     client.on('data', ondata.bind(this))
     this.log.info('connected to %s:%s', host, port)
     this.send(_.extend({cmd:'init'}, initArgs))
-    this.send({cmd:'status'}, status => this.device.status = status)
-    if(addInit) addInit()
+    this.send({cmd:'status'}, status => {
+      this.device.status = status
+      if(addInit) addInit()
+    })
     setTimeout(pingTimer.bind(this), settings.getStartWatchdog())
   }).connect({host, port}).on('error', onerror.bind(this)).on('end', onend.bind(this))
 }
@@ -56,7 +57,7 @@ function ondata(data) {
         this.emit('sensor')
       } else {
         if(this.receiveCb) this.receiveCb(data)
-        clearTimeout(this.timeout)        
+        clearTimeout(this.timeout)
       }
     }
   })
@@ -84,7 +85,7 @@ function send(cmd, cb) {
     this.log.warn('send %j fails, no connection', cmd)
     return
   }
-  this.log.debug('send %j', cmd)
+  this.log[cmd.cmd==='ping'?'debug':'info']('send %j', cmd)
   if(cb) {
     this.receiveCb = cb;
     this.timeout = setTimeout(() => {

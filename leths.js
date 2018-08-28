@@ -29,10 +29,28 @@ log.info(
 
 _.each(config.omegas, (devices, type) => {
   ({
-    'text':   devices => _.each(devices, device => {
-                var client = new Client(device, ws, {'text': device.text})
-                clients.text.push(client)
-              }),
+    'text':   devices => {
+                var conf = config.omegas.text
+                var startScroll = _.debounce(c => {
+                  _.each(clients.text, c => c.send({feature: 'text', cmd: 'stopscroll'}))
+                  //TODO getoffsets -> group -> take majority instead of 0
+                  _.each(clients.text, c => c.send({feature: 'text', offsetx: 0}))
+                  _.each(conf.settings, s => {
+                    _.each(clients.text, c => c.send(_.merge({feature: 'text'}, s)))
+                  })
+                  let o = {feature: 'text', cmd: 'startscroll', start: (new Date).getTime() + 200}
+                  o = _.merge(o, conf.scrollSettings)
+                  _.each(clients.text, c => c.send(o))
+                }, 10, {leading: false, trailing: true})
+                _.each(devices.texts, device => {
+                  var client = new Client(device, ws, {'text': device.text}, () => {
+                    if(_.every(clients.text, 'online')) {
+                      startScroll()
+                    }
+                  })
+                  clients.text.push(client)
+                })
+              },
     'light':  devices => {
                 let pos = {x: 0, y: 0}
                 _.each(devices.lights, device => {
@@ -47,30 +65,29 @@ _.each(config.omegas, (devices, type) => {
                 })
               },
     'neuron': devices => {
-                var c = config.omegas.neuron
+                var conf = config.omegas.neuron
                 _.forOwn(devices.neurons, (device, i) => {
                   var client = new Client(device, ws, {'neuron' : {
-                        movingAverageCount:c.movingAverageCount,
-                        threshold:c.threshold,
+                        movingAverageCount:conf.movingAverageCount,
+                        threshold:conf.threshold,
                         numAxonLeds:device.numAxonLeds,
-                        numBodyLeds:c.numBodyLeds,
-                    }}, () => {
-                      client.on('sensor', () => {
-                        log.info('on sensor')
-                        _.each(_.filter(clients.light,
-                          l => Math.abs(l.pos.x - device.x) < 2 && Math.abs(l.pos.y - device.y) < 2), c => {
-                            c.send({cmd: 'fade', to: .5, time: 100})
-                            timeouts.add(`lightFadeBack.${c.pos.x}.${c.pos.y}`, () => c.send({cmd: 'fade', to: 1, time: 1e3}), 10e3)
-                          })
-                        mqtt.publish('neurons', {[i]: true})
-                        timeouts.add(`mqttReset.${i}`, () => {
-                          mqtt.publish('neurons', {[i]: false})
-                        }, 10e3)
+                        numBodyLeds:conf.numBodyLeds,
+                  }})
+                  client.on('sensor', () => {
+                    log.info('on sensor')
+                    _.each(_.filter(clients.light,
+                      l => Math.abs(l.pos.x - device.x) < 2 && Math.abs(l.pos.y - device.y) < 2), c => {
+                        c.send({cmd: 'fade', to: .5, time: 100})
+                        timeouts.add(`lightFadeBack.${c.pos.x}.${c.pos.y}`, () => c.send({cmd: 'fade', to: 1, time: 1e3}), 10e3)
                       })
-                    })
-                    clients.neuron.push(client)
+                    mqtt.publish('neurons', {[i]: true})
+                    timeouts.add(`mqttReset.${i}`, () => {
+                      mqtt.publish('neurons', {[i]: false})
+                    }, 10e3)
                   })
-                }
+                  clients.neuron.push(client)
+                })
+              }
   }[type])(devices);
 })
 
