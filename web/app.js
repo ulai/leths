@@ -15,9 +15,6 @@ angular
     templateUrl: 'tmpl/index.html',
     controller: ['$scope', 'websocket', function($scope, websocket) {
       websocket.on('stats', stats => $scope.$apply(() => $scope.stats = stats))
-      $scope.startScroll = () => websocket.emit('startScroll', {})
-      $scope.stopScroll = () => websocket.emit('stopScroll')
-      $scope.set = (k,v) => websocket.emit('set', {k, v})
     }]
   })
   $stateProvider.state('text', {
@@ -34,10 +31,6 @@ angular
     url: '/list',
     templateUrl: 'tmpl/list.html',
     controller: ['$scope', 'websocket', function($scope, websocket) {
-      $scope.set = (k,v) => websocket.emit('set', {k, v})
-      $scope.startScroll = (stepx, stepy, steps, interval, roundoffsets, start) => websocket.emit('startScroll', {stepx, stepy, steps, interval, roundoffsets, start})
-      $scope.stopScroll = () => websocket.emit('stopScroll')
-      $scope.fade = (to, t) => websocket.emit('fade', {to, t})
     }]
   })
   $stateProvider.state('test', {

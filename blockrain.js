@@ -4,10 +4,28 @@ const _ = require("lodash"),
         isArray: Array.isArray,
         each: (a, cb) => _.forOwn(a, (v,k) => cb(k,v))
       },
-      BlockrainThemes = {'headless': {}}
+      BlockrainThemes = {'headless': {}},
+      log = require('./logger').getLogger('tetris')
 
 module.exports = { game: () => {
 return {
+  initialize: function(clients) {
+    this.create({
+      onGameOver: () => log.debug('onGameOver'),
+      onPlaced: () => log.debug('onPlaced'),
+      onLine: () => log.debug('onLine'),
+      drawBlock: b => {
+        if(b.x < 0 || b.y < 0) return
+        _.filter(clients.light, l => l.pos.x == b.x && l.pos.y == b.y)[0]
+          .send({cmd: 'fade', to: 1, time: 0})
+      },
+      clear: () => {
+        _.each(clients.light, l => {
+          l.send({cmd: 'fade', to: 0.5, time: 0})
+        })
+      }
+    })
+  },
   options: {
     autoplay: true, // Let a bot play the game
     autoplayRestart: true, // Restart the game automatically once a bot loses

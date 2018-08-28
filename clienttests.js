@@ -4,6 +4,7 @@ const chai = require('chai'),
       expect = chai.expect,
       sinon = require('sinon'),
       net = require('net'),
+      _ = require('lodash'),
       utils = require('./utils'),
       config = require('./config'),
       settings = require('./settings'),
@@ -26,26 +27,27 @@ describe('client', function() {
     }),
     it('inits', function(done) {
       const device = {addr: '1', text:[{}]}
-      var client = new Client(device, {}, {'text': device.text}, () => {
+      var client = new Client(device, {}, {'text': device.text})
+      setTimeout(() => {
         var cmds = []
         socket.on('data', d => {
-          cmds.push(d.toString())
-          if(cmds.length == 2) {
-            expect(cmds).to.include('{"cmd":"init","text":[{}]}\n')
-            expect(cmds).to.include('{"cmd":"status"}\n')
+          _.merge(cmds, d.toString().split('\n').filter(Boolean))
+          if(cmds.length > 1) {
+            console.dir(cmds);
+            expect(cmds).to.include('{"cmd":"init","text":[{}]}')
+            expect(cmds).to.include('{"cmd":"status"}')
             done()
           }
         })
-      })
+      }, 10)
     })
     it('reconnects', function(done) {
       const device = {addr: '2', text:[{}]}
-      var client = new Client(device, {}, {'text': device.text}, () => {
-        setTimeout(() => {
-          expect(client.online).to.equal(false)
-          done()
-        }, 10)
-      })
+      var client = new Client(device, {}, {'text': device.text})
+      setTimeout(() => {
+        expect(client.online).to.equal(false)
+        done()
+      }, 10)
     })
     afterEach(function() {
       server.close()
