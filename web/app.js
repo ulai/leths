@@ -40,6 +40,8 @@ angular
       $scope.fire = i => websocket.emit('fire', i)
       $scope.tetris = b => websocket.emit('light', {tetris: b})
       $scope.test = b => websocket.emit('light', {test: b})
+      $scope.noise = b => websocket.emit('light', {noise: b})
+      $scope.wave = b => websocket.emit('light', {wave: b})
       $scope.clear = b => websocket.emit('light', {clear: 1})
       $scope.modules = _.times(35, x => {
         return `rgb(255,255,255)`

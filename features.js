@@ -76,7 +76,7 @@ module.exports = {
     const tetris = blockrain.game()
     tetris.initialize(clients)
 
-    var lightTimer, lightPos = 0
+    var lightTimer, lightPos = 0, noiseTimer, waveTimer, wavePhi = 0
     ws.on('light', x => {
       if(x.clear) _.each(clients.light, l => l.send({cmd: 'fade', to: 1, time: 0}))
       if('tetris' in x) x.tetris ? tetris.resume() : tetris.pause()
@@ -90,6 +90,29 @@ module.exports = {
         } else {
           clearInterval(lightTimer)
           lightTimer = null
+        }
+      }
+      if('noise' in x) {
+        if(x.noise && !noiseTimer) {
+          noiseTimer = setInterval(() => {
+            _.each(clients.light, l => l.send({cmd: 'fade', to: Math.random(), time: 0}))
+          }, 50)
+        } else {
+          clearInterval(noiseTimer)
+          noiseTimer = null
+        }
+      }
+      if('wave' in x) {
+        if(x.wave && !waveTimer) {
+          waveTimer = setInterval(() => {
+            wavePhi += 0.1;
+            _.each(clients.light, l => {
+              l.send({cmd: 'fade', to: Math.abs(Math.sin((l.pos.x / 10 * Math.PI) + wavePhi)), time: 0})
+            })
+          }, 50)
+        } else {
+          clearInterval(waveTimer)
+          waveTimer = null
         }
       }
     })
