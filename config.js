@@ -18,7 +18,7 @@ module.exports = {
     return this.config
   },
   getAddresses() {
-    return _.map(_.flatten(_.at(this.getConfig(), ['omegas.text', 'omegas.light.lights', 'omegas.neuron.neurons'])), 'addr')
+    return _.map(_.flatten(_.at(this.getConfig(), ['omegas.text.texts', 'omegas.light.lights', 'omegas.neuron.neurons'])), 'addr')
   },
   getIps() {
     return _.map(this.getAddresses(), utils.getHostAndPort)
