@@ -7,28 +7,47 @@ default:
 
 omegas:
   text:
-    - { addr: 'fe80::42a3:6bff:fec1:8298 11200', text: [ { cols: 72, offset: 0, orientation: 0 } ] }
+
+    # E9 (short LED, normal orientation -> should have short LED with short side at connector!
+    - { addr: 'fe80::42a3:6bff:fec1:82b2 11200', text: [ { cols: 72, offset: 0, orientation: 0 } ] }
+    # D9
     - { addr: 'fe80::42a3:6bff:fec1:82b1 11200', text: [ { cols: 72, offset: 72, orientation: 0 } ] }
+    # C9
+    - { addr: 'fe80::42a3:6bff:fec1:8262 11200', text: [ { cols: 72, offset: 144, orientation: 0 } ] }
+    # B9 (long LED, reverse orientation, long)
+    - { addr: 'fe80::42a3:6bff:fec1:8253 11200', text: [ { cols: 72, offset: 216, orientation: 6 } ] }
 
+    # A9 (Corner)
+    - { addr: 'fe80::42a3:6bff:fec1:8375 11200', text: [ { cols: 47, offset: 312, orientation: 6 }, { cols: 24, offset: 288, orientation: 0 } ] }
 
-    - { addr: 'fe80::42a3:6bff:fec1:838a 11200', text: [ { cols: 47, offset: 0, orientation: 0 }, { cols: 24, offset: 47, orientation: 6 } ] }
-    - { addr: 'fe80::42a3:6bff:fec1:8253 11200', text: [ { cols: 72, offset: 71, orientation: 0 } ] }
-    - { addr: 'fe80::42a3:6bff:fec1:828a 11200', text: [ { cols: 72, offset: 143, orientation: 0 } ] }
-    - { addr: 'fe80::42a3:6bff:fec1:8381 11200', text: [ { cols: 72, offset: 215, orientation: 0 } ] }
-    - { addr: 'fe80::42a3:6bff:fec1:8375 11200', text: [ { cols: 72, offset: 287, orientation: 0 } ] }
-    - { addr: 'fe80::42a3:6bff:fec1:825c 11200', text: [ { cols: 72, offset: 431, orientation: 0 } ] }
-    - { addr: 'fe80::42a3:6bff:fec1:82b2 11200', text: [ { cols: 72, offset: 503, orientation: 0 } ] }
+    # A8 (reverse orientation)
+    - { addr: 'fe80::42a3:6bff:fec1:80e3 11200', text: [ { cols: 47, offset: 359, orientation: 6 } ] }
+    # A7
+    - { addr: 'fe80::42a3:6bff:fec1:82a3 11200', text: [ { cols: 47, offset: 406, orientation: 0 } ] }
+    # A6
+    - { addr: 'fe80::42a3:6bff:fec1:838a 11200', text: [ { cols: 47, offset: 453, orientation: 0 }, { cols: 24, offset: 47, orientation: 6 } ] }
+    # A5
+    - { addr: 'fe80::42a3:6bff:fec1:828e 11200', text: [ { cols: 47, offset: 500, orientation: 0 } ] }
+    # A4
+    - { addr: 'fe80::42a3:6bff:fec1:825c 11200', text: [ { cols: 47, offset: 547, orientation: 0 } ] }
+    # A3
+    - { addr: 'fe80::42a3:6bff:fec1:828a 11200', text: [ { cols: 47, offset: 594, orientation: 0 } ] }
+    # A2
+    - { addr: 'fe80::42a3:6bff:fec1:82a4 11200', text: [ { cols: 47, offset: 641, orientation: 0 } ] }
 
-    - { addr: 'fe80::42a3:6bff:fec1:80e3 11200', text: [ { cols: 47, offset: 0, orientation: 0 }, { cols: 24, offset: 47, orientation: 6 } ] }
-    - { addr: 'fe80::42a3:6bff:fec1:82a4 11200', text: [ { cols: 72, offset: 71, orientation: 0 } ] }
-    - { addr: 'fe80::42a3:6bff:fec1:839f 11200', text: [ { cols: 72, offset: 143, orientation: 0 } ] }
-    - { addr: 'fe80::42a3:6bff:fec1:828e 11200', text: [ { cols: 72, offset: 72, orientation: 0 } ] }
-    - { addr: 'fe80::42a3:6bff:fec1:82a3 11200', text: [ { cols: 72, offset: 287, orientation: 0 } ] }
-    - { addr: 'fe80::42a3:6bff:fec1:8262 11200', text: [ { cols: 72, offset: 0, orientation: 0 } ] }
-    - { addr: 'fe80::42a3:6bff:fec1:838d 11200', text: [ { cols: 72, offset: 431, orientation: 0 } ] }
+    # A1 (Corner)
+    - { addr: 'fe80::42a3:6bff:fec1:82a6 11200', text: [ { cols: 47, offset: 688, orientation: 0 }, { cols: 24, offset: 735, orientation: 6 } ] }
 
-    - { addr: 'fe80::42a3:6bff:fec1:8567 11200', text: [ { cols: 72, offset: 0, orientation: 0 } ] }
-    - { addr: 'fe80::42a3:6bff:fec1:82a6 11200', text: [ { cols: 72, offset: 72, orientation: 0 } ] }
+    # B1
+    - { addr: 'fe80::42a3:6bff:fec1:838d 11200', text: [ { cols: 72, offset: 759, orientation: 0 } ] }
+    # C1
+    - { addr: 'fe80::42a3:6bff:fec1:8298 11200', text: [ { cols: 72, offset: 831, orientation: 0 } ] }
+    # D1 (label inside?)
+    - { addr: 'fe80::42a3:6bff:fec1:8567 11200', text: [ { cols: 72, offset: 903, orientation: 0 } ] }
+    # E1
+    - { addr: 'fe80::42a3:6bff:fec1:8381 11200', text: [ { cols: 72, offset: 975, orientation: 0 } ] }
+    # F1
+    - { addr: 'fe80::42a3:6bff:fec1:839f 11200', text: [ { cols: 72, offset: 1047, orientation: 0 } ] }
 
 
 # text: The quick brown fox jumps over the lazy dog +++ 0123456789+"*$%&/()=,;.:-_!?^~` +++ THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG +++
@@ -80,15 +99,23 @@ omegas:
   neuron:
     movingAverageCount: 20 # Number of frame to for moving average
     threshold: 250 # ad threshold to fire neuron
+    numBodyLeds: 70
     neurons:
       # first batch delivered 2018-08-20
+
+      # Unused, spare Neurons
       - { addr: 'fe80::42a3:6bff:fec1:8383 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:837b 11200', x: 1, y : 1}
+      - { addr: 'fe80::42a3:6bff:fec1:828b 11200', x: 1, y : 1}
+
+      # active
+
+
       - { addr: 'fe80::42a3:6bff:fec1:8395 11200', x: 1, y : 1}
       - { addr: 'fe80::42a3:6bff:fec1:82af 11200', x: 1, y : 1}
       - { addr: 'fe80::42a3:6bff:fec1:82ac 11200', x: 1, y : 1}
       - { addr: 'fe80::42a3:6bff:fec1:8297 11200', x: 1, y : 1}
       - { addr: 'fe80::42a3:6bff:fec1:82a7 11200', x: 1, y : 1}
-      - { addr: 'fe80::42a3:6bff:fec1:837b 11200', x: 1, y : 1}
       - { addr: 'fe80::42a3:6bff:fec1:8296 11200', x: 1, y : 1}
       - { addr: 'fe80::42a3:6bff:fec1:82aa 11200', x: 1, y : 1}
       - { addr: 'fe80::42a3:6bff:fec1:82b5 11200', x: 1, y : 1}
@@ -99,7 +126,6 @@ omegas:
       - { addr: 'fe80::42a3:6bff:fec1:82b7 11200', x: 1, y : 1}
       - { addr: 'fe80::42a3:6bff:fec1:828d 11200', x: 1, y : 1}
       - { addr: 'fe80::42a3:6bff:fec1:8378 11200', x: 1, y : 1}
-      - { addr: 'fe80::42a3:6bff:fec1:828b 11200', x: 1, y : 1}
       - { addr: 'fe80::42a3:6bff:fec1:82a9 11200', x: 1, y : 1}
       - { addr: 'fe80::42a3:6bff:fec1:82a2 11200', x: 1, y : 1}
       - { addr: 'fe80::42a3:6bff:fec1:829e 11200', x: 1, y : 1}
