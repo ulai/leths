@@ -1,0 +1,115 @@
+# Configuration for leths server
+# The server connects to omegas an initializes them with different
+# features. The connection is via ipv6 local link addresses.
+default:
+  interface: enp1s0 # the interface for ipv6 local
+  port: 11200 # the default port the lethd api listens on
+
+omegas:
+  text:
+    defaultText: 'Des Menschen Seele  Gleicht dem Wasser:  Vom Himmel kommt es,  Zum Himmel steigt es,  Und wieder nieder  Zur Erde muß es.  Ewig wechselnd.  -  Strömt von der hohen,  Steilen Felsenwand  Der reine Strahl,  Dann stäubt er lieblich  In Wolkenwellen  Zum glatten Fels,  Und, leicht empfangen,  Wallt er verschleiernd,  Leisrauschend  Zur Tiefe nieder.  -  Ragen Klippen  Dem Sturz entgegen,  Schäumt er unmutig  Stufenweise  Zum Abgrund.  -  Im flachen Bette  Schleicht er das Wiesental hin,  Und in dem glatten See  Weiden ihr Antlitz  Alle Gestirne. - Wind ist der Welle  Lieblicher Buhler;  Wind rauscht von Grund aus  Schäumende Wogen.  -  Seele des Menschen  Wie gleichst du dem Wasser!  Schicksal des Menschen,  Wie gleichst du dem Wind!'
+    scrollSettings: { stepx: .25, stepy: 0, steps: -1, interval: 20, roundoffsets: true }
+    settings: [{color: 'ffffff'}]
+    texts:
+      - { addr: 'fe80::42a3:6bff:fec1:838a', text: [ { cols: 47, offset: 0, orientation: 0 }, { cols: 24, offset: 47, orientation: 6 } ] }
+      - { addr: 'fe80::42a3:6bff:fec1:8253', text: [ { cols: 72, offset: 71, orientation: 0 } ] }
+      - { addr: 'fe80::42a3:6bff:fec1:828a', text: [ { cols: 72, offset: 143, orientation: 0 } ] }
+      - { addr: 'fe80::42a3:6bff:fec1:8381', text: [ { cols: 72, offset: 215, orientation: 0 } ] }
+      - { addr: 'fe80::42a3:6bff:fec1:8375', text: [ { cols: 72, offset: 287, orientation: 0 } ] }
+      - { addr: 'fe80::42a3:6bff:fec1:8298', text: [ { cols: 72, offset: 359, orientation: 0 } ] }
+      - { addr: 'fe80::42a3:6bff:fec1:825c', text: [ { cols: 72, offset: 431, orientation: 0 } ] }
+      - { addr: 'fe80::42a3:6bff:fec1:82b2', text: [ { cols: 72, offset: 503, orientation: 0 } ] }
+
+      - { addr: 'fe80::42a3:6bff:fec1:80e3', text: [ { cols: 47, offset: 0, orientation: 0 }, { cols: 24, offset: 47, orientation: 6 } ] }
+      - { addr: 'fe80::42a3:6bff:fec1:82a4', text: [ { cols: 72, offset: 71, orientation: 0 } ] }
+      - { addr: 'fe80::42a3:6bff:fec1:839f', text: [ { cols: 72, offset: 143, orientation: 0 } ] }
+      - { addr: 'fe80::42a3:6bff:fec1:828e', text: [ { cols: 72, offset: 215, orientation: 0 } ] }
+      - { addr: 'fe80::42a3:6bff:fec1:82a3', text: [ { cols: 72, offset: 287, orientation: 0 } ] }
+      - { addr: 'fe80::42a3:6bff:fec1:8262', text: [ { cols: 72, offset: 359, orientation: 0 } ] }
+      - { addr: 'fe80::42a3:6bff:fec1:838d', text: [ { cols: 72, offset: 431, orientation: 0 } ] }
+      - { addr: 'fe80::42a3:6bff:fec1:82b1', text: [ { cols: 72, offset: 503, orientation: 0 } ] }
+
+      - { addr: 'fe80::42a3:6bff:fec1:8567', text: [ { cols: 72, offset: 0, orientation: 0 } ] }
+      - { addr: 'fe80::42a3:6bff:fec1:82a6', text: [ { cols: 72, offset: 72, orientation: 0 } ] }
+
+
+# text: The quick brown fox jumps over the lazy dog +++ 0123456789+"*$%&/()=,;.:-_!?^~` +++ THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG +++
+# text: Benno Eddi Rolf - Wolf +++ Sue Claire Trine - Biene +++
+# text: Des Menschen Seele  Gleicht dem Wasser:  Vom Himmel kommt es,  Zum Himmel steigt es,  Und wieder nieder  Zur Erde muß es.  Ewig wechselnd.  -  Strömt von der hohen,  Steilen Felsenwand  Der reine Strahl,  Dann stäubt er lieblich  In Wolkenwellen  Zum glatten Fels,  Und, leicht empfangen,  Wallt er verschleiernd,  Leisrauschend  Zur Tiefe nieder.  -  Ragen Klippen  Dem Sturz entgegen,  Schäumt er unmutig  Stufenweise  Zum Abgrund.  -  Im flachen Bette  Schleicht er das Wiesental hin,  Und in dem glatten See  Weiden ihr Antlitz  Alle Gestirne. - Wind ist der Welle  Lieblicher Buhler;  Wind rauscht von Grund aus  Schäumende Wogen.  -  Seele des Menschen  Wie gleichst du dem Wasser!  Schicksal des Menschen,  Wie gleichst du dem Wind!
+
+
+  light:
+    size: {x: 5, y: 7} # (N, M)
+    lights: # starting at x=0, y=0 -> x=N, y=0 -> x=1, y=1 ...
+      # row 0 -> y=0
+      - { addr: 'fe80::42a3:6bff:fec1:8054' }
+      - { addr: 'fe80::42a3:6bff:fec1:8069' }
+      - { addr: 'fe80::42a3:6bff:fec1:827f' }
+      - { addr: 'fe80::42a3:6bff:fec1:8066' }
+      - { addr: 'fe80::42a3:6bff:fec1:8289' }
+      # row 0 -> y=1
+      - { addr: 'fe80::42a3:6bff:fec1:8390' }
+      - { addr: 'fe80::42a3:6bff:fec1:7ff1' }
+      - { addr: 'fe80::42a3:6bff:fec1:82ad' }
+      - { addr: 'fe80::42a3:6bff:fec1:808b' }
+      - { addr: 'fe80::42a3:6bff:fec1:8063' }
+      # row 0 -> y=2
+      - { addr: 'fe80::42a3:6bff:fec1:8103' }
+      - { addr: 'fe80::42a3:6bff:fec1:8292' }
+      - { addr: 'fe80::42a3:6bff:fec1:8003' }
+      - { addr: 'fe80::42a3:6bff:fec1:8006' }
+      - { addr: 'fe80::42a3:6bff:fec1:832d' }
+      # row 0 -> y=3
+      - { addr: 'fe80::42a3:6bff:fec1:8036' }
+      - { addr: 'fe80::42a3:6bff:fec1:837e' }
+      - { addr: 'fe80::42a3:6bff:fec1:82a0' }
+      - { addr: 'fe80::42a3:6bff:fec1:7ffa' }
+      - { addr: 'fe80::42a3:6bff:fec1:800f' }
+      # row 0 -> y=4
+      - { addr: 'fe80::42a3:6bff:fec1:8018' }
+      - { addr: 'fe80::42a3:6bff:fec1:8407' }
+      - { addr: 'fe80::42a3:6bff:fec1:803c' }
+      - { addr: 'fe80::42a3:6bff:fec1:8084' }
+      - { addr: 'fe80::42a3:6bff:fec1:8290' }
+      # row 0 -> y=5
+      - { addr: 'fe80::42a3:6bff:fec1:8295' }
+      - { addr: 'fe80::42a3:6bff:fec1:84a4' }
+      - { addr: 'fe80::42a3:6bff:fec1:8385' }
+      - { addr: 'fe80::42a3:6bff:fec1:80f5' }
+      - { addr: 'fe80::42a3:6bff:fec1:80c8' }
+      # row 0 -> y=6
+      - { addr: 'fe80::42a3:6bff:fec1:82c7' }
+      - { addr: 'fe80::42a3:6bff:fec1:8042' }
+      - { addr: 'fe80::42a3:6bff:fec1:82a8' }
+      - { addr: 'fe80::42a3:6bff:fec1:805d' }
+      - { addr: 'fe80::42a3:6bff:fec1:8000' }
+
+
+  neuron:
+    movingAverageCount: 20 # Number of frames or moving average
+    threshold: 250 # ad threshold to fire neuron
+    numBodyLeds: 70
+    neurons:
+      # first batch delivered 2018-08-20
+      - { addr: 'fe80::42a3:6bff:fec1:8383', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:8395', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:82af', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:82ac', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:8297', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:82a7', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:837b', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:8296', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:82aa', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:82b5', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:82a1', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:8288', x: 1, y : 1, numAxonLeds: 70}
+
+      # second batch
+      - { addr: 'fe80::42a3:6bff:fec1:82b7', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:828d', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:8378', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:828b', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:82a9', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:82a2', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:829e', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:80ec', x: 1, y : 1, numAxonLeds: 70}

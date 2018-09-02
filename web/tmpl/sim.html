@@ -1,0 +1,7 @@
+<div class="container u-full-width u-max-full-width">
+  <div class="row neuronsim">
+    <ul style="list-style:none; border:0; float:left" ng-repeat="ledchain in ledchains track by $index">
+      <li ng-repeat="led in ledchain track by $index" style="height:10px; width:10px; float:left; background-color:{{led}}"></li>
+    </ul>
+  </div>
+</div>

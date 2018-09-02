@@ -5,7 +5,8 @@ const config = require('./config.js'),
       server = require('http').createServer(app),
       io = require('socket.io').listen(server),
       spawn = require('child_process').spawn,
-      _ = require('lodash')
+      _ = require('lodash'),
+      EventEmitter = require('events')
 
 /** @module WebServer */
 
@@ -14,12 +15,13 @@ const config = require('./config.js'),
   websocket.io and static serving
 */
 
-class WebServer {
+class WebServer extends EventEmitter {
   /**
     @param clients - list of clients {text: [{Client}], light: [], neuron: []}
     @param {Integer} port - tcp port to listen
   */
   constructor(clients, port) {
+    super()
     server.listen(port)
 
     app.use('/', express.static('web'))
@@ -55,34 +57,33 @@ class WebServer {
       socket.on('startScroll', x => {
         log.info('startScroll %j', x)
         let o = { feature: 'text', cmd: 'startscroll', start: (new Date).getTime() + 200 }
-        if(x.stepx !== null) o.stepx = x.stepx
-        if(x.stepy !== null) o.stepy = x.stepy
-        if(x.steps !== null) o.steps = x.steps
-        if(x.interval !== null) o.interval = x.interval
-        if(x.roundoffsets !== null) o.roundoffsets = x.roundoffsets
-        if(x.start !== undefined) o.start = x.start
-        _.each(clients.text, c => c.send(o));
+        o = _.merge(o, _.omitBy(x, _.isNull))
+        _.each(clients.text, c => c.send(o))
     	})
       socket.on('stopScroll', () => {
         log.info('stopScroll')
-        _.each(clients.text, c => c.send({feature: 'text', cmd: 'stopscroll'}));
+        _.each(clients.text, c => c.send({feature: 'text', cmd: 'stopscroll'}))
       })
       socket.on('fade', x => {
         log.info('fade %j', x)
         let o = {feature: 'text', cmd: 'fade'}
         if(x.to) o.to = x.to
         if(x.t) o.t = x.t
-        _.each(clients.text, c => c.send(o));
+        _.each(clients.text, c => c.send(o))
       })
       socket.on('fire', i => {
         log.info('fire %d', i)
         clients.neuron[i].send({feature: 'neuron', cmd: 'fire'});
       })
+      socket.on('light', x => {
+        log.info('light %j', x)
+        this.emit('light', x)
+      })
     })
   }
 
   light(v, pos) {
-    log.info('%d %j', v, pos)
+    log.debug('%d %j', v, pos)
     io.sockets.emit('light', {v, pos})
   }
 }

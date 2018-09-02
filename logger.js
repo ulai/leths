@@ -6,7 +6,8 @@ const winston = require('winston'),
 
 var transports = {
    file: new winston.transports.File({ filename: 'leths.log', level: 'info' }),
-   console: new winston.transports.Console({ format: winston.format.simple(), level: 'debug', silent: true})
+   console: new winston.transports.Console({ format: 
+    winston.format.printf(info => `${info.message}`), level: 'debug', silent: true})
 }
 
 const logger = winston.createLogger({

@@ -1,22 +1,42 @@
 const _ = require('lodash'),
       net = require('net'),
-      config = require('./config').getConfig(),
-      utils = require('./utils'),
       reconnect = require('reconnect-net'),
-      EventEmitter = require('events')
+      EventEmitter = require('events'),
+      utils = require('./utils'),
+      config = require('./config'),
+      settings = require('./settings')
 
-function connect(device, init) {
+function connect(device, initArgs, addInit) {
   var [host, port] = utils.getHostAndPort(device.addr)
-  host = `${host}%${config.default.interface}`
-  port = port || config.default.port
-  this.log.debug('connecting to %s:%s', host, port)
+  var iface = config.getConfig().default.interface
+  if(iface) host += `%${iface}`
+  port = port || config.getConfig().default.port
+  this.log.info('connecting to %s:%s', host, port)
   reconnect(client => {
     this.client = client
-    client.on('data', ondata.bind(this))
     this.online = true
+    client.on('data', ondata.bind(this))
     this.log.info('connected to %s:%s', host, port)
-    if(init) init()
+    this.send(_.extend({cmd:'init'}, initArgs))
+    this.send({cmd:'status'}, status => {
+      this.device.status = status
+      if(addInit) addInit()
+    })
+    setTimeout(pingTimer.bind(this), settings.getStartWatchdog())
   }).connect({host, port}).on('error', onerror.bind(this)).on('end', onend.bind(this))
+}
+
+function pingTimer() {
+  this.send({cmd:'ping'}, pong => {
+    clearTimeout(this.noConnectionTimeout)
+    this.pingTimeout = setTimeout(pingTimer.bind(this), settings.getRepeatWatchdog())
+  })
+  this.noConnectionTimeout = setTimeout(() => {
+    this.log.warn('ending connection')
+    clearTimeouts.bind(this)
+    this.client.destroy()
+    this.online = false
+  }, settings.getTimeout())
 }
 
 function ondata(data) {
@@ -31,25 +51,33 @@ function ondata(data) {
     } finally {
       this.buffer = ''
     }
-    this.log.info('ondata %j', data)
+    this.log.debug('ondata %j', data)
     if(data) {
       if('sensor' in data) {
         this.emit('sensor')
+      } else {
+        if(this.receiveCb) this.receiveCb(data)
+        clearTimeout(this.timeout)
       }
-      if(this.receiveCb) this.receiveCb(data)
-      clearTimeout(this.timeout)
     }
   })
 }
 
 function onerror(err) {
   this.online = false
+  clearTimeouts.bind(this)
   this.log.warn('onerror %j', err)
 }
 
 function onend() {
   this.online = false
+  clearTimeouts.bind(this)
   this.log.warn('onend')
+}
+
+function clearTimeouts() {
+  clearTimeout(this.noConnectionTimeout)
+  clearTimeout(this.pingTimeout)
 }
 
 function send(cmd, cb) {
@@ -57,12 +85,12 @@ function send(cmd, cb) {
     this.log.warn('send %j fails, no connection', cmd)
     return
   }
-  this.log.info('send %j', cmd)
+  this.log[cmd.cmd==='ping'?'debug':'info']('send %j', cmd)
   if(cb) {
     this.receiveCb = cb;
     this.timeout = setTimeout(() => {
-      this.log.error('timeout %j', cmd)
-    }, 1e3)
+      this.log.warn('timeout %j', cmd)
+    }, settings.getTimeout())
   }
   setTimeout(() => {
     this.client.write(getCommand(cmd))
@@ -74,13 +102,13 @@ function getCommand(cmd) {
 }
 
 class Client extends EventEmitter {
-  constructor(device, ws, init) {
+  constructor(device, ws, args, init) {
     super()
     this.log = require('./logger').getLogger(`client.${device.addr}`)
     this.online = false
     this.device = device
     this.ws = ws
-    connect.bind(this)(device, init)
+    connect.bind(this)(device, args, init)
   }
   send(cmd, cb) {
     send.bind(this)(cmd, cb)

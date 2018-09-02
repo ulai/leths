@@ -3,7 +3,7 @@ const mqtt = require('mqtt'),
 
 class Mqtt {
   constructor() {
-    this.client  = mqtt.connect('mqtt://localhost')
+    this.client  = mqtt.connect('ws://localhost:1884')
     this.client.on('connect', () => {
       log.info('connected')
     })

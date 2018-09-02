@@ -26,8 +26,10 @@ module.exports = {
   check() {
     let ips = this.getIps()
     let duplicateIps = _.pickBy(_.countBy(ips), x => x > 1)
-    if(duplicateIps) {
-      log.warn('Config contains duplicate ips: %j', duplicateIps)
+    if(!_.isEmpty(duplicateIps)) {
+      log.warn('Config contains duplicates: %j', duplicateIps)
+    } else {
+      log.info('no duplicates')
     }
   }
 };
