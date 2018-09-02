@@ -110,28 +110,51 @@ omegas:
     threshold: 250 # ad threshold to fire neuron
     numBodyLeds: 70
     neurons:
+      # tested Neurons
+
+      # D6
+      - { addr: 'fe80::42a3:6bff:fec1:82aa', x: 2, y : 4, numAxonLeds: 70}
+
+      # C4
+      - { addr: 'fe80::42a3:6bff:fec1:8378', x: 1, y : 2, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:829e', x: 1, y : 2, numAxonLeds: 70}
+
+      # C3
+      - { addr: 'fe80::42a3:6bff:fec1:8297', x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:82af', x: 1, y : 1, numAxonLeds: 70}
+
+      # C5
+      - { addr: 'fe80::42a3:6bff:fec1:82a9', x: 1, y : 3, numAxonLeds: 70}
+
+      # C6
+      - { addr: 'fe80::42a3:6bff:fec1:8395', x: 1, y : 4, numAxonLeds: 70}
+
+      # D3
+      - { addr: 'fe80::42a3:6bff:fec1:82a1', x: 2, y : 1, numAxonLeds: 70}
+
+      # E3
+      - { addr: 'fe80::42a3:6bff:fec1:82b7', x: 3, y : 1, numAxonLeds: 70}
+
+      # D5
+      - { addr: 'fe80::42a3:6bff:fec1:82a2', x: 2, y : 3, numAxonLeds: 70}
+
+      # C7
+      - { addr: 'fe80::42a3:6bff:fec1:8383', x: 1, y : 5, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:828b', x: 1, y : 5, numAxonLeds: 70}
+
+      # E7
+      - { addr: 'fe80::42a3:6bff:fec1:80ec', x: 3, y : 5, numAxonLeds: 70}
+
+      # E6
+      - { addr: 'fe80::42a3:6bff:fec1:828d', x: 3, y : 4, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:82b5', x: 3, y : 4, numAxonLeds: 70}
+
       # unused
-#      - { addr: 'fe80::42a3:6bff:fec1:8383', x: 1, y : 1, numAxonLeds: 70}
-#      - { addr: 'fe80::42a3:6bff:fec1:828b', x: 1, y : 1, numAxonLeds: 70}
+#      - { addr: 'fe80::42a3:6bff:fec1:837b', x: 1, y : 1, numAxonLeds: 70}
 #      - { addr: 'fe80::42a3:6bff:fec1:837b', x: 1, y : 1, numAxonLeds: 70}
 
-      # first batch delivered 2018-08-20
-      - { addr: 'fe80::42a3:6bff:fec1:8395', x: 1, y : 1, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:82af', x: 1, y : 1, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:82ac', x: 1, y : 1, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:8297', x: 1, y : 1, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:82a7', x: 1, y : 1, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:8296', x: 1, y : 1, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:82aa', x: 1, y : 1, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:82b5', x: 1, y : 1, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:82a1', x: 1, y : 1, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:8288', x: 1, y : 1, numAxonLeds: 70}
+#      - { addr: 'fe80::42a3:6bff:fec1:82ac', x: 1, y : 1, numAxonLeds: 70}
+#      - { addr: 'fe80::42a3:6bff:fec1:82a7', x: 1, y : 1, numAxonLeds: 70}
+#      - { addr: 'fe80::42a3:6bff:fec1:8296', x: 1, y : 1, numAxonLeds: 70}
+#      - { addr: 'fe80::42a3:6bff:fec1:8288', x: 1, y : 1, numAxonLeds: 70}
 
-      # second batch
-      - { addr: 'fe80::42a3:6bff:fec1:82b7', x: 1, y : 1, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:828d', x: 1, y : 1, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:8378', x: 1, y : 1, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:82a9', x: 1, y : 1, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:82a2', x: 1, y : 1, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:829e', x: 1, y : 1, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:80ec', x: 1, y : 1, numAxonLeds: 70}
