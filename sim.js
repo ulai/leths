@@ -21,11 +21,11 @@ const clients = { text: [], light: [], neuron: []}
 const lethd = './lethdx86'
 
 _.each(config.omegas, (devices, type) => {
-  console.log(clients[type])
+  console.log(clients[type]);
   ({
     'text':   devices => _.each(devices.texts, _.partialRight(startLethd, clients[type])),
-    'light':  devices => _.each(devices.lights, _.partial(startLethd, clients[type])),
-    'neuron': devices => _.each(devices.neurons, _.partial(startLethd, clients[type])),
+    'light':  devices => _.each(devices.lights, _.partialRight(startLethd, clients[type])),
+    'neuron': devices => _.each(devices.neurons, _.partialRight(startLethd, clients[type])),
   }[type])(devices);
 })
 
@@ -43,6 +43,6 @@ function startLethd(device, clients) {
     console.log(`stdout: ${stdout}`)
     console.log(`stderr: ${stderr}`)
   })
-  console.dir(clients)
-  clients.push(p)
+  console.dir(clients);
+  //clients.push(p)
 }

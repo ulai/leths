@@ -13,7 +13,10 @@ angular
     url: '/',
     templateUrl: 'tmpl/index.html',
     controller: ['$scope', 'websocket', function($scope, websocket) {
-      websocket.on('stats', function(stats) { $scope.$apply(function() {$scope.stats = stats; }); });
+      $scope.color = function(c, r) {
+        return _.every($scope.grid[c+r], 'online') ? 'green' : 'red';
+      };
+      websocket.on('stats', function(stats) { $scope.$apply(function() { $scope.stats = stats; }); });
     }]
   });
   $stateProvider.state('text', {
@@ -35,5 +38,8 @@ angular
   });
 }])
 .controller('ctrl', ['$scope', '$interval', '$timeout', 'websocket', function($scope, $interval, $timeout, websocket) {
-  websocket.on('stats', function(stats) { $scope.$apply(function() { $scope.stats = stats }) })
+  websocket.on('stats', function(stats) { $scope.$apply(function() {
+    $scope.stats = stats;
+    $scope.grid = _.groupBy(_.flatten(_.values($scope.stats.clients)), 'device.gridcoordinate')
+  })})
 }])

@@ -3,87 +3,154 @@
 # features. The connection is via ipv6 local link addresses.
 default:
   interface: wlp3s0 # the interface for ipv6 local
-  port: 12345 # the default port the lethd api listens on
+  port: 11200 # the default port the lethd api listens on
 
 omegas:
   text:
-    defaultText: 'Des Menschen Seele  Gleicht dem Wasser:  Vom Himmel kommt es,  Zum Himmel steigt es,  Und wieder nieder  Zur Erde muß es.  Ewig wechselnd.  -  Strömt von der hohen,  Steilen Felsenwand  Der reine Strahl,  Dann stäubt er lieblich  In Wolkenwellen  Zum glatten Fels,  Und, leicht empfangen,  Wallt er verschleiernd,  Leisrauschend  Zur Tiefe nieder.  -  Ragen Klippen  Dem Sturz entgegen,  Schäumt er unmutig  Stufenweise  Zum Abgrund.  -  Im flachen Bette  Schleicht er das Wiesental hin,  Und in dem glatten See  Weiden ihr Antlitz  Alle Gestirne. - Wind ist der Welle  Lieblicher Buhler;  Wind rauscht von Grund aus  Schäumende Wogen.  -  Seele des Menschen  Wie gleichst du dem Wasser!  Schicksal des Menschen,  Wie gleichst du dem Wind!'
+    # defaultText: 'The quick brown fox jumps over the lazy dog +++ 0123456789+"*$%&/()=,;.:-_!?^~` +++ THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG +++ '
+    # defaultText: 'Benno Eddi Rolf - Wolf +++ Sue Claire Trine - Biene +++ '
+    defaultText: 'Des Menschen Seele  Gleicht dem Wasser:  Vom Himmel kommt es,  Zum Himmel steigt es,  Und wieder nieder  Zur Erde muss es.  Ewig wechselnd.  -  Strömt von der hohen,  Steilen Felsenwand  Der reine Strahl,  Dann stäubt er lieblich  In Wolkenwellen  Zum glatten Fels,  Und, leicht empfangen,  Wallt er verschleiernd,  Leisrauschend  Zur Tiefe nieder.  -  Ragen Klippen  Dem Sturz entgegen,  Schäumt er unmutig  Stufenweise  Zum Abgrund.  -  Im flachen Bette  Schleicht er das Wiesental hin,  Und in dem glatten See  Weiden ihr Antlitz  Alle Gestirne. - Wind ist der Welle  Lieblicher Buhler;  Wind rauscht von Grund aus  Schäumende Wogen.  -  Seele des Menschen  Wie gleichst du dem Wasser!  Schicksal des Menschen,  Wie gleichst du dem Wind!'
     scrollSettings: { stepx: .25, stepy: 0, steps: -1, interval: 20, roundoffsets: true }
     settings: [{color: 'ffffff'}]
     texts:
-      - { addr: '::1 11200', text: [{cols: 22, offset: 123, orentiation: 1}] }
-      - { addr: '::1 11201', text: [{cols: 22, offset: 123, orentiation: 1}] }
-      - { addr: '::1 11202', text: [{cols: 22, offset: 123, orentiation: 1}] }
-      - { addr: '::1 11203', text: [{cols: 22, offset: 123, orentiation: 1}] }
-      - { addr: '::1 11204', text: [{cols: 22, offset: 123, orentiation: 1}] }
-      - { addr: '::1 11205', text: [{cols: 22, offset: 123, orentiation: 1}] }
+      # E9 (short LED, normal orientation -> should have short LED with short side at connector!
+      - { addr: '::1 11200', gridcoordinate: "E9", text: [ { cols: 72, offset: 0, orientation: 0 } ] }
+      # D9
+      - { addr: '::1 11201', gridcoordinate: "D9", text: [ { cols: 72, offset: 72, orientation: 0 } ] }
+      # C9
+      - { addr: '::1 11202', gridcoordinate: "C9", text: [ { cols: 72, offset: 144, orientation: 0 } ] }
+      # B9 (long LED, reverse orientation, long)
+      - { addr: '::1 11203', gridcoordinate: "B9", text: [ { cols: 72, offset: 216, orientation: 6 } ] }
+
+      # A9 (Corner)
+      - { addr: '::1 11204', gridcoordinate: "A9", text: [ { cols: 47, offset: 312, orientation: 6 }, { cols: 24, offset: 288, orientation: 0 } ] }
+
+      # A8 (reverse orientation)
+      - { addr: '::1 11205', gridcoordinate: "A8", text: [ { cols: 48, offset: 359, orientation: 6 } ] }
+      # A7
+      - { addr: '::1 11206', gridcoordinate: "A7", text: [ { cols: 48, offset: 407, orientation: 0 } ] }
+      # A6
+      - { addr: '::1 11207', gridcoordinate: "A6", text: [ { cols: 48, offset: 455, orientation: 0 }, { cols: 24, offset: 47, orientation: 6 } ] }
+      # A5
+      - { addr: '::1 11208', gridcoordinate: "A5", text: [ { cols: 48, offset: 503, orientation: 0 } ] }
+      # A4
+      - { addr: '::1 11209', gridcoordinate: "A4", text: [ { cols: 48, offset: 551, orientation: 0 } ] }
+      # A3
+      - { addr: '::1 11210', gridcoordinate: "A3", text: [ { cols: 48, offset: 599, orientation: 0 } ] }
+      # A2
+      - { addr: '::1 11211', gridcoordinate: "A2", text: [ { cols: 48, offset: 647, orientation: 0 } ] }
+
+      # A1 (Corner)
+      - { addr: '::1 11212', gridcoordinate: "A1", text: [ { cols: 47, offset: 695, orientation: 0 }, { cols: 24, offset: 742, orientation: 6 } ] }
+
+      # B1
+      - { addr: '::1 11213', gridcoordinate: "B1", text: [ { cols: 72, offset: 766, orientation: 0 } ] }
+      # C1
+      - { addr: '::1 11214', gridcoordinate: "C1", text: [ { cols: 72, offset: 838, orientation: 0 } ] }
+      # D1 (label inside?)
+      - { addr: '::1 11215', gridcoordinate: "D1", text: [ { cols: 72, offset: 910, orientation: 0 } ] }
+      # E1
+      - { addr: '::1 11216', gridcoordinate: "E1", text: [ { cols: 72, offset: 982, orientation: 0 } ] }
+      # F1
+      - { addr: '::1 11217', gridcoordinate: "F1", text: [ { cols: 72, offset: 1054, orientation: 0 } ] }
+
+
   light:
     size: {x: 5, y: 7} # (N, M)
-    lights: # starting at x=0, y=0 -> x=N-1, y=0 -> x=1, y=1 ...
+    lights: # starting at x=0, y=0 -> x=N, y=0 -> x=1, y=1 ...
       # row 0 -> y=0
-      - { addr: '::1 11210' }
-      - { addr: '::1 11211' }
-      - { addr: '::1 11212' }
-      - { addr: '::1 11213' }
-      - { addr: '::1 11214' }
-      # row 1 -> y=1
-      - { addr: '::1 11220' }
-      - { addr: '::1 11221' }
-      - { addr: '::1 11222' }
-      - { addr: '::1 11223' }
-      - { addr: '::1 11224' }
-      # row 2
-      - { addr: '::1 11230' }
-      - { addr: '::1 11231' }
-      - { addr: '::1 11232' }
-      - { addr: '::1 11233' }
-      - { addr: '::1 11234' }
-      # row 3
-      - { addr: '::1 11240' }
-      - { addr: '::1 11241' }
-      - { addr: '::1 11242' }
-      - { addr: '::1 11243' }
-      - { addr: '::1 11244' }
-      # row 4
-      - { addr: '::1 11250' }
-      - { addr: '::1 11251' }
-      - { addr: '::1 11252' }
-      - { addr: '::1 11253' }
-      - { addr: '::1 11254' }
-      # row 5
-      - { addr: '::1 11260' }
-      - { addr: '::1 11261' }
-      - { addr: '::1 11262' }
-      - { addr: '::1 11263' }
-      - { addr: '::1 11264' }
-      # row 6
-      - { addr: '::1 11270' }
-      - { addr: '::1 11271' }
-      - { addr: '::1 11272' }
-      - { addr: '::1 11273' }
-      - { addr: '::1 11274' }
+      - { addr: '::1 11300', gridcoordinate: "B2" }
+      - { addr: '::1 11301', gridcoordinate: "C2" }
+      - { addr: '::1 11302', gridcoordinate: "D2" }
+      - { addr: '::1 11303', gridcoordinate: "E2" }
+      - { addr: '::1 11304', gridcoordinate: "F2" }
+      # row 0 -> y=1
+      - { addr: '::1 11310', gridcoordinate: "B3"  }
+      - { addr: '::1 11311', gridcoordinate: "C3"  }
+      - { addr: '::1 11312', gridcoordinate: "D3"  }
+      - { addr: '::1 11313', gridcoordinate: "E3"  }
+      - { addr: '::1 11314', gridcoordinate: "F3"  }
+      # row 0 -> y=2
+      - { addr: '::1 11320', gridcoordinate: "B4"  }
+      - { addr: '::1 11321', gridcoordinate: "C4"  }
+      - { addr: '::1 11322', gridcoordinate: "D4"  }
+      - { addr: '::1 11323', gridcoordinate: "E4"  }
+      - { addr: '::1 11324', gridcoordinate: "F4"  }
+      # row 0 -> y=3
+      - { addr: '::1 11330', gridcoordinate: "B5"  }
+      - { addr: '::1 11331', gridcoordinate: "C5"  }
+      - { addr: '::1 11332', gridcoordinate: "D5"  }
+      - { addr: '::1 11333', gridcoordinate: "E5"  }
+      - { addr: '::1 11334', gridcoordinate: "F5"  }
+      # row 0 -> y=4
+      - { addr: '::1 11340', gridcoordinate: "B6"  }
+      - { addr: '::1 11341', gridcoordinate: "C6"  }
+      - { addr: '::1 11342', gridcoordinate: "D6"  }
+      - { addr: '::1 11343', gridcoordinate: "E6"  }
+      - { addr: '::1 11344', gridcoordinate: "F6"  }
+      # row 0 -> y=5
+      - { addr: '::1 11350', gridcoordinate: "B7"  }
+      - { addr: '::1 11351', gridcoordinate: "C7"  }
+      - { addr: '::1 11352', gridcoordinate: "D7"  }
+      - { addr: '::1 11353', gridcoordinate: "E7"  }
+      - { addr: '::1 11354', gridcoordinate: "F7"  }
+      # row 0 -> y=6
+      - { addr: '::1 11360', gridcoordinate: "B8"  }
+      - { addr: '::1 11361', gridcoordinate: "C8"  }
+      - { addr: '::1 11362', gridcoordinate: "D8"  }
+      - { addr: '::1 11363', gridcoordinate: "E8"  }
+      - { addr: '::1 11364', gridcoordinate: "F8"  }
+
+
   neuron:
-    movingAverageCount: 20 # Number of frame to for moving average
+    movingAverageCount: 20 # Number of frames for moving average
     threshold: 250 # ad threshold to fire neuron
     numBodyLeds: 70
     neurons:
-      - { addr: '::1 11300', x: 1, y : 3, numAxonLeds: 70}
-      - { addr: '::1 11301', x: 1, y : 3, numAxonLeds: 70}
-      - { addr: '::1 11302', x: 2, y : 2, numAxonLeds: 70}
-      - { addr: '::1 11303', x: 3, y : 1, numAxonLeds: 70}
-      - { addr: '::1 11304', x: 2, y : 1, numAxonLeds: 70}
-      - { addr: '::1 11305', x: 2, y : 1, numAxonLeds: 70}
-      - { addr: '::1 11306', x: 2, y : 1, numAxonLeds: 70}
-      - { addr: '::1 11307', x: 2, y : 1, numAxonLeds: 70}
-      - { addr: '::1 11308', x: 2, y : 1, numAxonLeds: 70}
-      - { addr: '::1 11309', x: 2, y : 1, numAxonLeds: 70}
-      - { addr: '::1 11310', x: 2, y : 1, numAxonLeds: 70}
-      - { addr: '::1 11311', x: 2, y : 1, numAxonLeds: 70}
-      - { addr: '::1 11312', x: 2, y : 1, numAxonLeds: 70}
-      - { addr: '::1 11313', x: 2, y : 1, numAxonLeds: 70}
-      - { addr: '::1 11314', x: 2, y : 1, numAxonLeds: 70}
-      - { addr: '::1 11315', x: 2, y : 1, numAxonLeds: 70}
-      - { addr: '::1 11316', x: 2, y : 1, numAxonLeds: 70}
-      - { addr: '::1 11317', x: 2, y : 1, numAxonLeds: 70}
-      - { addr: '::1 11318', x: 2, y : 1, numAxonLeds: 70}
-      - { addr: '::1 11319', x: 2, y : 1, numAxonLeds: 70}
+      # tested Neurons
+
+      # D6
+      - { addr: '::1 11300', gridcoordinate: "D6", x: 2, y : 4, numAxonLeds: 70}
+
+      # C4
+      - { addr: '::1 11301', gridcoordinate: "C4", x: 1, y : 2, numAxonLeds: 70}
+      - { addr: '::1 11302', gridcoordinate: "C4", x: 1, y : 2, numAxonLeds: 70}
+
+      # C3
+      - { addr: '::1 11303', gridcoordinate: "C3", x: 1, y : 1, numAxonLeds: 70}
+      - { addr: '::1 11304', gridcoordinate: "C3", x: 1, y : 1, numAxonLeds: 70}
+
+      # C5
+      - { addr: '::1 11305', gridcoordinate: "C5", x: 1, y : 3, numAxonLeds: 70}
+
+      # C6
+      - { addr: '::1 11306', gridcoordinate: "C6", x: 1, y : 4, numAxonLeds: 70}
+
+      # D3
+      - { addr: '::1 11307', gridcoordinate: "D3", x: 2, y : 1, numAxonLeds: 70}
+
+      # E3
+      - { addr: '::1 11308', gridcoordinate: "E3", x: 3, y : 1, numAxonLeds: 70}
+
+      # D5
+      - { addr: '::1 11309', gridcoordinate: "D5", x: 2, y : 3, numAxonLeds: 70}
+
+      # C7
+      - { addr: '::1 11310', gridcoordinate: "C7", x: 1, y : 5, numAxonLeds: 70}
+      - { addr: '::1 11311', gridcoordinate: "C7", x: 1, y : 5, numAxonLeds: 70}
+
+      # E7
+      - { addr: '::1 11312', gridcoordinate: "E7", x: 3, y : 5, numAxonLeds: 70}
+
+      # E6
+      - { addr: '::1 11313', gridcoordinate: "E6", x: 3, y : 4, numAxonLeds: 70}
+      - { addr: '::1 11314', gridcoordinate: "E6", x: 3, y : 4, numAxonLeds: 70}
+
+      # unused
+#      - { addr: '::1 11200', gridcoordinate: "n/a", x: 1, y : 1, numAxonLeds: 70}
+#      - { addr: '::1 11200', gridcoordinate: "n/a", x: 1, y : 1, numAxonLeds: 70}
+
+#      - { addr: '::1 11200', gridcoordinate: "n/a", x: 1, y : 1, numAxonLeds: 70}
+#      - { addr: '::1 11200', gridcoordinate: "n/a", x: 1, y : 1, numAxonLeds: 70}
+#      - { addr: '::1 11200', gridcoordinate: "n/a", x: 1, y : 1, numAxonLeds: 70}
+#      - { addr: '::1 11200', gridcoordinate: "n/a", x: 1, y : 1, numAxonLeds: 70}
