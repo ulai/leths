@@ -106,7 +106,7 @@ omegas:
 
 
   neuron:
-    movingAverageCount: 20 # Number of frames or moving average
+    movingAverageCount: 20 # Number of frames for moving average
     threshold: 250 # ad threshold to fire neuron
     numBodyLeds: 70
     neurons:
