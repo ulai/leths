@@ -4,3 +4,15 @@
   <button ng-click="startScroll()">start</button>
   <button ng-click="stopScroll()">stop</button>
 </p>
+<table class="u-full-width">
+  <thead>
+    <tr>
+      <th ng-repeat="c in ['','A','B','C','D','E','F']">{{c}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="r in [1,2,3,4,5,6,7,8]">
+      <td ng-repeat="c in ['', 'A','B','C','D','E','F']">{{c}}{{r}}</th>
+    </tr>
+  </tbody>
+</table>
