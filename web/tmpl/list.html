@@ -6,6 +6,7 @@
       <tr>
         <th>id</th>
         <th>online</th>
+        <th>coord</td>
         <th>addr</th>
         <th>mac</th>
         <th>ivp4</th>
@@ -16,6 +17,7 @@
       <tr ng-repeat="c in stats.clients[t] track by $index" style="color:{{c.online ? 'black':'red'}}">
         <td>{{$index}}</td>
         <td>{{c.online}}</td>
+        <td>{{c.device.gridcoordinate}}</td>
         <td>{{c.device.addr}}</td>
         <td>{{c.device.status.macaddress}}</td>
         <td>{{c.device.status.ipv4}}</td>

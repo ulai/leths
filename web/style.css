@@ -1,3 +1,6 @@
+body {
+  margin: 7px;
+}
 .lightsim ul {
   list-style:none; border:0; float:left; width:150px
 }

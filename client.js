@@ -104,7 +104,7 @@ function getCommand(cmd) {
 class Client extends EventEmitter {
   constructor(device, ws, args, init) {
     super()
-    this.log = require('./logger').getLogger(`client.${device.addr}`)
+    this.log = require('./logger').getLogger(`client.${device.addr} - ${device.gridcoordinate}`)
     this.online = false
     this.device = device
     this.ws = ws

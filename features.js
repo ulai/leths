@@ -27,7 +27,7 @@ module.exports = {
       })
     }, 10, {leading: false, trailing: true})
     _.each(devices.texts, device => {
-      var client = new Client(device, ws, {'text': device.text}, () => {
+      var client = new Client(device, ws, {'gridcoordinate': device.gridcoordinate, 'text': device.text }, () => {
         if(_.every(clients.text, 'online')) {
           startScroll()
         }
@@ -38,7 +38,7 @@ module.exports = {
   initLight: (devices, clients, config, ws) => {
     let pos = {x: 0, y: 0}
     _.each(devices.lights, device => {
-      var client = new Client(device, ws, {light: 1})
+      var client = new Client(device, ws, {'gridcoordinate': device.gridcoordinate, 'light': 1})
       client.pos = _.clone(pos)
       pos.x++
       if(pos.x === devices.size.x) {
@@ -51,7 +51,7 @@ module.exports = {
   initNeuron: (devices, clients, config, ws)  => {
     var conf = config.omegas.neuron
     _.forOwn(devices.neurons, (device, i) => {
-      var client = new Client(device, ws, {'neuron' : {
+      var client = new Client(device, ws, {'gridcoordinate': device.gridcoordinate, 'neuron' : {
             movingAverageCount:conf.movingAverageCount,
             threshold:conf.threshold,
             numAxonLeds:device.numAxonLeds,
