@@ -61,8 +61,8 @@ module.exports = {
         log.info('on sensor')
         _.each(_.filter(clients.light,
           l => Math.abs(l.pos.x - device.x) < 2 && Math.abs(l.pos.y - device.y) < 2), c => {
-            c.send({cmd: 'fade', to: .5, time: 100})
-            timeouts.add(`lightFadeBack.${c.pos.x}.${c.pos.y}`, () => c.send({cmd: 'fade', to: 1, time: 1e3}), 10e3)
+            c.send({feature:'light', cmd: 'fade', to: .5, time: 100})
+            timeouts.add(`lightFadeBack.${c.pos.x}.${c.pos.y}`, () => c.send({feature:'light', cmd: 'fade', to: 1, time: 1e3}), 10e3)
           })
         mqtt.publish('neurons', {[i]: true})
         timeouts.add(`mqttReset.${i}`, () => {
@@ -78,15 +78,15 @@ module.exports = {
 
     var lightTimer, lightPos = 0, noiseTimer, waveTimer, wavePhi = 0
     ws.on('light', x => {
-      if(x.clear) _.each(clients.light, l => l.send({cmd: 'fade', to: 1, time: 0}))
+      if(x.clear) _.each(clients.light, l => l.send({feature:'light', cmd: 'fade', to: 1, time: 0}))
       if('tetris' in x) x.tetris ? tetris.resume() : tetris.pause()
       if('test' in x) {
         if(x.test && !lightTimer) {
           lightTimer = setInterval(() => {
             if(lightPos == clients.light.length) lightPos = 0
-            _.each(clients.light, l => l.send({cmd: 'fade', to: 1, time: 0}))
-            clients.light[lightPos++].send({cmd: 'fade', to: 0.5, time: 0})
-          }, 50)
+            _.each(clients.light, l => l.send({feature:'light', cmd: 'fade', to: 0, time: 0}))
+            clients.light[lightPos++].send({feature:'light', cmd: 'fade', to: 1, time: 0})
+          }, 100)
         } else {
           clearInterval(lightTimer)
           lightTimer = null
@@ -95,7 +95,7 @@ module.exports = {
       if('noise' in x) {
         if(x.noise && !noiseTimer) {
           noiseTimer = setInterval(() => {
-            _.each(clients.light, l => l.send({cmd: 'fade', to: Math.random(), time: 0}))
+            _.each(clients.light, l => l.send({feature:'light', cmd: 'fade', to: Math.random(), time: 0}))
           }, 50)
         } else {
           clearInterval(noiseTimer)
@@ -107,7 +107,7 @@ module.exports = {
           waveTimer = setInterval(() => {
             wavePhi += 0.1;
             _.each(clients.light, l => {
-              l.send({cmd: 'fade', to: Math.abs(Math.sin((l.pos.x / 10 * Math.PI) + wavePhi)), time: 0})
+              l.send({feature:'light', cmd: 'fade', to: Math.abs(Math.sin((l.pos.x / 10 * Math.PI) + wavePhi)), time: 0})
             })
           }, 50)
         } else {
