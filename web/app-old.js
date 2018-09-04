@@ -14,7 +14,7 @@ angular
     templateUrl: 'tmpl/index.html',
     controller: ['$scope', 'websocket', function($scope, websocket) {
       $scope.color = function(c, r) {
-        return _.every($scope.grid[c+r], 'online') ? 'green' : 'red';
+        return $scope.grid[c+r]===undefined ? '#BBB' : (_.every($scope.grid[c+r], 'online') ? 'green' : 'red');
       };
       websocket.on('stats', function(stats) { $scope.$apply(function() { $scope.stats = stats; }); });
     }]

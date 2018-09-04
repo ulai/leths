@@ -7,13 +7,13 @@
 <table class="u-full-width">
   <thead>
     <tr>
-      <th ng-repeat="c in ['','A','B','C','D','E','F']">{{c}}</th>
+      <th ng-repeat="c in ['','A','B','C','D','E','F', 'G']">{{c}}</th>
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="r in [1,2,3,4,5,6,7,8,9]">
+    <tr ng-repeat="r in [9,8,7,6,5,4,3,2,1]">
       <td>{{r}}</td>
-      <td ng-repeat="c in ['A','B','C','D','E','F']" style="background-color:{{color(c, r)}}">{{c}}{{r}}</td>
+      <td ng-repeat="c in ['A','B','C','D','E','F','G']" style="background-color:{{color(c, r)}}">{{c}}{{r}}</td>
     </tr>
   </tbody>
 </table>
