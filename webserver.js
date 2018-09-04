@@ -71,6 +71,12 @@ class WebServer extends EventEmitter {
         if(x.t) o.t = x.t
         _.each(clients.text, c => c.send(o))
       })
+      socket.on('textJson', x => {
+        log.info('textJson %j', x)
+        let o = {feature: 'text'}
+        o = _.merge(o, x)
+        _.each(clients.text, c => c.send(o))
+      })
       socket.on('fire', i => {
         log.info('fire %d', i)
         clients.neuron[i].send({feature: 'neuron', cmd: 'fire'});
