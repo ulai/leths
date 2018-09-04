@@ -1,5 +1,5 @@
 <p>
-  Text: <input type="text" ng-model="text" ng-trim="false">
+  Text: <input size="80" type="text" ng-model="text" ng-trim="false">
   <button ng-click="set('text',text)">set</button>
 </p>
 <p>
@@ -17,7 +17,7 @@
   <button ng-click="stopScroll()">stop</button>
 </p>
 <p>
-  json: <input type="text" ng-model="json">
+  json: <input size="80" type="text" ng-model="json">
   <button ng-click="send(json)">send</button>
 </p>
 <p>
@@ -27,11 +27,11 @@
 </p>
 <p>
   Color: <input type="color" ng-model="color">
-  <button ng-click="set('color', color | rgb)">set</button>
+  <button ng-click="set('color', color)">set</button>
 </p>
 <p>
   Backgroundcolor: <input type="color" ng-model="backgroundcolor">
-  <button ng-click="set('backgroundcolor', backgroundcolor | rgb)">set</button>
+  <button ng-click="set('backgroundcolor', backgroundcolor)">set</button>
 </p>
 <p>
   spacing: <input type="number" ng-model="spacing">
