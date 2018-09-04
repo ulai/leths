@@ -85,6 +85,10 @@ class WebServer extends EventEmitter {
         log.info('light %j', x)
         this.emit('light', x)
       })
+      socket.on('text', x => {
+        log.info('text %j', x)
+        this.emit('text', x)
+      })
     })
   }
 

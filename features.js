@@ -76,6 +76,11 @@ module.exports = {
     tetris.initialize(clients)
 
     var lightTimer, lightPos = 0, noiseTimer, waveTimer, wavePhi = 0
+    ws.on('text', x => {
+      if(x.textclear) _.each(clients.text, l => l.send({feature:'text', scene: { type:'text', label:'TEXT', wrapmode:3, sizetocontent:true }}))
+      if(x.scene) _.each(clients.text, l => l.send({feature:'text', scene:'scenes/'+x.scene+'.json'}))
+    })
+
     ws.on('light', x => {
       if(x.clear) _.each(clients.light, l => l.send({feature:'light', cmd: 'fade', to: 1, time: 0}))
       if('tetris' in x) x.tetris ? tetris.resume() : tetris.pause()
