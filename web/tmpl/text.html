@@ -3,15 +3,17 @@
   <button ng-click="set('text',text)">set</button>
 </p>
 <p>
-  stepx: <input type="number" ng-model="stepx">
+  Scene: <input type="text" ng-model="scene">
+  <button ng-click="set('scene', scene)">set</button>
+</p>
+<p>
+  Scroll: stepx: <input type="number" ng-model="stepx">
   stepy: <input type="number" ng-model="stepy">
   steps: <input type="number" ng-model="steps">
   interval: <input type="number" ng-model="interval">
   roundoffsets: <input type="checkbox" ng-model="roundoffsets">
   start: <input type="number" ng-model="start">
   <button ng-click="startScroll(stepx, stepy, steps, interval, roundoffsets, start)">start</button>
-</p>
-<p>
   <button ng-click="stopScroll()">stop</button>
 </p>
 <p>
@@ -19,7 +21,7 @@
   <button ng-click="send(json)">send</button>
 </p>
 <p>
-  to: <input type="number" ng-model="to">
+  Fade: to: <input type="number" ng-model="to">
   t: <input type="number" ng-model="t">
   <button ng-click="fade(to, t)">fade</button>
 </p>
