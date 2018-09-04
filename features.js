@@ -17,7 +17,6 @@ module.exports = {
       async c => { return new Promise(resolve => c.send({cmd: 'status'}, resolve)) })).then(status => {
         var offsetx = _.maxBy(_.values(_.groupBy(_.map(status, "features.text.scrolloffsetx"))),'length')[0]
         _.each(clients.text, c => c.send({feature: 'text', offsetx: offsetx}))
-        _.each(clients.text, c => c.send({feature: 'text', text: conf.defaultText}))
         _.each(conf.settings, s => {
           _.each(clients.text, c => c.send(_.merge({feature: 'text'}, s)))
         })
