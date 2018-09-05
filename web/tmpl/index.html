@@ -11,6 +11,13 @@
     </tr>
   </tbody>
 </table>
-<ul>
-  <li ng-repeat="c in offline track by $index">{{c}}</li>
-</ul>
+<p>Offline Modules</p>
+<div ng-repeat="t in ['text', 'light', 'neuron']">
+  {{t}}
+  <ul>
+    <li ng-repeat="c in stats.clients[t] | filter:{online: false}" style="color:red">
+      {{c.device.gridcoordinate}},
+      {{c.device.addr}}
+    </li>
+  </ul>
+</div>
