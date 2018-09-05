@@ -28,6 +28,7 @@ angular
       $scope.startScroll = (stepx, stepy, steps, interval, roundoffsets, start) => websocket.emit('startScroll', {stepx, stepy, steps, interval, roundoffsets, start})
       $scope.stopScroll = () => websocket.emit('stopScroll')
       $scope.fade = (to, t) => websocket.emit('fade', {to, t})
+      $scope.send = json => websocket.emit('textJson', JSON.parse(json))
     }]
   })
   $stateProvider.state('list', {
