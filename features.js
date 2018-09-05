@@ -17,7 +17,6 @@ module.exports = {
       async c => { return new Promise(resolve => c.send({cmd: 'status'}, resolve)) })).then(status => {
         var offsetx = _.maxBy(_.values(_.groupBy(_.map(status, "features.text.scrolloffsetx"))),'length')[0]
         _.each(clients.text, c => c.send({feature: 'text', offsetx: offsetx}))
-        _.each(clients.text, c => c.send({feature: 'text', text: conf.defaultText}))
         _.each(conf.settings, s => {
           _.each(clients.text, c => c.send(_.merge({feature: 'text'}, s)))
         })
@@ -77,6 +76,11 @@ module.exports = {
     tetris.initialize(clients)
 
     var lightTimer, lightPos = 0, noiseTimer, waveTimer, wavePhi = 0
+    ws.on('text', x => {
+      if(x.textclear) _.each(clients.text, l => l.send({feature:'text', scene: { type:'text', label:'TEXT', wrapmode:3, sizetocontent:true }}))
+      if(x.scene) _.each(clients.text, l => l.send({feature:'text', scene:'scenes/'+x.scene+'.json'}))
+    })
+
     ws.on('light', x => {
       if(x.clear) _.each(clients.light, l => l.send({feature:'light', cmd: 'fade', to: 1, time: 0}))
       if('tetris' in x) x.tetris ? tetris.resume() : tetris.pause()

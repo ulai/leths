@@ -7,11 +7,11 @@ default:
 
 omegas:
   text:
-    # defaultText: 'The quick brown fox jumps over the lazy dog +++ 0123456789+"*$%&/()=,;.:-_!?^~` +++ THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG +++ '
-    # defaultText: 'Benno Eddi Rolf - Wolf +++ Sue Claire Trine - Biene +++ '
-    defaultText: 'Des Menschen Seele  Gleicht dem Wasser:  Vom Himmel kommt es,  Zum Himmel steigt es,  Und wieder nieder  Zur Erde muss es.  Ewig wechselnd.  -  Strömt von der hohen,  Steilen Felsenwand  Der reine Strahl,  Dann stäubt er lieblich  In Wolkenwellen  Zum glatten Fels,  Und, leicht empfangen,  Wallt er verschleiernd,  Leisrauschend  Zur Tiefe nieder.  -  Ragen Klippen  Dem Sturz entgegen,  Schäumt er unmutig  Stufenweise  Zum Abgrund.  -  Im flachen Bette  Schleicht er das Wiesental hin,  Und in dem glatten See  Weiden ihr Antlitz  Alle Gestirne. - Wind ist der Welle  Lieblicher Buhler;  Wind rauscht von Grund aus  Schäumende Wogen.  -  Seele des Menschen  Wie gleichst du dem Wasser!  Schicksal des Menschen,  Wie gleichst du dem Wind!'
-    scrollSettings: { stepx: .25, stepy: 0, steps: -1, interval: 20, roundoffsets: true }
-    settings: [{color: 'ffffff'}]
+    settings: [{color: 'ffffff', text: 'Des Menschen Seele  Gleicht dem Wasser:  Vom Himmel kommt es,  Zum Himmel steigt es,  Und wieder nieder  Zur Erde muss es.  Ewig wechselnd.  -  Strömt von der hohen,  Steilen Felsenwand  Der reine Strahl,  Dann stäubt er lieblich  In Wolkenwellen  Zum glatten Fels,  Und, leicht empfangen,  Wallt er verschleiernd,  Leisrauschend  Zur Tiefe nieder.  -  Ragen Klippen  Dem Sturz entgegen,  Schäumt er unmutig  Stufenweise  Zum Abgrund.  -  Im flachen Bette  Schleicht er das Wiesental hin,  Und in dem glatten See  Weiden ihr Antlitz  Alle Gestirne. - Wind ist der Welle  Lieblicher Buhler;  Wind rauscht von Grund aus  Schäumende Wogen.  -  Seele des Menschen  Wie gleichst du dem Wasser!  Schicksal des Menschen,  Wie gleichst du dem Wind!' }]
+#    settings: [{color: 'ffffff', text: 'The quick brown fox jumps over the lazy dog +++ 0123456789+"*$%&/()=,;.:-_!?^~` +++ THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG +++ ' }]
+#    settings: [{color: 'ffffff', text: 'Benno Eddi Rolf - Wolf +++ Sue Claire Trine - Biene +++ '}]
+#    settings: [{ scene: 'scenes/rainbow.json' }]
+    scrollSettings: { stepx: 1, stepy: 0, steps: -1, interval: 25, roundoffsets: true }
     texts:
       # E9 (short LED, normal orientation -> should have short LED with short side at connector!
       - { addr: 'fe80::42a3:6bff:fec1:82b2', gridcoordinate: "E9", text: [ { cols: 72, offset: 0, orientation: 0 } ] }

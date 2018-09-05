@@ -67,8 +67,8 @@ class WebServer extends EventEmitter {
       socket.on('fade', x => {
         log.info('fade %j', x)
         let o = {feature: 'text', cmd: 'fade'}
-        if(x.to) o.to = x.to
-        if(x.t) o.t = x.t
+        if(x.to!==undefined) o.to = x.to
+        if(x.t!==undefined) o.t = x.t
         _.each(clients.text, c => c.send(o))
       })
       socket.on('textJson', x => {
@@ -84,6 +84,10 @@ class WebServer extends EventEmitter {
       socket.on('light', x => {
         log.info('light %j', x)
         this.emit('light', x)
+      })
+      socket.on('text', x => {
+        log.info('text %j', x)
+        this.emit('text', x)
       })
     })
   }

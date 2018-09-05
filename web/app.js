@@ -47,6 +47,8 @@ angular
       $scope.noise = b => websocket.emit('light', {noise: b})
       $scope.wave = b => websocket.emit('light', {wave: b})
       $scope.clear = b => websocket.emit('light', {clear: 1})
+      $scope.textclear = b => websocket.emit('text', {textclear: 1})
+      $scope.scene = s => websocket.emit('text', {scene: s})
       $scope.modules = _.times(35, x => {
         return `rgb(255,255,255)`
       })
