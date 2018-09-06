@@ -10,6 +10,12 @@ const _ = require('lodash'),
 module.exports = {
   initText: (devices, clients, config, ws) => {
     var conf = config.omegas.text
+    ws.on('text', x => {
+      if(x.textclear) _.each(clients.text, l => l.send({feature:'text', scene: { type:'text', label:'TEXT', wrapmode:3, sizetocontent:true }}))
+      if(x.scene) _.each(clients.text, l => l.send({feature:'text', scene: (x.scene.charAt(0)=='/' ? x.scene : (x.scene.charAt(0)=='{' ?  JSON.parse(x.scene) : 'scenes/'+x.scene+'.json'))}))
+      if(x.textdefault) _.each(conf.settings, s => {_.each(clients.text, l => l.send(_.merge({feature:'text'}, s)))})
+    })
+
     var startScroll = _.debounce(c => {
       _.each(clients.text, c => c.send({feature: 'text', cmd: 'stopscroll'}))
       Promise.all(
@@ -76,10 +82,6 @@ module.exports = {
     tetris.initialize(clients)
 
     var lightTimer, lightPos = 0, noiseTimer, waveTimer, wavePhi = 0
-    ws.on('text', x => {
-      if(x.textclear) _.each(clients.text, l => l.send({feature:'text', scene: { type:'text', label:'TEXT', wrapmode:3, sizetocontent:true }}))
-      if(x.scene) _.each(clients.text, l => l.send({feature:'text', scene: (x.scene.charAt(0)=='/' ? x.scene : (x.scene.charAt(0)=='{' ?  JSON.parse(x.scene) : 'scenes/'+x.scene+'.json'))}))
-    })
 
     ws.on('light', x => {
       if(x.clear) _.each(clients.light, l => l.send({feature:'light', cmd: 'fade', to: 1, time: 0}))

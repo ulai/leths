@@ -6,9 +6,11 @@
   Scene: <input type="text" ng-model="scene">
   <button ng-click="textscene(scene)">set</button>
   <button ng-click="textclear()">Clear</button>
+  <button ng-click="textdefault()">Default</button>
   <button ng-click="textscene('stepup')">StepUp</button>
   <button ng-click="textscene('pacman')">Pacman</button>
   <button ng-click="textscene('ghost')">Ghost</button>
+  <button ng-click="textscene('life')">Life</button>
   <button ng-click="textscene('rainbow')">Rainbow</button>
   <button ng-click="textscene('rain')">Rain</button>
   <button ng-click="textscene('snow')">Snow</button>
@@ -47,7 +49,4 @@
 <p>
   spacing: <input type="number" ng-model="spacing">
   <button ng-click="set('spacing', spacing)">set</button>
-</p>
-<p>
-  <button ng-click="textinit()">re-init</button>
 </p>

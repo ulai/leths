@@ -31,7 +31,7 @@ angular
       $scope.send = json => websocket.emit('textJson', JSON.parse(json))
       $scope.textclear = b => websocket.emit('text', {textclear: 1})
       $scope.textscene = s => websocket.emit('text', {scene: s})
-      $scope.textinit = () => websocket.emit('textinit')
+      $scope.textdefault = () => websocket.emit('text', {textdefault: 1})
     }]
   })
   $stateProvider.state('list', {
