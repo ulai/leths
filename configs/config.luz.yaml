@@ -44,7 +44,7 @@ omegas:
       - { addr: 'fe80::42a3:6bff:fec1:82a6', gridcoordinate: "A1", text: [ { cols: 47, offset: 695, orientation: 0 }, { cols: 24, offset: 742, orientation: 6 } ] }
 
       # B1
-#      - { addr: 'fe80::42a3:6bff:fec1:838d', gridcoordinate: "B1", text: [ { cols: 72, offset: 766, orientation: 0 } ] }
+      - { addr: 'fe80::42a3:6bff:fec1:838d', gridcoordinate: "B1", text: [ { cols: 72, offset: 766, orientation: 0 } ] }
       # C1
       - { addr: 'fe80::42a3:6bff:fec1:8298', gridcoordinate: "C1", text: [ { cols: 72, offset: 838, orientation: 0 } ] }
       # D1 (label inside?)
@@ -57,7 +57,7 @@ omegas:
       # luz test unit
 #      - { addr: 'fe80::42a3:6bff:fec1:8397', gridcoordinate: "B1", text: [ { cols: 72, offset: 766, orientation: 0 } ] }
 #      - { addr: 'fe80::4d2:eda4:a942:d178 11200', gridcoordinate: "B1", text: [ { cols: 72, offset: 766, orientation: 0 } ] }
-      - { addr: '::1 11200', gridcoordinate: "B1", text: [ { cols: 72, offset: 0, orientation: 0 } ] }
+#      - { addr: '::1 11200', gridcoordinate: "B1", text: [ { cols: 72, offset: 0, orientation: 0 } ] }
 
 
   light:
