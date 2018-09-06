@@ -7,3 +7,9 @@ body {
 .lightsim ul li{
   height:20px; width:28px; float:left; margin:0;
 }
+input.wide {
+  width:80%
+}
+input[type="number"] {
+  width: 84px;
+}

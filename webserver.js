@@ -89,6 +89,10 @@ class WebServer extends EventEmitter {
         log.info('text %j', x)
         this.emit('text', x)
       })
+      socket.on('textinit', () => {
+        log.info('text re-init')
+        // how???
+      })
     })
   }
 

@@ -12,51 +12,52 @@ omegas:
 #    settings: [{color: 'ffffff', text: 'Benno Eddi Rolf - Wolf +++ Sue Claire Trine - Biene +++ '}]
 #    settings: [{ scene: 'scenes/rainbow.json' }]
 #    settings: [{ scene: 'scenes/pactext.json' }]
+#    settings: [{ scene: 'scenes/stepup.json' }]
     scrollSettings: { stepx: 1, stepy: 0, steps: -1, interval: 25, roundoffsets: true }
     texts:
-      # E9 (short LED, normal orientation -> should have short LED with short side at connector!
-      - { addr: 'fe80::42a3:6bff:fec1:82b2', gridcoordinate: "E9", text: [ { cols: 72, offset: 0, orientation: 0 } ] }
-      # D9
-      - { addr: 'fe80::42a3:6bff:fec1:82b1', gridcoordinate: "D9", text: [ { cols: 72, offset: 72, orientation: 0 } ] }
-      # C9
-      - { addr: 'fe80::42a3:6bff:fec1:8262', gridcoordinate: "C9", text: [ { cols: 72, offset: 144, orientation: 0 } ] }
-      # B9 (long LED, reverse orientation, long)
-      - { addr: 'fe80::42a3:6bff:fec1:8253', gridcoordinate: "B9", text: [ { cols: 72, offset: 216, orientation: 6 } ] }
-
-      # A9 (Corner)
-      - { addr: 'fe80::42a3:6bff:fec1:8375', gridcoordinate: "A9", text: [ { cols: 47, offset: 312, orientation: 6 }, { cols: 24, offset: 288, orientation: 0 } ] }
-
-      # A8 (reverse orientation)
-#      - { addr: 'fe80::42a3:6bff:fec1:80e3', gridcoordinate: "A8", text: [ { cols: 48, offset: 359, orientation: 6 } ] }
-      # A7
-      - { addr: 'fe80::42a3:6bff:fec1:82a3', gridcoordinate: "A7", text: [ { cols: 48, offset: 407, orientation: 0 } ] }
-      # A6
-      - { addr: 'fe80::42a3:6bff:fec1:838a', gridcoordinate: "A6", text: [ { cols: 48, offset: 455, orientation: 0 }, { cols: 24, offset: 47, orientation: 6 } ] }
-      # A5
-      - { addr: 'fe80::42a3:6bff:fec1:828e', gridcoordinate: "A5", text: [ { cols: 48, offset: 503, orientation: 0 } ] }
-      # A4
-      - { addr: 'fe80::42a3:6bff:fec1:825c', gridcoordinate: "A4", text: [ { cols: 48, offset: 551, orientation: 0 } ] }
-      # A3
-      - { addr: 'fe80::42a3:6bff:fec1:828a', gridcoordinate: "A3", text: [ { cols: 48, offset: 599, orientation: 0 } ] }
-      # A2
-      - { addr: 'fe80::42a3:6bff:fec1:82a4', gridcoordinate: "A2", text: [ { cols: 48, offset: 647, orientation: 0 } ] }
-
-      # A1 (Corner)
-      - { addr: 'fe80::42a3:6bff:fec1:82a6', gridcoordinate: "A1", text: [ { cols: 47, offset: 695, orientation: 0 }, { cols: 24, offset: 742, orientation: 6 } ] }
-
-      # B1
-      - { addr: 'fe80::42a3:6bff:fec1:838d', gridcoordinate: "B1", text: [ { cols: 72, offset: 766, orientation: 0 } ] }
-      # C1
-#      - { addr: 'fe80::42a3:6bff:fec1:8298', gridcoordinate: "C1", text: [ { cols: 72, offset: 838, orientation: 0 } ] }
-      # D1 (label inside?)
-      - { addr: 'fe80::42a3:6bff:fec1:8567', gridcoordinate: "D1", text: [ { cols: 72, offset: 910, orientation: 0 } ] }
-      # E1
-      - { addr: 'fe80::42a3:6bff:fec1:8381', gridcoordinate: "E1", text: [ { cols: 72, offset: 982, orientation: 0 } ] }
-      # F1
-      - { addr: 'fe80::42a3:6bff:fec1:839f', gridcoordinate: "F1", text: [ { cols: 72, offset: 1054, orientation: 0 } ] }
+#       # E9 (short LED, normal orientation -> should have short LED with short side at connector!
+#       - { addr: 'fe80::42a3:6bff:fec1:82b2', gridcoordinate: "E9", text: [ { cols: 72, offset: 0, orientation: 0 } ] }
+#       # D9
+#       - { addr: 'fe80::42a3:6bff:fec1:82b1', gridcoordinate: "D9", text: [ { cols: 72, offset: 72, orientation: 0 } ] }
+#       # C9
+#       - { addr: 'fe80::42a3:6bff:fec1:8262', gridcoordinate: "C9", text: [ { cols: 72, offset: 144, orientation: 0 } ] }
+#       # B9 (long LED, reverse orientation, long)
+#       - { addr: 'fe80::42a3:6bff:fec1:8253', gridcoordinate: "B9", text: [ { cols: 72, offset: 216, orientation: 6 } ] }
+#
+#       # A9 (Corner)
+#       - { addr: 'fe80::42a3:6bff:fec1:8375', gridcoordinate: "A9", text: [ { cols: 47, offset: 312, orientation: 6 }, { cols: 24, offset: 288, orientation: 0 } ] }
+#
+#       # A8 (reverse orientation)
+# #      - { addr: 'fe80::42a3:6bff:fec1:80e3', gridcoordinate: "A8", text: [ { cols: 48, offset: 359, orientation: 6 } ] }
+#       # A7
+#       - { addr: 'fe80::42a3:6bff:fec1:82a3', gridcoordinate: "A7", text: [ { cols: 48, offset: 407, orientation: 0 } ] }
+#       # A6
+#       - { addr: 'fe80::42a3:6bff:fec1:838a', gridcoordinate: "A6", text: [ { cols: 48, offset: 455, orientation: 0 }, { cols: 24, offset: 47, orientation: 6 } ] }
+#       # A5
+#       - { addr: 'fe80::42a3:6bff:fec1:828e', gridcoordinate: "A5", text: [ { cols: 48, offset: 503, orientation: 0 } ] }
+#       # A4
+#       - { addr: 'fe80::42a3:6bff:fec1:825c', gridcoordinate: "A4", text: [ { cols: 48, offset: 551, orientation: 0 } ] }
+#       # A3
+#       - { addr: 'fe80::42a3:6bff:fec1:828a', gridcoordinate: "A3", text: [ { cols: 48, offset: 599, orientation: 0 } ] }
+#       # A2
+#       - { addr: 'fe80::42a3:6bff:fec1:82a4', gridcoordinate: "A2", text: [ { cols: 48, offset: 647, orientation: 0 } ] }
+#
+#       # A1 (Corner)
+#       - { addr: 'fe80::42a3:6bff:fec1:82a6', gridcoordinate: "A1", text: [ { cols: 47, offset: 695, orientation: 0 }, { cols: 24, offset: 742, orientation: 6 } ] }
+#
+#       # B1
+#       - { addr: 'fe80::42a3:6bff:fec1:838d', gridcoordinate: "B1", text: [ { cols: 72, offset: 766, orientation: 0 } ] }
+#       # C1
+# #      - { addr: 'fe80::42a3:6bff:fec1:8298', gridcoordinate: "C1", text: [ { cols: 72, offset: 838, orientation: 0 } ] }
+#       # D1 (label inside?)
+#       - { addr: 'fe80::42a3:6bff:fec1:8567', gridcoordinate: "D1", text: [ { cols: 72, offset: 910, orientation: 0 } ] }
+#       # E1
+#       - { addr: 'fe80::42a3:6bff:fec1:8381', gridcoordinate: "E1", text: [ { cols: 72, offset: 982, orientation: 0 } ] }
+#       # F1
+#       - { addr: 'fe80::42a3:6bff:fec1:839f', gridcoordinate: "F1", text: [ { cols: 72, offset: 1054, orientation: 0 } ] }
 
       # A8-pseudo luz test unit
-      - { addr: 'fe80::42a3:6bff:fec1:8397', gridcoordinate: "A8", text: [ { cols: 72, offset: 0, orientation: 0 } ] }
+      - { addr: 'fe80::42a3:6bff:fec1:8397', gridcoordinate: "A8", text: [ { cols: 72, offset: 72, orientation: 0 } ] }
       # C1-pseudo XCode lethd instance on MBP13 luz
       - { addr: '2a02:168:201d:59:43:cb3c:4389:30f7 11200', gridcoordinate: "C1", text: [ { cols: 72, offset: 0, orientation: 0 } ] }
 

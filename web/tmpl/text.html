@@ -1,10 +1,16 @@
 <p>
-  Text: <input size="80" type="text" ng-model="text" ng-trim="false">
+  Text: <input class="wide" type="text" ng-model="text" ng-trim="false">
   <button ng-click="set('text',text)">set</button>
 </p>
 <p>
   Scene: <input type="text" ng-model="scene">
-  <button ng-click="set('scene', scene)">set</button>
+  <button ng-click="textscene(scene)">set</button>
+  <button ng-click="textclear()">Clear</button>
+  <button ng-click="textscene('stepup')">StepUp</button>
+  <button ng-click="textscene('pactext')">Pacman</button>
+  <button ng-click="textscene('rainbow')">Rainbow</button>
+  <button ng-click="textscene('rain')">Rain</button>
+  <button ng-click="textscene('snow')">Snow</button>
 </p>
 <p>
   Scroll: stepx: <input type="number" ng-model="stepx">
@@ -17,7 +23,13 @@
   <button ng-click="stopScroll()">stop</button>
 </p>
 <p>
-  json: <input size="80" type="text" ng-model="json">
+  offsetx: <input type="number" ng-model="offsetx">
+  <button ng-click="set('offsetx', offsetx)">set</button>
+  offsety: <input type="number" ng-model="offsety">
+  <button ng-click="set('offsety', offsety)">set</button>
+</p>
+<p>
+  json: <input class="wide" type="text" ng-model="json">
   <button ng-click="send(json)">send</button>
 </p>
 <p>
@@ -28,8 +40,6 @@
 <p>
   Color: <input type="color" ng-model="color">
   <button ng-click="set('color', color)">set</button>
-</p>
-<p>
   Backgroundcolor: <input type="color" ng-model="backgroundcolor">
   <button ng-click="set('backgroundcolor', backgroundcolor)">set</button>
 </p>
@@ -38,10 +48,5 @@
   <button ng-click="set('spacing', spacing)">set</button>
 </p>
 <p>
-  offsetx: <input type="number" ng-model="offsetx">
-<button ng-click="set('offsetx', offsetx)">set</button>
-</p>
-<p>
-  offsety: <input type="number" ng-model="offsety">
-  <button ng-click="set('offsety', offsety)">set</button>
+  <button ng-click="textinit()">re-init</button>
 </p>

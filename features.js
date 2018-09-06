@@ -78,7 +78,7 @@ module.exports = {
     var lightTimer, lightPos = 0, noiseTimer, waveTimer, wavePhi = 0
     ws.on('text', x => {
       if(x.textclear) _.each(clients.text, l => l.send({feature:'text', scene: { type:'text', label:'TEXT', wrapmode:3, sizetocontent:true }}))
-      if(x.scene) _.each(clients.text, l => l.send({feature:'text', scene:'scenes/'+x.scene+'.json'}))
+      if(x.scene) _.each(clients.text, l => l.send({feature:'text', scene: (x.scene.charAt(0)=='/' ? x.scene : 'scenes/'+x.scene+'.json')}))
     })
 
     ws.on('light', x => {
