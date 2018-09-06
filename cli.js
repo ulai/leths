@@ -28,6 +28,10 @@ program
   .description('Copy lethd binary')
   .action(utils.copy)
 program
+  .command('shellcmd "<shell command>"')
+  .description('run shell command on each controller')
+  .action(utils.shellcmd)
+program
   .command('uci <settings> <cmd>')
   .description('Distribute uci settings: (a=b,c=d) cmd: executed afterwards')
   .action(utils.uci)
