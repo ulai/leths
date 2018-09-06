@@ -13,7 +13,10 @@ module.exports = {
     ws.on('text', x => {
       if(x.textclear) _.each(clients.text, l => l.send({feature:'text', scene: { type:'text', label:'TEXT', wrapmode:3, sizetocontent:true }}))
       if(x.scene) _.each(clients.text, l => l.send({feature:'text', scene: (x.scene.charAt(0)=='/' ? x.scene : (x.scene.charAt(0)=='{' ?  JSON.parse(x.scene) : 'scenes/'+x.scene+'.json'))}))
-      if(x.textdefault) _.each(conf.settings, s => {_.each(clients.text, l => l.send(_.merge({feature:'text'}, s)))})
+      if(x.textdefault) {
+        _.each(clients.text, l => l.send({feature:'text', scene: { type:'text', label:'TEXT', wrapmode:3, sizetocontent:true }}))
+        _.each(conf.settings, s => {_.each(clients.text, l => l.send(_.merge({feature:'text'}, s)))})
+      }
     })
 
     var startScroll = _.debounce(c => {
