@@ -7,7 +7,8 @@ default:
 
 omegas:
   text:
-    settings: [{color: 'ffffff', text: 'Des Menschen Seele  Gleicht dem Wasser:  Vom Himmel kommt es,  Zum Himmel steigt es,  Und wieder nieder  Zur Erde muss es.  Ewig wechselnd.  -  Strömt von der hohen,  Steilen Felsenwand  Der reine Strahl,  Dann stäubt er lieblich  In Wolkenwellen  Zum glatten Fels,  Und, leicht empfangen,  Wallt er verschleiernd,  Leisrauschend  Zur Tiefe nieder.  -  Ragen Klippen  Dem Sturz entgegen,  Schäumt er unmutig  Stufenweise  Zum Abgrund.  -  Im flachen Bette  Schleicht er das Wiesental hin,  Und in dem glatten See  Weiden ihr Antlitz  Alle Gestirne. - Wind ist der Welle  Lieblicher Buhler;  Wind rauscht von Grund aus  Schäumende Wogen.  -  Seele des Menschen  Wie gleichst du dem Wasser!  Schicksal des Menschen,  Wie gleichst du dem Wind!' }]
+    settings: [{color: 'ffffff', text: 'ETH Digital Platform +++ ' }]
+#    settings: [{color: 'ffffff', text: 'Des Menschen Seele  Gleicht dem Wasser:  Vom Himmel kommt es,  Zum Himmel steigt es,  Und wieder nieder  Zur Erde muss es.  Ewig wechselnd.  -  Strömt von der hohen,  Steilen Felsenwand  Der reine Strahl,  Dann stäubt er lieblich  In Wolkenwellen  Zum glatten Fels,  Und, leicht empfangen,  Wallt er verschleiernd,  Leisrauschend  Zur Tiefe nieder.  -  Ragen Klippen  Dem Sturz entgegen,  Schäumt er unmutig  Stufenweise  Zum Abgrund.  -  Im flachen Bette  Schleicht er das Wiesental hin,  Und in dem glatten See  Weiden ihr Antlitz  Alle Gestirne. - Wind ist der Welle  Lieblicher Buhler;  Wind rauscht von Grund aus  Schäumende Wogen.  -  Seele des Menschen  Wie gleichst du dem Wasser!  Schicksal des Menschen,  Wie gleichst du dem Wind!' }]
 #    settings: [{color: 'ffffff', text: 'The quick brown fox jumps over the lazy dog +++ 0123456789+"*$%&/()=,;.:-_!?^~` +++ THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG +++ ' }]
 #    settings: [{color: 'ffffff', text: 'Benno Eddi Rolf - Wolf +++ Sue Claire Trine - Biene +++ '}]
 #    settings: [{ scene: 'scenes/rainbow.json' }]
@@ -144,7 +145,7 @@ omegas:
 
       # E6
       - { addr: 'fe80::42a3:6bff:fec1:828d', gridcoordinate: "E6", x: 3, y : 4, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:82b5', gridcoordinate: "E6", x: 3, y : 4, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:82b5', gridcoordinate: "E6", x: 3, y : 4, numAxonLeds: 99}
 
       # unused
 #      - { addr: 'fe80::42a3:6bff:fec1:837b', gridcoordinate: "n/a", x: 1, y : 1, numAxonLeds: 70}

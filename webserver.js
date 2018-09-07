@@ -62,7 +62,7 @@ class WebServer extends EventEmitter {
     	})
       socket.on('stopScroll', () => {
         log.info('stopScroll')
-        _.each(clients.text, c => c.send({feature: 'text', cmd: 'stopscroll'}))
+        _.each(clients.text, c => c.send({feature: 'text', cmd: 'startscroll', steps: 0, start: (new Date).getTime() + 200}))
       })
       socket.on('fade', x => {
         log.info('fade %j', x)

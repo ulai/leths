@@ -70,12 +70,12 @@ module.exports = {
         _.each(_.filter(clients.light,
           l => Math.abs(l.pos.x - device.x) < 2 && Math.abs(l.pos.y - device.y) < 2), c => {
             c.send({feature:'light', cmd: 'fade', to: .5, time: 100})
-            timeouts.add(`lightFadeBack.${c.pos.x}.${c.pos.y}`, () => c.send({feature:'light', cmd: 'fade', to: 1, time: 1e3}), 10e3)
+            timeouts.add(`lightFadeBack.${c.pos.x}.${c.pos.y}`, () => c.send({feature:'light', cmd: 'fade', to: 1, time: 2e3}), 5e3)
           })
         mqtt.publish('neurons', {[i]: true})
         timeouts.add(`mqttReset.${i}`, () => {
           mqtt.publish('neurons', {[i]: false})
-        }, 10e3)
+        }, 1.5e3)
       })
       clients.neuron.push(client)
     })
