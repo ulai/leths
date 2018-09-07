@@ -9,7 +9,7 @@ class Mqtt {
     })
   }
   publish(topic, msg) {
-    log.info(`publish %s %j`, topic, msg)
+    log.debug(`publish %s %j`, topic, msg)
     this.client.publish(topic, JSON.stringify(msg))
   }
 }

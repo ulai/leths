@@ -66,7 +66,7 @@ module.exports = {
             numBodyLeds:conf.numBodyLeds,
       }})
       client.on('sensor', () => {
-        log.info('on sensor')
+        log.debug('on sensor')
         _.each(_.filter(clients.light,
           l => Math.abs(l.pos.x - device.x) < 2 && Math.abs(l.pos.y - device.y) < 2), c => {
             c.send({feature:'light', cmd: 'fade', to: .5, time: 100})
