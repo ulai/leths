@@ -17,11 +17,11 @@ return {
       drawBlock: b => {
         if(b.x < 0 || b.y < 0) return
         _.filter(clients.light, l => l.pos.x == b.x && l.pos.y == b.y)[0]
-          .send({feature:'light', cmd: 'fade', to: 1, time: 0})
+          .send({feature:'light', cmd: 'fade', to: 1, t: 0})
       },
       clear: () => {
         _.each(clients.light, l => {
-          l.send({feature:'light', cmd: 'fade', to: 0, time: 0})
+          l.send({feature:'light', cmd: 'fade', to: 0, t: 0})
         })
       }
     })
