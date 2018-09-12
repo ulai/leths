@@ -1,5 +1,4 @@
-const config = require('./config.js'),
-      log = require('./logger').getLogger('webserver'),
+const log = require('./logger').getLogger('weserver'),
       express = require('express'),
       app = express(),
       server = require('http').createServer(app),
@@ -18,9 +17,10 @@ const config = require('./config.js'),
 class WebServer extends EventEmitter {
   /**
     @param clients - list of clients {text: [{Client}], light: [], neuron: []}
+    @param utils . utils module
     @param {Integer} port - tcp port to listen
   */
-  constructor(clients, port) {
+  constructor(clients, utils, port) {
     super()
     server.listen(port)
 
@@ -92,6 +92,10 @@ class WebServer extends EventEmitter {
       socket.on('textdefault', () => {
         log.info('textdefault')
         this.emit('text', {textdefault:1})
+      })
+      socket.on('timeSync', () => {
+        log.info('timeSync')
+        utils.shellcmd('ntpd -dnqg -p leths-host')
       })
     })
   }

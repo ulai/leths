@@ -32,6 +32,7 @@ angular
       $scope.textclear = b => websocket.emit('text', {textclear: 1})
       $scope.textscene = s => websocket.emit('text', {scene: s})
       $scope.textdefault = () => websocket.emit('text', {textdefault: 1})
+      $scope.timeSync = () => websocket.emit('timeSync')
     }]
   })
   $stateProvider.state('list', {

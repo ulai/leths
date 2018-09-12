@@ -114,7 +114,7 @@ module.exports = {
     }))
   },
   /**
-    Copy executable lethd to omages with stopping and starting service
+    Executes command on each device
   */
   shellcmd(cmdstring) {
     _.each(config.getIps(), ip => shellcmd(ip, config.getConfig().default.interface, cmdstring).catch(err => {
