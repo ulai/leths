@@ -54,6 +54,7 @@ function ondata(data) {
     this.log.debug('ondata %j', data)
     if(data) {
       if('sensor' in data) {
+        this.log.info('sensor %j', data)
         this.emit('sensor')
       } else {
         if(this.receiveCb) this.receiveCb(data)
