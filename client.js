@@ -86,7 +86,7 @@ function send(cmd, cb) {
     this.log.warn('send %j fails, no connection', cmd)
     return
   }
-  this.log[cmd.cmd==='ping'?'debug':'info']('send %j', cmd)
+  this.log.debug('send %j', cmd)
   if(cb) {
     this.receiveCb = cb;
     this.timeout = setTimeout(() => {
