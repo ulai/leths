@@ -1,6 +1,7 @@
 "use strict"
 
 const _ = require('lodash'),
+      utils = require('./utils'),
       config = require('./config').getConfig(),
       log = require('./logger').getLogger('leths'),
       Client = require('./client'),
@@ -17,7 +18,7 @@ process.on('uncaughtException', (err) => {
   log.error(`uncaughtException: ${err.stack}`)
 })
 
-const ws = new WebServer(clients, settings.getWebServerPort())
+const ws = new WebServer(clients, utils, settings.getWebServerPort())
 
 log.info(
   'initialising: %d text, %d light, %d neuron',

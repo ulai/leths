@@ -1,5 +1,4 @@
-const config = require('./config.js'),
-      log = require('./logger').getLogger('webserver'),
+const log = require('./logger').getLogger('weserver'),
       express = require('express'),
       app = express(),
       server = require('http').createServer(app),
@@ -18,9 +17,10 @@ const config = require('./config.js'),
 class WebServer extends EventEmitter {
   /**
     @param clients - list of clients {text: [{Client}], light: [], neuron: []}
+    @param utils . utils module
     @param {Integer} port - tcp port to listen
   */
-  constructor(clients, port) {
+  constructor(clients, utils, port) {
     super()
     server.listen(port)
 
@@ -62,7 +62,7 @@ class WebServer extends EventEmitter {
     	})
       socket.on('stopScroll', () => {
         log.info('stopScroll')
-        _.each(clients.text, c => c.send({feature: 'text', cmd: 'stopscroll'}))
+        _.each(clients.text, c => c.send({feature: 'text', cmd: 'startscroll', steps: 0, start: (new Date).getTime() + 200}))
       })
       socket.on('fade', x => {
         log.info('fade %j', x)
@@ -92,6 +92,14 @@ class WebServer extends EventEmitter {
       socket.on('textdefault', () => {
         log.info('textdefault')
         this.emit('text', {textdefault:1})
+      })
+      socket.on('timeUnSync', () => {
+        log.info('timeUnSync 00:00')
+        utils.shellcmd('date -s 00:00')
+      })
+      socket.on('timeSync', () => {
+        log.info('timeSync ntp')
+        utils.shellcmd('ntpd -dnqg -p leths-host')
       })
     })
   }

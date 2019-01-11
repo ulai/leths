@@ -1,5 +1,7 @@
 const mqtt = require('mqtt'),
-      log = require('./logger').getLogger('mqtt')
+      log = require('./logger').getLogger('mqtt'),
+      _ = require("lodash"),
+      status = {}
 
 class Mqtt {
   constructor() {
@@ -9,8 +11,12 @@ class Mqtt {
     })
   }
   publish(topic, msg) {
-    log.info(`publish %s %j`, topic, msg)
-    this.client.publish(topic, JSON.stringify(msg))
+    log.debug(`publish %s %j`, topic, msg)
+    var key = _.keys(msg)[0]
+    if (status[key]!=msg[key]) {
+      status[key] = msg[key]
+      this.client.publish(topic, JSON.stringify(msg))
+    }
   }
 }
 
