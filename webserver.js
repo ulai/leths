@@ -93,8 +93,12 @@ class WebServer extends EventEmitter {
         log.info('textdefault')
         this.emit('text', {textdefault:1})
       })
+      socket.on('timeUnSync', () => {
+        log.info('timeUnSync 00:00')
+        utils.shellcmd('date -s 00:00')
+      })
       socket.on('timeSync', () => {
-        log.info('timeSync')
+        log.info('timeSync ntp')
         utils.shellcmd('ntpd -dnqg -p leths-host')
       })
       socket.on('mute', b => {
