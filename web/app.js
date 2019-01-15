@@ -42,7 +42,7 @@ angular
     controller: ['$scope', 'websocket', function($scope, websocket) {
       $scope.mute = b => {
         websocket.emit('mute', b)
-        if(!b) websocket.emit('groundlight', 0)
+        if(!b) websocket.emit('groundlight', 0.6)
       }
       $scope.set = b => websocket.emit('groundlight', b)
     }]
