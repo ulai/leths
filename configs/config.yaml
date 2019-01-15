@@ -111,41 +111,41 @@ omegas:
       # tested Neurons
 
       # D6
-      - { addr: 'fe80::42a3:6bff:fec1:82aa', gridcoordinate: "D6", x: 2, y : 4, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:82aa', gridcoordinate: "D6", x: 2, y : 4, numAxonLeds: 70, neighbours: [4,5,8,9,10,12]}
 
       # C4
-      - { addr: 'fe80::42a3:6bff:fec1:8378', gridcoordinate: "C4", x: 1, y : 2, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:829e', gridcoordinate: "C4", x: 1, y : 2, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:8378', gridcoordinate: "C4", x: 1, y : 2, numAxonLeds: 70, neighbours: [3,4,6,8,10,11]}
+      - { addr: 'fe80::42a3:6bff:fec1:829e', gridcoordinate: "C4", x: 1, y : 2, numAxonLeds: 70, neighbours: [5,8,12,13]}
 
       # C3
-      - { addr: 'fe80::42a3:6bff:fec1:8297', gridcoordinate: "C3", x: 1, y : 1, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:82af', gridcoordinate: "C3", x: 1, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:8297', gridcoordinate: "C3", x: 1, y : 1, numAxonLeds: 70, neighbours: [1,4,5,14]}
+      - { addr: 'fe80::42a3:6bff:fec1:82af', gridcoordinate: "C3", x: 1, y : 1, numAxonLeds: 70, neighbours: [0,1,3,5,6,10,11]}
 
       # C5
-      - { addr: 'fe80::42a3:6bff:fec1:82a9', gridcoordinate: "C5", x: 1, y : 3, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:82a9', gridcoordinate: "C5", x: 1, y : 3, numAxonLeds: 70, neighbours: [0,2,3,4,7,8,9,12]}
 
       # C6
-      - { addr: 'fe80::42a3:6bff:fec1:8395', gridcoordinate: "C6", x: 1, y : 4, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:8395', gridcoordinate: "C6", x: 1, y : 4, numAxonLeds: 70, neighbours: [1,4,10]}
 
       # D3
-      - { addr: 'fe80::42a3:6bff:fec1:82a1', gridcoordinate: "D3", x: 2, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:82a1', gridcoordinate: "D3", x: 2, y : 1, numAxonLeds: 70, neighbours: [5,8]}
 
       # E3
-      - { addr: 'fe80::42a3:6bff:fec1:82b7', gridcoordinate: "E3", x: 3, y : 1, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:82b7', gridcoordinate: "E3", x: 3, y : 1, numAxonLeds: 70, neighbours: [0,1,2,5,7,9,11,13,14]}
 
       # D5
-      - { addr: 'fe80::42a3:6bff:fec1:82a2', gridcoordinate: "D5", x: 2, y : 3, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:82a2', gridcoordinate: "D5", x: 2, y : 3, numAxonLeds: 70, neighbours: [0,5,8,12,13]}
 
       # C7
-      - { addr: 'fe80::42a3:6bff:fec1:8383', gridcoordinate: "C7", x: 1, y : 5, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:828b', gridcoordinate: "C7", x: 1, y : 5, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:8383', gridcoordinate: "C7", x: 1, y : 5, numAxonLeds: 70, neighbours: [0,1,4,6,11]}
+      - { addr: 'fe80::42a3:6bff:fec1:828b', gridcoordinate: "C7", x: 1, y : 5, numAxonLeds: 70, neighbours: [1,4,8,10,12]}
 
       # E7
-      - { addr: 'fe80::42a3:6bff:fec1:80ec', gridcoordinate: "E7", x: 3, y : 5, numAxonLeds: 70}
+      - { addr: 'fe80::42a3:6bff:fec1:80ec', gridcoordinate: "E7", x: 3, y : 5, numAxonLeds: 70, neighbours: [0,2,5,9,11,13,14]}
 
       # E6
-      - { addr: 'fe80::42a3:6bff:fec1:828d', gridcoordinate: "E6", x: 3, y : 4, numAxonLeds: 70}
-      - { addr: 'fe80::42a3:6bff:fec1:82b5', gridcoordinate: "E6", x: 3, y : 4, numAxonLeds: 99}
+      - { addr: 'fe80::42a3:6bff:fec1:828d', gridcoordinate: "E6", x: 3, y : 4, numAxonLeds: 70, neighbours: [2,8,9,12]}
+      - { addr: 'fe80::42a3:6bff:fec1:82b5', gridcoordinate: "E6", x: 3, y : 4, numAxonLeds: 99, neighbours: [3,8,12]}
 
       # unused
 #      - { addr: 'fe80::42a3:6bff:fec1:837b', gridcoordinate: "n/a", x: 1, y : 1, numAxonLeds: 70}

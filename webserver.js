@@ -79,7 +79,7 @@ class WebServer extends EventEmitter {
       })
       socket.on('fire', i => {
         log.info('fire %d', i)
-        clients.neuron[i].send({feature: 'neuron', cmd: 'fire'});
+        clients.neuron[i].send({feature: 'neuron', cmd: 'glow'});
       })
       socket.on('light', x => {
         log.info('light %j', x)
@@ -100,6 +100,14 @@ class WebServer extends EventEmitter {
       socket.on('timeSync', () => {
         log.info('timeSync ntp')
         utils.shellcmd('ntpd -dnqg -p leths-host')
+      })
+      socket.on('mute', b => {
+        log.info('mute %j', b)
+        this.emit('mute', b)
+      })
+      socket.on('groundlight', b => {
+        log.info('groundlight %j', b)
+        this.emit('groundlight', b)
       })
     })
   }

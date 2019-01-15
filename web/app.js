@@ -36,6 +36,17 @@ angular
       $scope.timeSync = () => websocket.emit('timeSync')
     }]
   })
+  $stateProvider.state('light', {
+    url: '/light',
+    templateUrl: 'tmpl/light.html',
+    controller: ['$scope', 'websocket', function($scope, websocket) {
+      $scope.mute = b => {
+        websocket.emit('mute', b)
+        if(!b) websocket.emit('groundlight', 0)
+      }
+      $scope.set = b => websocket.emit('groundlight', b)
+    }]
+  })
   $stateProvider.state('list', {
     url: '/list',
     templateUrl: 'tmpl/list.html',

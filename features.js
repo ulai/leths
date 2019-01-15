@@ -76,8 +76,17 @@ module.exports = {
         timeouts.add(`mqttReset.${i}`, () => {
           mqtt.publish('neurons', {[i]: false})
         }, 1.5e3)
+        _.each(device.neighbours, j => clients.neuron[j].send({feature:'neuron', cmd: 'glow'}))
       })
       clients.neuron.push(client)
+    })
+  },
+  initGroundLight: (clients, ws) => {
+    ws.on('mute', b => {
+      _.each(clients.neuron, n => n.send({feature:'neuron', cmd: 'mute', on: !!b}))
+    })
+    ws.on('groundlight', b => {
+      _.each(clients.light, l => l.send({feature:'light', cmd: 'fade', to: b, t: 0}))
     })
   },
   initLightTests: (clients, ws) => {
