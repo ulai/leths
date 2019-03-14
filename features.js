@@ -67,17 +67,25 @@ module.exports = {
       }})
       client.on('sensor', () => {
         log.debug('on sensor')
-        _.each(_.filter(clients.light,
-          l => Math.abs(l.pos.x - device.x) < 2 && Math.abs(l.pos.y - device.y) < 2), c => {
-            c.send({feature:'light', cmd: 'fade', to: .5, t: 100})
-            timeouts.add(`lightFadeBack.${c.pos.x}.${c.pos.y}`, () => c.send({feature:'light', cmd: 'fade', to: 1, t: 2e3}), 5e3)
-          })
+        _.each(clients.light, l => {
+          l.send({feature:'light', cmd: 'fade', to: .3, t: 100})
+          timeouts.add(`lightFadeBack.${l.pos.x}.${l.pos.y}`, () => l.send({feature:'light', cmd: 'fade', to: .6, t: 2e3}), 5e3)
+        })
         mqtt.publish('neurons', {[i]: true})
         timeouts.add(`mqttReset.${i}`, () => {
           mqtt.publish('neurons', {[i]: false})
         }, 1.5e3)
+        _.each(device.neighbours, j => clients.neuron[j].send({feature:'neuron', cmd: 'glow'}))
       })
       clients.neuron.push(client)
+    })
+  },
+  initGroundLight: (clients, ws) => {
+    ws.on('mute', b => {
+      _.each(clients.neuron, n => n.send({feature:'neuron', cmd: 'mute', on: !!b}))
+    })
+    ws.on('groundlight', b => {
+      _.each(clients.light, l => l.send({feature:'light', cmd: 'fade', to: b, t: 0}))
     })
   },
   initLightTests: (clients, ws) => {

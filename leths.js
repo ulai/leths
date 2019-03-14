@@ -34,4 +34,5 @@ _.each(config.omegas, (devices, type) => {
   }[type])(devices, clients, config, ws)
 })
 
+features.initGroundLight(clients, ws)
 features.initLightTests(clients, ws)

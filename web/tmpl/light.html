@@ -1,0 +1,9 @@
+<div class="container u-full-width u-max-full-width">
+  <div class="row">
+    <button ng-click="mute(1)">Mute neurons</button>
+    <button ng-click="mute(0)">Unmute neurons</button>
+  </div>
+  <div class="row">
+    <button ng-repeat="i in [0,1,2,3,4,5,6,7,8,9,10]" ng-click="set(i/10)">{{i*10}} %</button>
+  </div>
+</div>
