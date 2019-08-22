@@ -29,6 +29,9 @@ class WebServer extends EventEmitter {
     app.get('/', (req, res) => {
     	res.sendFile(__dirname + '/web/index.html')
     })
+    app.get('/admin', (req, res) => {
+    	res.sendFile(__dirname + '/web/admin.html')
+    })
 
     log.info(`server runs at http://127.0.0.1:${port}/`)
 
@@ -108,6 +111,10 @@ class WebServer extends EventEmitter {
       socket.on('groundlight', b => {
         log.info('groundlight %j', b)
         this.emit('groundlight', b)
+      })
+      socket.on('config', (c) => {
+        log.info('config')
+        this.emit('config', c)
       })
     })
   }

@@ -17,6 +17,9 @@ module.exports = {
     if(!this.config) this.config = getConfig()
     return this.config
   },
+  saveConfig(config) {
+    fs.writeFileSync('config.yaml', yaml.dump(config))
+  },
   getAddresses() {
     return _.map(_.flatten(_.at(this.getConfig(), ['omegas.text.texts', 'omegas.light.lights', 'omegas.neuron.neurons'])), 'addr')
   },
