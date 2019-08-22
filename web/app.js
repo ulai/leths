@@ -46,6 +46,17 @@ angular
       }
       $scope.setText = (t) => websocket.emit('set', {k: 'text', v: t})      
       $scope.startText = () => websocket.emit('startScroll', {})
+
+      $scope.set = (k,v) => websocket.emit('set', {k, v})
+      $scope.startScroll = (stepx, stepy, steps, interval, roundoffsets, start) => websocket.emit('startScroll', {stepx, stepy, steps, interval, roundoffsets, start})
+      $scope.stopScroll = () => websocket.emit('stopScroll')
+      $scope.fade = (to, t) => websocket.emit('fade', {to, t})
+      $scope.send = json => websocket.emit('textJson', JSON.parse(json))
+      $scope.textclear = b => websocket.emit('text', {textclear: 1})
+      $scope.textscene = s => websocket.emit('text', {scene: s})
+      $scope.textdefault = () => websocket.emit('text', {textdefault: 1})
+      $scope.timeUnSync = () => websocket.emit('timeUnSync')
+      $scope.timeSync = () => websocket.emit('timeSync')
     }]
   })   
   $stateProvider.state('text', {
