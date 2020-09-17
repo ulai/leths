@@ -1,0 +1,86 @@
+<button ui-sref="index()" class="btn-mode">simple mode</button>
+<p>Light Intensity:
+<div class="row">
+    <div class="one column" ng-repeat="i in [0,1,2,3,4,5,6,7,8,9,10]">
+    <button ng-click="light(i/10)" class="light">{{i*10}} %</button>
+    </div>
+</div>
+</p>
+<p>Scrolling LED Display:
+    <p>
+        Text: <input class="wide" type="text" ng-model="text" ng-trim="false">
+        <button ng-click="set('text',text)">set</button>
+      </p>
+      <p>
+        Scene: <input type="text" ng-model="scene">
+        <button ng-click="textscene(scene)">set</button>
+        <button ng-click="textclear()">Clear</button>
+        <button ng-click="textdefault()">Default</button>
+      </p>
+      <p>
+        Scenes: <button ng-click="textscene('stepup')">StepUp</button>
+        <button ng-click="textscene('pacman')">Pacman</button>
+        <button ng-click="textscene('ghost')">Ghost</button>
+        <button ng-click="textscene('life')">Life</button>
+        <button ng-click="textscene('rainbow')">Rainbow</button>
+        <button ng-click="textscene('rain')">Rain</button>
+        <button ng-click="textscene('snow')">Snow</button>
+      </p>
+      <p>
+        Scroll: stepx: <input type="number" ng-model="stepx">
+        stepy: <input type="number" ng-model="stepy">
+        steps: <input type="number" ng-model="steps">
+        interval: <input type="number" ng-model="interval">
+        roundoffsets: <input type="checkbox" ng-model="roundoffsets">
+        start: <input type="number" ng-model="start">
+        <button ng-click="startScroll(stepx, stepy, steps, interval, roundoffsets, start)">start</button>
+        <button ng-click="stopScroll()">stop</button>
+      </p>
+      <p>
+        offsetx: <input type="number" ng-model="offsetx">
+        <button ng-click="set('offsetx', offsetx)">set</button>
+        offsety: <input type="number" ng-model="offsety">
+        <button ng-click="set('offsety', offsety)">set</button>
+      </p>
+      <p>
+        Color: <input type="color" ng-model="color">
+        <button ng-click="set('color', color)">set</button>
+        Backgroundcolor: <input type="color" ng-model="backgroundcolor">
+        <button ng-click="set('backgroundcolor', backgroundcolor)">set</button>
+      </p>
+      <p>
+        Fade: to: <input type="number" ng-model="to">
+        t: <input type="number" ng-model="t">
+        <button ng-click="fade(to, t)">fade</button>
+      </p>
+      <p>
+        JSON: <input class="wide" type="text" ng-model="json">
+        <button ng-click="send(json)">send</button>
+      </p>
+      <p>
+        spacing: <input type="number" ng-model="spacing">
+        <button ng-click="set('spacing', spacing)">set</button>
+      </p>
+      <p>
+        <button ng-click="timeUnSync()">time set 00:00</button>
+        <button ng-click="timeSync()">time sync ntp</button>
+      </p>
+</p>
+<p>Platform Setup:
+<table class="u-full-width">
+    <thead>
+    <tr>
+        <th ng-repeat="c in ['','A','B','C','D','E','F', 'G']">{{c}}</th>
+    </tr>
+    </thead>  
+    <tbody>
+    <tr ng-repeat="r in [9,8,7,6,5,4,3,2,1]">
+        <td>{{r}}</td>
+        <td ng-repeat="c in ['A','B','C','D','E','F','G']">
+            <button ng-click="mute(c, r)">
+                {{ client(c,r).c.device.mute ? 'disabled' : 'enabled' }}</button></td>
+    </tr>
+    </tbody>
+</table>
+</p>
+<button ng-click="save()">save</button>

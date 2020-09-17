@@ -109,9 +109,15 @@ class Client extends EventEmitter {
     this.online = false
     this.device = device
     this.ws = ws
+    if(device.mute) {
+      this.online = true;
+      this.mute = true;
+      return
+    }
     connect.bind(this)(device, args, init)
   }
   send(cmd, cb) {
+    if(this.mute) return
     send.bind(this)(cmd, cb)
     if(cmd.cmd === 'fade') {
       this.ws.light(cmd.to, this.pos)

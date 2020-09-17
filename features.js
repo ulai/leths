@@ -5,7 +5,8 @@ const _ = require('lodash'),
       mqtt = new (require('./mqtt')),
       timeouts = require('./timeouts'),
       blockrain = require('./blockrain'),
-      log = require('./logger').getLogger('features')
+      log = require('./logger').getLogger('features'),
+      saveConfig = require('./config').saveConfig
 
 module.exports = {
   initText: (devices, clients, config, ws) => {
@@ -80,12 +81,21 @@ module.exports = {
       clients.neuron.push(client)
     })
   },
-  initGroundLight: (clients, ws) => {
+  initMisc: (clients, config, ws) => {
     ws.on('mute', b => {
       _.each(clients.neuron, n => n.send({feature:'neuron', cmd: 'mute', on: !!b}))
     })
     ws.on('groundlight', b => {
       _.each(clients.light, l => l.send({feature:'light', cmd: 'fade', to: b, t: 0}))
+    })
+    ws.on('config', c => {
+      if(c.save) {
+        saveConfig(config)
+        process.exit()    
+      }
+      if(c.mute) {
+        _.find(config.omegas[c.mute.t][c.mute.t+'s'], {'addr': c.mute.c.device.addr}).mute = c.mute.b;
+      }
     })
   },
   initLightTests: (clients, ws) => {

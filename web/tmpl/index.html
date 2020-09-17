@@ -1,23 +1,33 @@
-<table class="u-full-width">
-  <thead>
-    <tr>
-      <th ng-repeat="c in ['','A','B','C','D','E','F', 'G']">{{c}}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="r in [9,8,7,6,5,4,3,2,1]">
-      <td>{{r}}</td>
-      <td ng-repeat="c in ['A','B','C','D','E','F','G']" style="background-color:{{color(c, r)}}">{{c}}{{r}}</td>
-    </tr>
-  </tbody>
-</table>
-<p>Offline Modules</p>
-<div ng-repeat="t in ['text', 'light', 'neuron']">
-  {{t}}
-  <ul>
-    <li ng-repeat="c in stats.clients[t] | filter:{online: false}" style="color:red">
-      {{c.device.gridcoordinate}},
-      {{c.device.addr}}
-    </li>
-  </ul>
+<button ui-sref="advanced()" class="btn-mode">advanced mode</button>
+<p>Light Intensity:
+<div class="row">
+  <div class="one column" ng-repeat="i in [0,1,2,3,4,5,6,7,8,9,10]">
+    <button ng-click="light(i/10)" class="light">{{i*10}} %</button>
+  </div>
 </div>
+</p>
+<p>Scrolling LED Display:
+  <p>
+    Text: <input class="wide" type="text" ng-model="text" ng-trim="false">
+    <button ng-click="setText(text)">set</button>
+  </p>
+  <p>
+    <button ng-click="startText()">start</button>
+    <button ng-click="startText()">stop</button>
+  </p>
+</p>
+<p>Check:
+  <table class="u-full-width">
+    <thead>
+      <tr>
+        <th ng-repeat="c in ['','A','B','C','D','E','F', 'G']">{{c}}</th>
+      </tr>
+    </thead>  
+    <tbody>
+      <tr ng-repeat="r in [9,8,7,6,5,4,3,2,1]">
+        <td>{{r}}</td>
+        <td ng-repeat="c in ['A','B','C','D','E','F','G']" style="background-color:{{color(c, r)}}">{{c}}{{r}}</td>
+      </tr>
+    </tbody>
+  </table>
+</p>

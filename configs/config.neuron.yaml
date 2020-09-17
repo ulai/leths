@@ -1,0 +1,158 @@
+# Configuration for leths server
+# The server connects to omegas an initializes them with different
+# features. The connection is via ipv6 local link addresses.
+default:
+  interface: enp1s0 # the interface for ipv6 local
+  port: 11200 # the default port the lethd api listens on
+
+omegas:
+  text:
+#    settings: [{color: 'ffffff', text: 'ETH Digital Platform +++ ' }]
+    settings: [{color: 'ffffff', text: 'ETH meets #worldwebforum +++ ' }]
+#    settings: [{color: 'ffffff', text: 'Des Menschen Seele  Gleicht dem Wasser:  Vom Himmel kommt es,  Zum Himmel steigt es,  Und wieder nieder  Zur Erde muss es.  Ewig wechselnd.  -  Strömt von der hohen,  Steilen Felsenwand  Der reine Strahl,  Dann stäubt er lieblich  In Wolkenwellen  Zum glatten Fels,  Und, leicht empfangen,  Wallt er verschleiernd,  Leisrauschend  Zur Tiefe nieder.  -  Ragen Klippen  Dem Sturz entgegen,  Schäumt er unmutig  Stufenweise  Zum Abgrund.  -  Im flachen Bette  Schleicht er das Wiesental hin,  Und in dem glatten See  Weiden ihr Antlitz  Alle Gestirne. - Wind ist der Welle  Lieblicher Buhler;  Wind rauscht von Grund aus  Schäumende Wogen.  -  Seele des Menschen  Wie gleichst du dem Wasser!  Schicksal des Menschen,  Wie gleichst du dem Wind!' }]
+#    settings: [{color: 'ffffff', text: 'The quick brown fox jumps over the lazy dog +++ 0123456789+"*$%&/()=,;.:-_!?^~` +++ THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG +++ ' }]
+#    settings: [{color: 'ffffff', text: 'Benno Eddi Rolf - Wolf +++ Sue Claire Trine - Biene +++ '}]
+#    settings: [{ scene: 'scenes/rainbow.json' }]
+    scrollSettings: { stepx: 1, stepy: 0, steps: -1, interval: 25, roundoffsets: true }
+    texts:
+      # E9 (short LED, normal orientation -> should have short LED with short side at connector!
+      - { addr: 'fe80::42a3:6bff:fec1:82b2', gridcoordinate: "E9", text: [ { cols: 72, offset: 0, orientation: 0 } ] }
+      # D9
+      - { addr: 'fe80::42a3:6bff:fec1:82b1', gridcoordinate: "D9", text: [ { cols: 72, offset: 72, orientation: 0 } ] }
+      # C9
+      - { addr: 'fe80::42a3:6bff:fec1:8262', gridcoordinate: "C9", text: [ { cols: 72, offset: 144, orientation: 0 } ] }
+      # B9 (long LED, reverse orientation, long)
+      - { addr: 'fe80::42a3:6bff:fec1:8253', gridcoordinate: "B9", text: [ { cols: 72, offset: 216, orientation: 6 } ] }
+
+      # A9 (Corner)
+      - { addr: 'fe80::42a3:6bff:fec1:8375', gridcoordinate: "A9", text: [ { cols: 47, offset: 312, orientation: 6 }, { cols: 24, offset: 288, orientation: 0 } ] }
+
+      # A8 (reverse orientation)
+      - { addr: 'fe80::42a3:6bff:fec1:80e3', gridcoordinate: "A8", text: [ { cols: 48, offset: 359, orientation: 6 } ] }
+      # A7
+      - { addr: 'fe80::42a3:6bff:fec1:82a3', gridcoordinate: "A7", text: [ { cols: 48, offset: 407, orientation: 0 } ] }
+      # A6
+      - { addr: 'fe80::42a3:6bff:fec1:838a', gridcoordinate: "A6", text: [ { cols: 48, offset: 455, orientation: 0 }, { cols: 24, offset: 47, orientation: 6 } ] }
+      # A5
+      - { addr: 'fe80::42a3:6bff:fec1:828e', gridcoordinate: "A5", text: [ { cols: 48, offset: 503, orientation: 0 } ] }
+      # A4
+      - { addr: 'fe80::42a3:6bff:fec1:825c', gridcoordinate: "A4", text: [ { cols: 48, offset: 551, orientation: 0 } ] }
+      # A3
+      - { addr: 'fe80::42a3:6bff:fec1:828a', gridcoordinate: "A3", text: [ { cols: 48, offset: 599, orientation: 0 } ] }
+      # A2
+      - { addr: 'fe80::42a3:6bff:fec1:82a4', gridcoordinate: "A2", text: [ { cols: 48, offset: 647, orientation: 0 } ] }
+
+      # A1 (Corner)
+      - { addr: 'fe80::42a3:6bff:fec1:82a6', gridcoordinate: "A1", text: [ { cols: 47, offset: 695, orientation: 0 }, { cols: 24, offset: 742, orientation: 6 } ] }
+
+      # B1
+      - { addr: 'fe80::42a3:6bff:fec1:838d', gridcoordinate: "B1", text: [ { cols: 72, offset: 766, orientation: 0 } ] }
+      # C1
+      - { addr: 'fe80::42a3:6bff:fec1:8298', gridcoordinate: "C1", text: [ { cols: 72, offset: 838, orientation: 0 } ] }
+      # D1 (label inside?)
+      - { addr: 'fe80::42a3:6bff:fec1:8567', gridcoordinate: "D1", text: [ { cols: 72, offset: 910, orientation: 0 } ] }
+      # E1
+      - { addr: 'fe80::42a3:6bff:fec1:8381', gridcoordinate: "E1", text: [ { cols: 72, offset: 982, orientation: 0 } ] }
+      # F1
+      - { addr: 'fe80::42a3:6bff:fec1:839f', gridcoordinate: "F1", text: [ { cols: 72, offset: 1054, orientation: 0 } ] }
+
+
+  light:
+    size: {x: 5, y: 7} # (N, M)
+    lights: # starting at x=0, y=0 -> x=N, y=0 -> x=1, y=1 ...
+      # row 0 -> y=0
+      - { addr: 'fe80::42a3:6bff:fec1:8054', gridcoordinate: "B2" }
+      - { addr: 'fe80::42a3:6bff:fec1:8069', gridcoordinate: "C2" }
+      - { addr: 'fe80::42a3:6bff:fec1:827f', gridcoordinate: "D2" }
+      - { addr: 'fe80::42a3:6bff:fec1:8066', gridcoordinate: "E2" }
+      - { addr: 'fe80::42a3:6bff:fec1:8289', gridcoordinate: "F2" }
+      # row 0 -> y=1
+      - { addr: 'fe80::42a3:6bff:fec1:8390', gridcoordinate: "B3"  }
+      - { addr: 'fe80::42a3:6bff:fec1:7ff1', gridcoordinate: "C3"  }
+      - { addr: 'fe80::42a3:6bff:fec1:82ad', gridcoordinate: "D3"  }
+      - { addr: 'fe80::42a3:6bff:fec1:808b', gridcoordinate: "E3"  }
+      - { addr: 'fe80::42a3:6bff:fec1:8063', gridcoordinate: "F3"  }
+      # row 0 -> y=2
+      - { addr: 'fe80::42a3:6bff:fec1:8103', gridcoordinate: "B4"  }
+      - { addr: 'fe80::42a3:6bff:fec1:8292', gridcoordinate: "C4"  }
+      - { addr: 'fe80::42a3:6bff:fec1:8003', gridcoordinate: "D4"  }
+      - { addr: 'fe80::42a3:6bff:fec1:8006', gridcoordinate: "E4"  }
+      - { addr: 'fe80::42a3:6bff:fec1:832d', gridcoordinate: "F4"  }
+      # row 0 -> y=3
+      - { addr: 'fe80::42a3:6bff:fec1:8036', gridcoordinate: "B5"  }
+      - { addr: 'fe80::42a3:6bff:fec1:837e', gridcoordinate: "C5"  }
+      - { addr: 'fe80::42a3:6bff:fec1:82a0', gridcoordinate: "D5"  }
+      - { addr: 'fe80::42a3:6bff:fec1:7ffa', gridcoordinate: "E5"  }
+      - { addr: 'fe80::42a3:6bff:fec1:800f', gridcoordinate: "F5"  }
+      # row 0 -> y=4
+      - { addr: 'fe80::42a3:6bff:fec1:8018', gridcoordinate: "B6"  }
+      - { addr: 'fe80::42a3:6bff:fec1:8407', gridcoordinate: "C6"  }
+      - { addr: 'fe80::42a3:6bff:fec1:803c', gridcoordinate: "D6"  }
+      - { addr: 'fe80::42a3:6bff:fec1:8084', gridcoordinate: "E6"  }
+      - { addr: 'fe80::42a3:6bff:fec1:8290', gridcoordinate: "F6"  }
+      # row 0 -> y=5
+      - { addr: 'fe80::42a3:6bff:fec1:8295', gridcoordinate: "B7"  }
+      - { addr: 'fe80::42a3:6bff:fec1:84a4', gridcoordinate: "C7"  }
+      - { addr: 'fe80::42a3:6bff:fec1:8385', gridcoordinate: "D7"  }
+      - { addr: 'fe80::42a3:6bff:fec1:80f5', gridcoordinate: "E7"  }
+      - { addr: 'fe80::42a3:6bff:fec1:80c8', gridcoordinate: "F7"  }
+      # row 0 -> y=6
+      - { addr: 'fe80::42a3:6bff:fec1:82c7', gridcoordinate: "B8"  }
+      - { addr: 'fe80::42a3:6bff:fec1:8042', gridcoordinate: "C8"  }
+      - { addr: 'fe80::42a3:6bff:fec1:82a8', gridcoordinate: "D8"  }
+      - { addr: 'fe80::42a3:6bff:fec1:805d', gridcoordinate: "E8"  }
+      - { addr: 'fe80::42a3:6bff:fec1:8000', gridcoordinate: "F8"  }
+
+
+  neuron:
+    movingAverageCount: 20 # Number of frames for moving average
+    threshold: 250 # ad threshold to fire neuron
+    numBodyLeds: 70
+    neurons:
+      # tested Neurons
+
+      # D6
+      - { addr: 'fe80::42a3:6bff:fec1:82aa', gridcoordinate: "D6", x: 2, y : 4, numAxonLeds: 70, neighbours: [4,5,8,9,10,12]}
+
+      # C4
+      - { addr: 'fe80::42a3:6bff:fec1:8378', gridcoordinate: "C4", x: 1, y : 2, numAxonLeds: 70, neighbours: [3,4,6,8,10,11]}
+      - { addr: 'fe80::42a3:6bff:fec1:829e', gridcoordinate: "C4", x: 1, y : 2, numAxonLeds: 70, neighbours: [5,8,12,13]}
+
+      # C3
+      - { addr: 'fe80::42a3:6bff:fec1:8297', gridcoordinate: "C3", x: 1, y : 1, numAxonLeds: 70, neighbours: [1,4,5,14]}
+      - { addr: 'fe80::42a3:6bff:fec1:82af', gridcoordinate: "C3", x: 1, y : 1, numAxonLeds: 70, neighbours: [0,1,3,5,6,10,11]}
+
+      # C5
+      - { addr: 'fe80::42a3:6bff:fec1:82a9', gridcoordinate: "C5", x: 1, y : 3, numAxonLeds: 70, neighbours: [0,2,3,4,7,8,9,12]}
+
+      # C6
+      - { addr: 'fe80::42a3:6bff:fec1:8395', gridcoordinate: "C6", x: 1, y : 4, numAxonLeds: 70, neighbours: [1,4,10]}
+
+      # D3
+      - { addr: 'fe80::42a3:6bff:fec1:82a1', gridcoordinate: "D3", x: 2, y : 1, numAxonLeds: 70, neighbours: [5,8]}
+
+      # E3
+      - { addr: 'fe80::42a3:6bff:fec1:82b7', gridcoordinate: "E3", x: 3, y : 1, numAxonLeds: 70, neighbours: [0,1,2,5,7,9,11,13,14]}
+
+      # D5
+      - { addr: 'fe80::42a3:6bff:fec1:82a2', gridcoordinate: "D5", x: 2, y : 3, numAxonLeds: 70, neighbours: [0,5,8,12,13]}
+
+      # C7
+      - { addr: 'fe80::42a3:6bff:fec1:8383', gridcoordinate: "C7", x: 1, y : 5, numAxonLeds: 70, neighbours: [0,1,4,6,11]}
+      - { addr: 'fe80::42a3:6bff:fec1:828b', gridcoordinate: "C7", x: 1, y : 5, numAxonLeds: 70, neighbours: [1,4,8,10,12]}
+
+      # E7
+      - { addr: 'fe80::42a3:6bff:fec1:80ec', gridcoordinate: "E7", x: 3, y : 5, numAxonLeds: 70, neighbours: [0,2,5,9,11,13,14]}
+
+      # E6
+      - { addr: 'fe80::42a3:6bff:fec1:828d', gridcoordinate: "E6", x: 3, y : 4, numAxonLeds: 70, neighbours: [2,8,9,12]}
+      - { addr: 'fe80::42a3:6bff:fec1:82b5', gridcoordinate: "E6", x: 3, y : 4, numAxonLeds: 99, neighbours: [3,8,12]}
+
+      # unused
+#      - { addr: 'fe80::42a3:6bff:fec1:837b', gridcoordinate: "n/a", x: 1, y : 1, numAxonLeds: 70}
+#      - { addr: 'fe80::42a3:6bff:fec1:837b', gridcoordinate: "n/a", x: 1, y : 1, numAxonLeds: 70}
+
+#      - { addr: 'fe80::42a3:6bff:fec1:82ac', gridcoordinate: "n/a", x: 1, y : 1, numAxonLeds: 70}
+#      - { addr: 'fe80::42a3:6bff:fec1:82a7', gridcoordinate: "n/a", x: 1, y : 1, numAxonLeds: 70}
+#      - { addr: 'fe80::42a3:6bff:fec1:8296', gridcoordinate: "n/a", x: 1, y : 1, numAxonLeds: 70}
+#      - { addr: 'fe80::42a3:6bff:fec1:8288', gridcoordinate: "n/a", x: 1, y : 1, numAxonLeds: 70}

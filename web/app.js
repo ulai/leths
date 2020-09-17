@@ -15,11 +15,50 @@ angular
     templateUrl: 'tmpl/index.html',
     controller: ['$scope', 'websocket', function($scope, websocket) {
       $scope.color = function(c, r) {
-        return $scope.grid[c+r]===undefined ? '#BBB' : (_.every($scope.grid[c+r], 'online') ? 'green' : 'red');
+        return  $scope.grid===undefined || $scope.grid[c+r]===undefined ? '#BBB' : (_.every($scope.grid[c+r], 'online') ? 'green' : 'red');
       };
-      //websocket.on('stats', stats => $scope.$apply(() => $scope.stats = stats))
+      $scope.light = b => websocket.emit('groundlight', b)
+      $scope.save = () => websocket.emit('config', {save: 1})
+      $scope.mute = (t, c, b) => websocket.emit('config', {mute: {t, c, b}})
+      $scope.setText = (t) => websocket.emit('set', {k: 'text', v: t})      
+      $scope.startText = () => websocket.emit('startScroll', {})
     }]
-  })
+  }) 
+  $stateProvider.state('advanced', {
+    url: '/advanced',
+    templateUrl: 'tmpl/advanced.html',
+    controller: ['$scope', 'websocket', function($scope, websocket) {
+      $scope.light = b => websocket.emit('groundlight', b)
+      $scope.save = () => websocket.emit('config', {save: 1})
+      $scope.client = (c, r) => {
+        if($scope.stats === undefined) return
+        var client;
+        ['text', 'light'].forEach(t => {
+          var tmp = $scope.stats.clients[t].find(x=>x.device.gridcoordinate==c+r)
+          if(tmp) client = {t, c: tmp}
+        })
+        return client;
+      }
+      $scope.mute = (c, r) => {
+        var client = $scope.client(c, r)
+        var b = client.c.device.mute ? 0 : 1
+        websocket.emit('config', {mute: {t:client.t, c:client.c, b}})
+      }
+      $scope.setText = (t) => websocket.emit('set', {k: 'text', v: t})      
+      $scope.startText = () => websocket.emit('startScroll', {})
+
+      $scope.set = (k,v) => websocket.emit('set', {k, v})
+      $scope.startScroll = (stepx, stepy, steps, interval, roundoffsets, start) => websocket.emit('startScroll', {stepx, stepy, steps, interval, roundoffsets, start})
+      $scope.stopScroll = () => websocket.emit('stopScroll')
+      $scope.fade = (to, t) => websocket.emit('fade', {to, t})
+      $scope.send = json => websocket.emit('textJson', JSON.parse(json))
+      $scope.textclear = b => websocket.emit('text', {textclear: 1})
+      $scope.textscene = s => websocket.emit('text', {scene: s})
+      $scope.textdefault = () => websocket.emit('text', {textdefault: 1})
+      $scope.timeUnSync = () => websocket.emit('timeUnSync')
+      $scope.timeSync = () => websocket.emit('timeSync')
+    }]
+  })   
   $stateProvider.state('text', {
     url: '/text',
     templateUrl: 'tmpl/text.html',
@@ -45,6 +84,7 @@ angular
         if(!b) websocket.emit('groundlight', 0.6)
       }
       $scope.set = b => websocket.emit('groundlight', b)
+      $scope.restart = () => websocket.emit('restart')
     }]
   })
   $stateProvider.state('list', {

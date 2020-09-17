@@ -1,15 +1,39 @@
 body {
   margin: 7px;
 }
-.lightsim ul {
-  list-style:none; border:0; float:left; width:150px
+div.modules {
+  clear:both;
 }
-.lightsim ul li{
-  height:20px; width:28px; float:left; margin:0;
+.modules ul {
+  list-style:none;
+}
+.modules li{
+  float:left; margin: 20px;
 }
 input.wide {
   width:80%
 }
 input[type="number"] {
   width: 84px;
+}
+.lightsim ul {
+  list-style:none; border:0; float:left; width:150px
+}
+.lightsim ul li{
+  height:20px; width:28px; float:left; margin:0;
+}
+button {
+  padding: 0 20px;
+}
+button:active {
+  background-color: green;
+}
+.btn-mode {
+  position: absolute;
+  right: 50px;
+  top: 50px;
+}
+button.light {
+  padding: 0;
+  width: 150%;
 }
