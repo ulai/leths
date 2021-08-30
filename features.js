@@ -86,7 +86,11 @@ module.exports = {
       _.each(clients.neuron, n => n.send({feature:'neuron', cmd: 'mute', on: !!b}))
     })
     ws.on('groundlight', b => {
-      _.each(clients.light, l => l.send({feature:'light', cmd: 'fade', to: b, t: 0}))
+      if(b.i !== undefined) {
+        clients.light[b.i].send({feature:'light', cmd: 'fade', to: b.b, t: 0})
+      } else {
+        _.each(clients.light, l => l.send({feature:'light', cmd: 'fade', to: b, t: 0}))
+      }
     })
     ws.on('config', c => {
       if(c.save) {

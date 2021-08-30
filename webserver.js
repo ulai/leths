@@ -32,6 +32,15 @@ class WebServer extends EventEmitter {
     app.get('/admin', (req, res) => {
     	res.sendFile(__dirname + '/web/admin.html')
     })
+    app.get('/api/light', (req, res) => {
+      if(req.query.i === undefined || req.query.b === undefined) {
+        res.statusCode = 400
+        res.send('usage: ?i=index&b=brightness with index [0..34] and brightness [0..1]')
+      } else {
+        this.emit('groundlight', {i: req.query.i, b: req.query.b})
+        res.send('ok')  
+      }
+    })
 
     log.info(`server runs at http://127.0.0.1:${port}/`)
 
