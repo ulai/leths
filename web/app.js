@@ -20,10 +20,11 @@ angular
       $scope.light = b => websocket.emit('groundlight', b)
       $scope.save = () => websocket.emit('config', {save: 1})
       $scope.mute = (t, c, b) => websocket.emit('config', {mute: {t, c, b}})
-      $scope.setText = (t) => websocket.emit('set', {k: 'text', v: t})      
+      $scope.setText = (t) => websocket.emit('set', {k: 'text', v: t})
       $scope.startText = () => websocket.emit('startScroll', {})
+      $scope.stopText = () => websocket.emit('stopScroll', {})
     }]
-  }) 
+  })
   $stateProvider.state('advanced', {
     url: '/advanced',
     templateUrl: 'tmpl/advanced.html',
@@ -44,7 +45,7 @@ angular
         var b = client.c.device.mute ? 0 : 1
         websocket.emit('config', {mute: {t:client.t, c:client.c, b}})
       }
-      $scope.setText = (t) => websocket.emit('set', {k: 'text', v: t})      
+      $scope.setText = (t) => websocket.emit('set', {k: 'text', v: t})
       $scope.startText = () => websocket.emit('startScroll', {})
 
       $scope.set = (k,v) => websocket.emit('set', {k, v})
@@ -58,7 +59,7 @@ angular
       $scope.timeUnSync = () => websocket.emit('timeUnSync')
       $scope.timeSync = () => websocket.emit('timeSync')
     }]
-  })   
+  })
   $stateProvider.state('text', {
     url: '/text',
     templateUrl: 'tmpl/text.html',
